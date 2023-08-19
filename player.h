@@ -12,6 +12,19 @@ private:
 	bool Mode;//2モードの状態フラグ
 	double Inherence;//キャラクター固有値
 
+protected:
+
+	//キーボード入力でのプレイヤーの移動ベクトルを取得する
+	Vec2 KeyInputMoveVector()
+	{
+		Vec2 x;
+		bool Right = KeyD.pressed(), Left = KeyA.pressed(), Down = KeyS.pressed(), Up = KeyW.pressed();
+
+		x = Vec2(Right - Left, Down - Up).setLength(1.0);
+
+
+		return x;
+	}
 
 
 public:
@@ -48,8 +61,15 @@ public:
 		return 0;
 	}
 
+	//キャラクター固有値上書き
+	int WriteInherence(double x)
+	{
+		Inherence = x;
+		return 0;
+	}
+
 	//キャラクター固有値操作
-	int writeInherence(double x)
+	int AddInherence(double x)
 	{
 		if (Inherence < x)Inherence = 0;
 		else Inherence += x;
@@ -62,18 +82,8 @@ public:
 
 
 		return 0;
+
 	}
 
-	//キーボード入力でのプレイヤーの移動ベクトルを取得する
-	Vec2 KeyInputMoveVector()
-	{
-		Vec2 x;
-		bool Right = KeyD.pressed(), Left = KeyA.pressed(), Down = KeyS.pressed(), Up = KeyW.pressed();
-
-		x = Vec2( Right - Left, Down - Up);
-		if ((Right || Left) && (Down || Up) == true) x = x * 0.7071;
-
-		return x;
-	}
 
 };

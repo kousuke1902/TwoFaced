@@ -14,7 +14,7 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
-		Print << player.InputMoveVector();
+		Print << player.KeyInputMoveVector();
 
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
