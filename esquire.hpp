@@ -1,6 +1,7 @@
 ﻿# pragma once
 # include <Siv3D.hpp>
 # include "player.hpp"
+# include "input.hpp"
 
 //右に盾を持ち左にチェーンガンを装備したロボット
 //プレイヤー操作キャラEsquireのクラス
