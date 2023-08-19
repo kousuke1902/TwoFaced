@@ -1,15 +1,15 @@
 ﻿# pragma once
 # include <Siv3D.hpp>
-# include "character.h"
+# include "character.hpp"
 
-
+//プレイヤーが操作するキャラクターに関する継承クラス
 class Player : public Character
 {
 
 private:
 
 	
-	bool Mode;//2モードの状態フラグ
+	bool Mode = false;//2モードの状態フラグ
 	double Inherence;//キャラクター固有値
 
 protected:
@@ -76,7 +76,7 @@ public:
 		return 0;
 	}
 
-	//様々なアップデート
+	//様々な行動に関するアップデート
 	int Update()
 	{
 

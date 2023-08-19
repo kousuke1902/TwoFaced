@@ -1,5 +1,5 @@
 ﻿# include <Siv3D.hpp> // OpenSiv3D v0.6.10
-# include "player.h"
+# include "player.hpp"
 
 void Main()
 {
@@ -10,11 +10,12 @@ void Main()
 
 	Player player;
 
+	player.writePos(Vec2(50, 50));
 
 	while (System::Update())
 	{
 		ClearPrint();
-		Print << player.KeyInputMoveVector();
+		//Print << player.KeyInputMoveVector();
 
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
