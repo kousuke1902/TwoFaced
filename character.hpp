@@ -4,7 +4,8 @@
 //ゲーム内のあらゆるキャラクターの基本クラス
 class Character
 {
-private:
+
+protected:
 
 	Vec2 Pos;//座標
 	int Life;//体力
@@ -91,6 +92,35 @@ public:
 		shotCoolTimer = x;
 		return 0;
 	}
+
+	//キャラクターの移動操作
+	int movePos(Vec2 move, double deltaTime)
+	{
+		Pos.moveBy(move * Speed * deltaTime);
+		return 0;
+	}
+
+	//発砲の有無
+	bool fire()
+	{
+		if (shotCoolTimer <= 0.0)
+		{
+			shotCoolTimer += shotCoolTime;
+			return true;
+
+		}
+
+		else return false;
+		
+	}
+
+	//発射クールタイム処理
+	int countshotCoolTimer(double deltatime)
+	{
+		shotCoolTimer = Max((shotCoolTimer - deltatime), 0.0);
+		return 0;
+	}
+
 
 	//描画
 	int draw()

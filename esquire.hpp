@@ -1,25 +1,28 @@
 ﻿# pragma once
 # include <Siv3D.hpp>
 # include "player.hpp"
-# include "input.hpp"
 
 //右に盾を持ち左にチェーンガンを装備したロボット
+// 
 //プレイヤー操作キャラEsquireのクラス
 class Esquire : public Player
 {
 
 public:
 
-	Esquire(Vec2 pos, int life, double speed, double shotcooltime, double inherence)
+	Esquire(Vec2 pos)
 	{
-		writePos(pos);
-		writeLife(life);
-		writeSpeed(speed);
-		writeshotCoolTime(shotcooltime);
-		WriteInherence(inherence);
+		Pos = pos;
+		Life = 100;
+		Speed = 200;
+		shotCoolTime = 1.0;
+		shotCoolTimer = 0.0;
+		Mode = false;
+		Inherence = 100;
 
 	};
 
+	//処理のアップデート
 	int Update()
 	{
 		//移動処理

@@ -6,28 +6,16 @@
 class Player : public Character
 {
 
-private:
+protected:
 
 	
-	bool Mode = false;//2モードの状態フラグ
+	bool Mode;//2モードの状態フラグ
 	double Inherence;//キャラクター固有値
-
+	double shotCoolTime2;//キャラクター二つ目の武器の発射間隔
+	double shotCoolTimer2;//キャラクター二つ目の武器のクールタイムタイマー
 
 
 public:
-
-	/*//ポジション，体力，移動速度，発射間隔の初期設定値
-	Player(Vec2 pos, int life, double speed, double shotcooltime, double inherence)
-	{
-		writePos(pos);
-		writeLife(life);
-		writeSpeed(speed);
-		writeshotCoolTime(shotcooltime);
-		writeshotCoolTimer(0.0);
-		Mode = false;
-		Inherence = inherence;
-	}
-	*/
 
 	//モード取得
 	bool readMode()
@@ -49,7 +37,7 @@ public:
 	}
 
 	//キャラクター固有値上書き
-	int WriteInherence(double x)
+	int writeInherence(double x)
 	{
 		Inherence = x;
 		return 0;
@@ -63,14 +51,29 @@ public:
 		return 0;
 	}
 
-	//様々な行動に関するアップデート
-	int Update()
+	//二つ目の武器の発砲の有無
+	bool fire2()
 	{
+		if (shotCoolTimer2 <= 0.0)
+		{
+			shotCoolTimer2 += shotCoolTime2;
+			return true;
 
+		}
 
-		return 0;
+		else return false;
 
 	}
+
+	//発射クールタイム処理
+	int countshotCoolTimer(double deltatime)
+	{
+		shotCoolTimer = Max((shotCoolTimer - deltatime), 0.0);
+		shotCoolTimer2 = Max((shotCoolTimer2 - deltatime), 0.0);
+		return 0;
+	}
+
+
 
 
 };
