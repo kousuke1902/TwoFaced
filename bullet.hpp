@@ -4,11 +4,20 @@
 //弾の基本クラス
 class Bullet
 {
-private:
+protected:
 
 	Vec2 Pos;//弾の座標
 	double Speed;//弾の速度
 	double LifeSpan;//弾の時間的寿命
+
+	//弾の移動
+	int movePos(Vec2 move)
+	{
+		Pos.moveBy(move);
+
+		return 0;
+	}
+
 
 public:
 
@@ -28,6 +37,16 @@ public:
 	double readLifeSpan()
 	{
 		return LifeSpan;
+	}
+
+	//寿命確認
+	bool Lifecheck(double deltatime)
+	{
+		LifeSpan -= deltatime;
+
+		if (LifeSpan <= 0)return true;
+		else return false;
+
 	}
 
 };
