@@ -1,6 +1,6 @@
-﻿# pragma once
-# include <Siv3D.hpp>
-# include "character.hpp"
+﻿#pragma once
+#include <Siv3D.hpp>
+#include "character.hpp"
 
 //プレイヤーが操作するキャラクターに関する継承クラス
 class Player : public Character
@@ -32,7 +32,7 @@ public:
 	//モード切り替え
 	int switchMode()
 	{
-		Mode != Mode;
+		Mode =! Mode;
 		return 0;
 	}
 

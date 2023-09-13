@@ -1,6 +1,7 @@
-﻿# pragma once
-# include <Siv3D.hpp>
-# include "player.hpp"
+﻿#pragma once
+#include <Siv3D.hpp>
+#include "player.hpp"
+#include "input.hpp"
 
 //右に盾を持ち左にチェーンガンを装備したロボット
 // 
@@ -23,14 +24,15 @@ public:
 	};
 
 	//処理のアップデート
-	int Update()
+	int Update(PlayerInput input, double deltatime)
 	{
 		//移動処理
-
+		movePos(input.KeyInputMoveVector(), deltatime);
 
 		//攻撃処理
 
 		//切り替え処理
+		if(input.downModechange())switchMode();
 
 		//固有値操作
 

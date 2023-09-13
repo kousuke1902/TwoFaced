@@ -1,5 +1,5 @@
 ﻿#pragma once
-# include <Siv3D.hpp>
+#include <Siv3D.hpp>
 
 //プレイヤーインプット関連の基本クラス
 class PlayerInput
@@ -23,7 +23,17 @@ public:
 
 	}
 
+	//射撃ボタン検知
+	bool pressFire()
+	{
+		return KeySpace.pressed();
+	}
 
+	//切り替えボタン検知
+	bool downModechange()
+	{
+		return KeyV.down();
+	}
 
 
 };

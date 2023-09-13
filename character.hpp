@@ -1,5 +1,5 @@
-﻿# pragma once
-# include <Siv3D.hpp>
+﻿#pragma once
+#include <Siv3D.hpp>
 
 //ゲーム内のあらゆるキャラクターの基本クラス
 class Character

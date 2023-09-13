@@ -788,5 +788,8 @@
     <ClInclude Include="input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bullet.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
