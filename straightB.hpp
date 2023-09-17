@@ -14,6 +14,15 @@ private:
 
 
 public:
+
+	StraightB(Vec2 pos, double speed, double lifespan)
+	{
+		Pos = pos;
+		Speed = speed;
+		LifeSpan = lifespan;
+
+	}
+
 	//動作の更新
 	int Update(double deltatime)
 	{

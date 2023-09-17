@@ -136,6 +136,12 @@
     <Filter Include="Resource Files\engine\font\min">
       <UniqueIdentifier>{1b103960-f11a-4515-b4f1-f59333ce00d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Character">
+      <UniqueIdentifier>{22b4f32e-9f0d-4134-8c09-29f1976ed03e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bullet">
+      <UniqueIdentifier>{522871ae-a7a0-4d01-a6fa-dfdcab312893}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -776,20 +782,26 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="character.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="player.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="esquire.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="character.hpp">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="esquire.hpp">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="player.hpp">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
     <ClInclude Include="bullet.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="straightB.hpp">
+      <Filter>Header Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="waveB.hpp">
+      <Filter>Header Files\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

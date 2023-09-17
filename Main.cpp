@@ -11,7 +11,7 @@ void Main()
 	static PlayerInput input;
 	//Player player;
 	auto player = Esquire(Vec2(100, 100));
-
+	
 
 	while (System::Update())
 	{
