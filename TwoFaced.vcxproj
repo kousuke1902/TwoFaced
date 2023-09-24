@@ -316,6 +316,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.hpp" />
+    <ClInclude Include="BulletManager.hpp" />
     <ClInclude Include="character.hpp" />
     <ClInclude Include="esquire.hpp" />
     <ClInclude Include="input.hpp" />

@@ -2,6 +2,7 @@
 #include "input.hpp"
 #include "player.hpp"
 #include "esquire.hpp"
+#include "BulletManager.hpp"
 
 void Main()
 {
@@ -11,6 +12,7 @@ void Main()
 	static PlayerInput input;
 	//Player player;
 	auto player = Esquire(Vec2(100, 100));
+	Array<BulletManager> bulletmanager;
 	
 
 	while (System::Update())

@@ -803,5 +803,8 @@
     <ClInclude Include="waveB.hpp">
       <Filter>Header Files\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="BulletManager.hpp">
+      <Filter>Header Files\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
