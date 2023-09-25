@@ -34,6 +34,19 @@ public:
 		//弾の衝突
 
 		//弾の生存確認
+		for (auto it = bullets.begin(); it != bullets.end();)
+		{
+			if (it->Lifecheck(deltatime))
+			{
+
+
+			}
+			else
+			{
+				++it;
+
+			}
+		}
 
 		
 
