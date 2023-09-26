@@ -322,7 +322,6 @@
     <ClInclude Include="input.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="straightB.hpp" />
     <ClInclude Include="waveB.hpp" />
   </ItemGroup>
   <ItemGroup>

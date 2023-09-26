@@ -11,6 +11,7 @@ protected:
 	double LifeSpan;//弾の時間的寿命
 	Vec2 Vector;//弾の向き
 
+
 public:
 
 	Bullet(Vec2 pos, double speed, double lifespan, Vec2 vector)

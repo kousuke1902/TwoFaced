@@ -36,10 +36,13 @@ public:
 		//弾の生存確認
 		for (auto it = bullets.begin(); it != bullets.end();)
 		{
-			if (it->Lifecheck(deltatime))
+			Bullet* bullet = *it;
+
+			//寿命を迎えた
+			if (bullet->Lifecheck(deltatime))
 			{
-
-
+				delete bullet;
+				it = bullets.erase(it);
 			}
 			else
 			{

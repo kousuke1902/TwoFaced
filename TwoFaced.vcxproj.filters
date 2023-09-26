@@ -797,9 +797,6 @@
     <ClInclude Include="bullet.hpp">
       <Filter>Header Files\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="straightB.hpp">
-      <Filter>Header Files\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="waveB.hpp">
       <Filter>Header Files\Bullet</Filter>
     </ClInclude>
