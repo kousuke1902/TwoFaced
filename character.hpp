@@ -16,17 +16,6 @@ protected:
 
 public:
 
-
-	//キャラクター移動
-	int movePos(bool right, bool left, bool down, bool up, double deltaTime)
-	{
-		const Vec2 move = Vec2{ (right - left),  (down - up)}.setLength(deltaTime * Speed);
-		Pos.moveBy(move);
-		
-		return 0;
-	}
-
-
 	//座標取得
 	Vec2 readPos()
 	{
