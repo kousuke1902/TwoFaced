@@ -1,7 +1,6 @@
 ﻿#include <Siv3D.hpp> // OpenSiv3D v0.6.10
 #include "input.hpp"
-#include "player.hpp"
-#include "esquire.hpp"
+#include "PlayerManager.hpp"
 #include "BulletManager.hpp"
 
 void Main()
@@ -12,7 +11,7 @@ void Main()
 	static PlayerInput input;
 	//Player player;
 	auto player = Esquire(Vec2(100, 100));
-	Array<BulletManager> bulletmanager;
+	BulletManager bulletmanager;
 	
 
 	while (System::Update())
@@ -22,8 +21,16 @@ void Main()
 		Print << y;
 		Print << U"mode:" << player.readMode();
 
-		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
+
+		//プレイヤー処理
+		//移動処理
+
+		//射撃
+
+
+		//処理フレーム間の経過時間
+		
 
 		player.Update(input, deltatime);
 

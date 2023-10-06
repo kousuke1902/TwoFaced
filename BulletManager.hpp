@@ -3,6 +3,8 @@
 #include "bullet.hpp"
 #include "waveB.hpp"
 
+//弾の処理に関するマネージャー
+
 class BulletManager
 {
 private:
