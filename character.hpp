@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
+#include "BulletManager.hpp"
 
 //ゲーム内のあらゆるキャラクターの基本クラス
 class Character
@@ -101,6 +102,13 @@ public:
 
 		else return false;
 		
+	}
+
+	virtual int createBullet(BulletManager* bulletmanager)
+	{
+		bulletmanager->CreateStraight(Pos, 100, 50, Vec2(0, 1));
+
+		return 0;
 	}
 
 	//発射クールタイム処理

@@ -803,5 +803,8 @@
     <ClInclude Include="BulletManager.hpp">
       <Filter>Header Files\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerManager.hpp">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

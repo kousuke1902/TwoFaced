@@ -10,31 +10,21 @@ void Main()
 
 	static PlayerInput input;
 	//Player player;
-	auto player = Esquire(Vec2(100, 100));
+	PlayerManager playermanager;
 	BulletManager bulletmanager;
 	
 
 	while (System::Update())
 	{
-		Vec2 y = player.readPos();
-		ClearPrint();
-		Print << y;
-		Print << U"mode:" << player.readMode();
-
 		const double deltatime = Scene::DeltaTime();
 
 		//プレイヤー処理
-		//移動処理
 
-		//射撃
 
 
 		//処理フレーム間の経過時間
 		
 
-		player.Update(input, deltatime);
-
-		Circle{ y, 4 }.draw(Palette::White);
 
 	}
 }

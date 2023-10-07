@@ -23,19 +23,10 @@ public:
 
 	};
 
-	//処理のアップデート
-	int Update(PlayerInput input, double deltatime)
+	//弾生成
+	int createBullet(BulletManager* bulletmanager) override
 	{
-		//移動処理
-		movePos(input.KeyInputMoveVector(), deltatime);
-
-		//攻撃処理
-
-		//切り替え処理
-		if(input.downModechange())switchMode();
-
-		//固有値操作
-
+		bulletmanager->CreateStraight(Pos, 100, 50, Vec2(0, -1.0));
 
 		return 0;
 	}
