@@ -14,9 +14,9 @@ private:
 
 public:
 
-	PlayerManager(Vec2 pos)
+	PlayerManager()
 	{
-		player = new Esquire(pos);
+		player = new Esquire(Vec2(0, 0));
 
 	}
 
@@ -29,12 +29,13 @@ public:
 	}
 
 	//更新
-	int Update(BulletManager* bulletmanager ,double deltatime)
+	int Update(BulletManager* bulletmanager, PlayerInput input, double deltatime)
 	{
 		//移動処理
-
+		player->movePos(input.KeyInputMoveVector(), deltatime);
 
 		//攻撃処理
+
 
 		//切り替え処理
 
