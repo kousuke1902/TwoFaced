@@ -25,7 +25,7 @@ public:
 
 	//弾生成
 	int createBullet(BulletManager bulletmanager) override
-	
+	{
 		bulletmanager.CreateStraight(Pos, 10.0, 300.0, Vec2(0, -1.0));
 
 		return 0;
