@@ -27,7 +27,7 @@ public:
 	int createBullet(BulletManager bulletmanager) override
 	{
 		bulletmanager.CreateStraight(Pos, 10.0, 300.0, Vec2(0, -1.0));
-
+		Print << bulletmanager.readBulletsize();
 		return 0;
 	}
 

@@ -37,8 +37,8 @@ public:
 		//攻撃処理
 		if (input.pressFire() && player->fire())
 		{
-
 			player->createBullet(bulletmanager);
+
 		}
 
 		player->countshotCoolTimer(deltatime);

@@ -107,7 +107,7 @@ public:
 	//弾の生成
 	virtual int createBullet(BulletManager bulletmanager)
 	{
-		bulletmanager.CreateStraight(Pos, 100, 50, Vec2(0, 1));
+		bulletmanager.CreateStraight(Pos, 100, 50, Vec2(0, -1));
 
 		return 0;
 	}
