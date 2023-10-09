@@ -17,9 +17,16 @@ public:
 	int CreateStraight(Vec2 pos, double speed, double lifespan, Vec2 vector)
 	{
 		Bullet* bullet = new Bullet(pos, speed, lifespan, vector);
-		bullets.push_back(bullet);
+		bullets << bullet;
 
 		return 0;
+	}
+
+	//弾数
+	size_t readBulletsize()
+	{
+		return bullets.size();
+
 	}
 
 	//情報の更新
@@ -56,10 +63,10 @@ public:
 		//描画
 		for (auto& bullet : bullets)
 		{
-			Circle(bullet->readPos(), 1.0).draw(Palette::Chartreuse);
-
+			Circle(bullet->readPos(), 2.0).draw(Palette::Red);
 		}
 
+		return 0;
 	}
 
 };

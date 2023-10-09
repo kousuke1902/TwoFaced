@@ -16,6 +16,7 @@ void Main()
 
 	while (System::Update())
 	{
+		ClearPrint();
 
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
@@ -23,9 +24,10 @@ void Main()
 		//プレイヤー処理
 		playermanager.Update(bulletmanager, input, deltatime);
 
-
-		
-
+		//弾処理
+		bulletmanager.Update(deltatime);
+		//bulletmanager.CreateStraight(Vec2(300, 400), 10, 100, Vec2(0.0, -1.0));
+		Print << bulletmanager.readBulletsize();
 
 	}
 }

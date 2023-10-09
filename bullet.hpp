@@ -20,7 +20,7 @@ public:
 		Speed = speed;
 		LifeSpan = lifespan;
 		Vector = vector;
-
+		Print << U"checkpoint bullet class";
 	}
 
 	//座標取得

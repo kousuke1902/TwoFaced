@@ -37,7 +37,7 @@ public:
 		//攻撃処理
 		if (input.pressFire() && player->fire())
 		{
-			Print << U"fire";
+
 			player->createBullet(bulletmanager);
 		}
 
@@ -51,7 +51,6 @@ public:
 
 		//描画
 		Circle(player->readPos(), 4.0).draw(Palette::Black);
-
 
 		return 0;
 	}
