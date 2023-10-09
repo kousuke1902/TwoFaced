@@ -24,9 +24,9 @@ public:
 	};
 
 	//弾生成
-	int createBullet(BulletManager* bulletmanager) override
+	int createBullet(BulletManager bulletmanager) override
 	{
-		bulletmanager->CreateStraight(Pos, 100, 50, Vec2(0, -1.0));
+		bulletmanager.CreateStraight(Pos, 100, 300, Vec2(0, -1.0));
 
 		return 0;
 	}

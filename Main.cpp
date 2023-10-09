@@ -16,13 +16,14 @@ void Main()
 
 	while (System::Update())
 	{
+
+		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
 
 		//プレイヤー処理
+		playermanager.Update(bulletmanager, input, deltatime);
 
 
-
-		//処理フレーム間の経過時間
 		
 
 

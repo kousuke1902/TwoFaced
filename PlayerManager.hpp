@@ -16,7 +16,7 @@ public:
 
 	PlayerManager()
 	{
-		player = new Esquire(Vec2(0, 0));
+		player = new Esquire(Vec2(300, 400));
 
 	}
 
@@ -29,19 +29,28 @@ public:
 	}
 
 	//更新
-	int Update(BulletManager* bulletmanager, PlayerInput input, double deltatime)
+	int Update(BulletManager bulletmanager, PlayerInput input, double deltatime)
 	{
 		//移動処理
 		player->movePos(input.KeyInputMoveVector(), deltatime);
 
 		//攻撃処理
+		if (input.pressFire() && player->fire())
+		{
+			Print << U"fire";
+			player->createBullet(bulletmanager);
+		}
 
+		player->countshotCoolTimer(deltatime);
 
 		//切り替え処理
 
 
 		//固有値操作
 
+
+		//描画
+		Circle(player->readPos(), 4.0).draw(Palette::Black);
 
 
 		return 0;

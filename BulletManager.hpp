@@ -53,8 +53,12 @@ public:
 			}
 		}
 
-		
+		//描画
+		for (auto& bullet : bullets)
+		{
+			Circle(bullet->readPos(), 1.0).draw(Palette::Chartreuse);
 
+		}
 
 	}
 
