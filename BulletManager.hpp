@@ -13,6 +13,12 @@ private:
 
 public:
 
+	BulletManager()
+	{
+
+		bullets.clear();
+	}
+
 	//直進弾の生成
 	int CreateStraight(Vec2 pos, double speed, double lifespan, Vec2 vector)
 	{

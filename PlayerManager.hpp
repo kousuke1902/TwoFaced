@@ -29,7 +29,7 @@ public:
 	}
 
 	//更新
-	int Update(BulletManager bulletmanager, PlayerInput input, double deltatime)
+	int Update(BulletManager* bulletmanager, PlayerInput input, double deltatime)
 	{
 		//移動処理
 		player->movePos(input.KeyInputMoveVector(), deltatime);
