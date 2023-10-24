@@ -142,6 +142,12 @@
     <Filter Include="Header Files\Bullet">
       <UniqueIdentifier>{522871ae-a7a0-4d01-a6fa-dfdcab312893}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Character\Enemy">
+      <UniqueIdentifier>{ae8e8e13-0387-4575-8a1d-dab3115a68c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Character\Player">
+      <UniqueIdentifier>{e9f16d60-a20c-4010-872f-79b0414e145e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -788,12 +794,6 @@
     <ClInclude Include="character.hpp">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="esquire.hpp">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="player.hpp">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
     <ClInclude Include="bullet.hpp">
       <Filter>Header Files\Bullet</Filter>
     </ClInclude>
@@ -803,8 +803,17 @@
     <ClInclude Include="BulletManager.hpp">
       <Filter>Header Files\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="player.hpp">
+      <Filter>Header Files\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="esquire.hpp">
+      <Filter>Header Files\Character\Player</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerManager.hpp">
-      <Filter>Header Files\Character</Filter>
+      <Filter>Header Files\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.hpp">
+      <Filter>Header Files\Character\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
