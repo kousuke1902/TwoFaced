@@ -20,9 +20,9 @@ public:
 	}
 
 	//直進弾の生成
-	int CreateStraight(Vec2 pos, double speed, double lifespan, Vec2 vector)
+	int CreateStraight(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		Bullet* bullet = new Bullet(pos, speed, lifespan, vector);
+		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
 		bullets << bullet;
 
 		return 0;

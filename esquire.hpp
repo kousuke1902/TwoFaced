@@ -26,7 +26,7 @@ public:
 	//弾生成
 	int createBullet(BulletManager* bulletmanager) override
 	{
-		bulletmanager->CreateStraight(Pos, 100.0, 6.0, Vec2(0, -1.0));
+		bulletmanager->CreateStraight(Pos, Vec2(0, -1.0), 100.0, 6.0, 1.0, 0);
 		return 0;
 	}
 

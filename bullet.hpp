@@ -7,19 +7,22 @@ class Bullet
 protected:
 
 	Vec2 Pos;//弾の座標
+	Vec2 Vector;//弾の向き
 	double Speed;//弾の速度
 	double LifeSpan;//弾の時間的寿命
-	Vec2 Vector;//弾の向き
-
+	double Damage;//与えるダメージ
+	int ImgType;//弾の画像の種類
 
 public:
 
-	Bullet(Vec2 pos, double speed, double lifespan, Vec2 vector)
+	Bullet(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
 		Pos = pos;
+		Vector = vector;
 		Speed = speed;
 		LifeSpan = lifespan;
-		Vector = vector;
+		Damage = damage;
+		ImgType = imgtype;
 	}
 
 	//座標取得
