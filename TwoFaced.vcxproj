@@ -321,6 +321,7 @@
     <ClInclude Include="enemy.hpp" />
     <ClInclude Include="esquire.hpp" />
     <ClInclude Include="input.hpp" />
+    <ClInclude Include="movecommand.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="PlayerManager.hpp" />
     <ClInclude Include="stdafx.h" />

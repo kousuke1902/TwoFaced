@@ -815,5 +815,8 @@
     <ClInclude Include="enemy.hpp">
       <Filter>Header Files\Character\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="movecommand.hpp">
+      <Filter>Header Files\Character\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

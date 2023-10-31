@@ -84,9 +84,9 @@ public:
 	}
 
 	//キャラクターの移動操作
-	int movePos(Vec2 move, double deltaTime)
+	int movePos(Vec2 vec, double deltaTime)
 	{
-		Pos.moveBy(move * Speed * deltaTime);
+		Pos.moveBy(vec * Speed * deltaTime);
 		return 0;
 	}
 
