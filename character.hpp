@@ -105,7 +105,7 @@ public:
 	}
 
 	//弾の生成
-	virtual int createBullet(BulletManager* bulletmanager)
+	virtual int createBullet(BulletManager* bulletmanager, Vec2 enemypos)
 	{
 		bulletmanager->CreateStraight(Pos, Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
 

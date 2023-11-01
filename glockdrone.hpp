@@ -12,7 +12,13 @@ private:
 
 public:
 
+	//弾生成
+	int createBullet(BulletManager* bulletmanager, Vec2 enemypos)override
+	{
+		bulletmanager->CreateStraight(Pos, Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
 
+		return 0;
+	}
 
 
 };

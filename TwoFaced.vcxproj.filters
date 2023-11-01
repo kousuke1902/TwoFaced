@@ -815,8 +815,11 @@
     <ClInclude Include="enemy.hpp">
       <Filter>Header Files\Character\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="movecommand.hpp">
+    <ClInclude Include="glockdrone.hpp">
       <Filter>Header Files\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="aimbullet.hpp">
+      <Filter>Header Files\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
