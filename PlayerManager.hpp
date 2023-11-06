@@ -37,7 +37,7 @@ public:
 		//攻撃処理
 		if (input.pressFire() && player->fire())
 		{
-			player->createBullet(bulletmanager);
+			player->createBullet(bulletmanager, Vec2(0.0, 0.0));
 
 		}
 

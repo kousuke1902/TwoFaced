@@ -12,10 +12,22 @@ private:
 
 public:
 
+	GlockDrone(Vec2 pos, Array<Vec2> movecommand)
+	{
+		Pos = pos;
+		Life = 20;
+		Speed = 300;
+		shotCoolTime = 2.0;
+		shotCoolTimer = 0.0;
+		MoveCommand = movecommand;
+	}
+
+
 	//弾生成
 	int createBullet(BulletManager* bulletmanager, Vec2 enemypos)override
 	{
-		bulletmanager->CreateStraight(Pos, Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
+
+		bulletmanager->CreateStraight(Pos, enemypos - Pos, 100.0, 50.0, 1.0, 0);
 
 		return 0;
 	}

@@ -315,11 +315,11 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="aimbullet.hpp" />
     <ClInclude Include="bullet.hpp" />
     <ClInclude Include="BulletManager.hpp" />
     <ClInclude Include="character.hpp" />
     <ClInclude Include="enemy.hpp" />
+    <ClInclude Include="EnemyManager.hpp" />
     <ClInclude Include="esquire.hpp" />
     <ClInclude Include="glockdrone.hpp" />
     <ClInclude Include="input.hpp" />

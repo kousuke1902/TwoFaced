@@ -62,7 +62,7 @@ public:
 	//弾の移動
 	virtual int movePos(double deltatime)
 	{
-		Pos.moveBy(Vector * Speed * deltatime);
+		Pos.moveBy(Vector.setLength(1.0) * Speed * deltatime);
 
 		return 0;
 	}

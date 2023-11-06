@@ -818,8 +818,8 @@
     <ClInclude Include="glockdrone.hpp">
       <Filter>Header Files\Character\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="aimbullet.hpp">
-      <Filter>Header Files\Bullet</Filter>
+    <ClInclude Include="EnemyManager.hpp">
+      <Filter>Header Files\Character\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
