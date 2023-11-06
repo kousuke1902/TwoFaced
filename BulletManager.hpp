@@ -39,20 +39,13 @@ public:
 	int Update(double deltatime)
 	{
 
-		//弾の移動
-		for (auto& bullet : bullets)
-		{
-			bullet->movePos(deltatime);
-
-		}
-
-		//弾の衝突
-
 		//弾の生存確認
 		for (auto it = bullets.begin(); it != bullets.end();)
 		{
 			Bullet* bullet = *it;
 
+			//弾の衝突
+			
 			//寿命を迎えた
 			if (bullet->Lifecheck(deltatime))
 			{
@@ -66,9 +59,12 @@ public:
 			}
 		}
 
-		//描画
+		
 		for (auto& bullet : bullets)
 		{
+			//弾の移動
+			bullet->movePos(deltatime);
+			//描画
 			Circle(bullet->readPos(), 2.0).draw(Palette::Red);
 		}
 

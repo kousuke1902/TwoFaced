@@ -27,16 +27,17 @@ public:
 
 	}
 
-	int writeMoveCommand(Array<Vec2> command)
+	int writeMoveCommand(Array<Vec2> commands)
 	{
-		for (int32 it = 0; it < command.size(); ++it)MoveCommand.push_back(command[it]);
+		for (int32 it = 0; it < commands.size(); ++it)MoveCommand.push_back(commands[it]);
 		return 1;
 	}
 
 	//移動命令のリストを上書き
-	int overwriteMoveCommand(Array<Vec2> command)
+	int overwriteMoveCommand(Array<Vec2> commands)
 	{
-		MoveCommand = command;
+		MoveCommand.clear();
+		MoveCommand = commands;
 		return 0;
 	}
 

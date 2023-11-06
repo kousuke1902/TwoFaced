@@ -19,15 +19,45 @@ public:
 		enemies.clear();
 	}
 
+	//敵の生成
 	int EnemySpawn(Vec2 pos, int enemynum)
 	{
 		if (enemynum == 0)
 		{
 
 			Enemy* enemy = new GlockDrone(pos);
+			enemies << enemy;
 			return 0;
 
 		}
+
+	}
+
+	//更新
+	int Update(BulletManager* bulletmanager, Vec2 playerpos, double deltatime)
+	{
+
+		for (auto it = enemies.begin(); it != enemies.end();)
+		{
+			//敵の生存確認
+
+		}
+
+		for (auto& enemy : enemies)
+		{
+			//判断処理
+
+			//移動処理
+
+			//攻撃処理
+
+			//ダメージ処理
+
+			//描画処理
+
+
+		}
+
 
 	}
 

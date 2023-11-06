@@ -1,6 +1,7 @@
 ﻿#include <Siv3D.hpp> // OpenSiv3D v0.6.10
 #include "input.hpp"
 #include "PlayerManager.hpp"
+#include "EnemyManager.hpp"
 #include "BulletManager.hpp"
 
 void Main()
@@ -11,8 +12,10 @@ void Main()
 	static PlayerInput input;
 	//Player player;
 	PlayerManager playermanager;
+	EnemyManager enemymanager;
 	BulletManager bulletmanager;
-	
+
+
 
 	while (System::Update())
 	{
