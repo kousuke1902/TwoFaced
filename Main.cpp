@@ -15,7 +15,7 @@ void Main()
 	EnemyManager enemymanager;
 	BulletManager bulletmanager;
 
-
+	enemymanager.EnemySpawn(Vec2(50, 50), 0);
 
 	while (System::Update())
 	{
@@ -26,6 +26,9 @@ void Main()
 
 		//プレイヤー処理
 		playermanager.Update(&bulletmanager, input, deltatime);
+
+		//エネミー処理
+		enemymanager.Update(&bulletmanager, playermanager.PlayerPos(), deltatime);
 
 		//弾処理
 		bulletmanager.Update(deltatime);

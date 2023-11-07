@@ -41,5 +41,16 @@ public:
 		return 0;
 	}
 
+	//エネミー移動
+	int moveEnemy(double deltatime)
+	{
+		if(!MoveCommand.empty())
+		{
+			Vec2 vector = Pos - MoveCommand.front();
+			if(Abs(vector.length()) > 0.1) MoveCommand.pop_front();
+			movePos(vector.setLength(1.0), deltatime);
+
+		}
+	}
 
 };

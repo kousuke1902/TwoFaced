@@ -28,6 +28,12 @@ public:
 		return 0;
 	}
 
+	//プレイヤー座標
+	Vec2 PlayerPos()
+	{
+		return player->readPos();
+	}
+
 	//更新
 	int Update(BulletManager* bulletmanager, PlayerInput input, double deltatime)
 	{

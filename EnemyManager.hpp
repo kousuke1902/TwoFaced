@@ -48,13 +48,16 @@ public:
 			//判断処理
 
 			//移動処理
+			enemy->moveEnemy(deltatime);
 
 			//攻撃処理
+			if (enemy->fire())enemy->createBullet(bulletmanager, playerpos);
+			enemy->countshotCoolTimer(deltatime);
 
 			//ダメージ処理
 
 			//描画処理
-
+			Circle(enemy->readPos(), 4.0).draw(Palette::Red);
 
 		}
 
