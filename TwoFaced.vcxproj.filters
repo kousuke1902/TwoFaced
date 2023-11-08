@@ -148,6 +148,9 @@
     <Filter Include="Header Files\Character\Player">
       <UniqueIdentifier>{e9f16d60-a20c-4010-872f-79b0414e145e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems">
+      <UniqueIdentifier>{ce1af7f8-0441-4744-9416-687fa4c71fa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -788,9 +791,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="input.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="character.hpp">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
@@ -820,6 +820,12 @@
     </ClInclude>
     <ClInclude Include="EnemyManager.hpp">
       <Filter>Header Files\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="input.hpp">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="collision.hpp">
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
