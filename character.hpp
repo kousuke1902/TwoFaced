@@ -119,6 +119,12 @@ public:
 		return 0;
 	}
 
+	//ダメージ処理
+	int HitDamage()
+	{
+
+		return 0;
+	}
 
 	//描画
 	int draw()

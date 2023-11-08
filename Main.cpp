@@ -33,6 +33,7 @@ void Main()
 
 		//弾処理
 		bulletmanager.Update(deltatime);
+
 		Print << bulletmanager.readBulletsize();
 		Print << enemymanager.EnemiesSize();
 
