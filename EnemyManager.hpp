@@ -33,15 +33,22 @@ public:
 
 	}
 
+	//エネミーの総数
+	size_t EnemiesSize()
+	{
+
+		return enemies.size();
+	}
+
 	//更新
 	int Update(BulletManager* bulletmanager, Vec2 playerpos, double deltatime)
 	{
 
-		for (auto it = enemies.begin(); it != enemies.end();)
+		/*for (auto it = enemies.begin(); it != enemies.end();)
 		{
 			//敵の生存確認
 
-		}
+		}*/
 
 		for (auto& enemy : enemies)
 		{
@@ -61,6 +68,7 @@ public:
 
 		}
 
+		return 0;
 
 	}
 

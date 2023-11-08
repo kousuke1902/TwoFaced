@@ -16,6 +16,7 @@ void Main()
 	BulletManager bulletmanager;
 
 	enemymanager.EnemySpawn(Vec2(50, 50), 0);
+	enemymanager.EnemySpawn(Vec2(450, 50), 0);
 
 	while (System::Update())
 	{
@@ -33,6 +34,7 @@ void Main()
 		//弾処理
 		bulletmanager.Update(deltatime);
 		Print << bulletmanager.readBulletsize();
+		Print << enemymanager.EnemiesSize();
 
 	}
 }

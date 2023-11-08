@@ -1,4 +1,4 @@
-﻿#pragma onece
+﻿#pragma once
 #include <Siv3D.hpp>
 #include "character.hpp"
 
@@ -51,6 +51,7 @@ public:
 			movePos(vector.setLength(1.0), deltatime);
 
 		}
+		return 0;
 	}
 
 };
