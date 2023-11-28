@@ -3,35 +3,46 @@
 #include "bullet.hpp"
 #include "waveB.hpp"
 
+enum class BulletType
+{
+	player, enemy, strong
+
+};
+
+
 //弾の処理に関するマネージャー
 
 class BulletManager
 {
 private:
 
-	Array<Bullet*> bullets;
+	Array<Bullet*> playerbullets, enemybullets, strongbullets;
 
 public:
 
 	BulletManager()
 	{
 
-		bullets.clear();
+		playerbullets.clear();
+		enemybullets.clear();
+		strongbullets.clear();
 	}
 
 	//直進弾の生成
-	int CreateStraight(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateStraight(Vec2 pos, Vec2 vector, double speed, double lifespan, BulletType type, double damage, int imgtype)
 	{
 		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
-		bullets << bullet;
+		if (type == BulletType::player)playerbullets << bullet;
+		else if (type == BulletType::enemy)enemybullets << bullet;
+		else if (type == BulletType::strong)strongbullets << bullet;
 
 		return 0;
 	}
 
 	//弾数
-	size_t readBulletsize()
+	size_t readPlayerBulletsize()
 	{
-		return bullets.size();
+		return playerbullets.size();
 
 	}
 
@@ -39,8 +50,8 @@ public:
 	int Update(double deltatime)
 	{
 
-		//弾の生存確認
-		for (auto it = bullets.begin(); it != bullets.end();)
+		//プレイヤー弾の生存確認
+		for (auto it = playerbullets.begin(); it != playerbullets.end();)
 		{
 			Bullet* bullet = *it;
 
@@ -50,7 +61,7 @@ public:
 			if (bullet->Lifecheck(deltatime))
 			{
 				delete bullet;
-				it = bullets.erase(it);
+				it = playerbullets.erase(it);
 			}
 			else
 			{
@@ -59,8 +70,66 @@ public:
 			}
 		}
 
-		
-		for (auto& bullet : bullets)
+		//エネミー弾の生存確認
+		for (auto it = enemybullets.begin(); it != enemybullets.end();)
+		{
+			Bullet* bullet = *it;
+
+			//弾の衝突
+
+			//寿命を迎えた
+			if (bullet->Lifecheck(deltatime))
+			{
+				delete bullet;
+				it = enemybullets.erase(it);
+			}
+			else
+			{
+				++it;
+
+			}
+		}
+
+		//全体攻撃弾の生存確認
+		for (auto it = strongbullets.begin(); it != strongbullets.end();)
+		{
+			Bullet* bullet = *it;
+
+			//弾の衝突
+
+			//寿命を迎えた
+			if (bullet->Lifecheck(deltatime))
+			{
+				delete bullet;
+				it = strongbullets.erase(it);
+			}
+			else
+			{
+				++it;
+
+			}
+		}
+
+		//プレイヤー弾
+		for (auto& bullet : playerbullets)
+		{
+			//弾の移動
+			bullet->movePos(deltatime);
+			//描画
+			Circle(bullet->readPos(), 2.0).draw(Palette::Red);
+		}
+
+		//エネミー弾
+		for (auto& bullet : enemybullets)
+		{
+			//弾の移動
+			bullet->movePos(deltatime);
+			//描画
+			Circle(bullet->readPos(), 2.0).draw(Palette::Red);
+		}
+
+		//全体攻撃弾
+		for (auto& bullet : strongbullets)
 		{
 			//弾の移動
 			bullet->movePos(deltatime);

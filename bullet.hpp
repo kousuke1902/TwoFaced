@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
 
+
 //弾の基本クラス
 class Bullet
 {

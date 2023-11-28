@@ -12,7 +12,7 @@ void Main()
 	static PlayerInput input;
 	PlayerManager playermanager;
 	EnemyManager enemymanager;
-	BulletManager playerbullets, enemiesbullets, storongbullets;
+	BulletManager bulletmanager;
 
 	enemymanager.EnemySpawn(Vec2(50, 50), 0);
 	enemymanager.EnemySpawn(Vec2(450, 50), 0);
@@ -25,15 +25,13 @@ void Main()
 		const double deltatime = Scene::DeltaTime();
 
 		//プレイヤー処理
-		playermanager.Update(&playerbullets, input, deltatime);
+		playermanager.Update(&bulletmanager, input, deltatime);
 
 		//エネミー処理
-		enemymanager.Update(&enemiesbullets, playermanager.PlayerPos(), deltatime);
+		enemymanager.Update(&bulletmanager, playermanager.PlayerPos(), deltatime);
 
 		//弾処理
-		playerbullets.Update(deltatime);
-		enemiesbullets.Update(deltatime);
-		storongbullets.Update(deltatime);
+		bulletmanager.Update(deltatime);
 
 
 	}
