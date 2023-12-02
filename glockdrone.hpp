@@ -14,7 +14,7 @@ public:
 
 	GlockDrone(Vec2 pos)
 	{
-		Pos = pos;
+		HitBox = RectF(Arg::center(pos), 10);
 		Life = 20;
 		Speed = 300;
 		shotCoolTime = 2.0;
@@ -23,7 +23,7 @@ public:
 
 	GlockDrone(Vec2 pos, Array<Vec2> movecommand)
 	{
-		Pos = pos;
+		HitBox = RectF(Arg::center(pos), 10);
 		Life = 20;
 		Speed = 300;
 		shotCoolTime = 2.0;
@@ -35,7 +35,7 @@ public:
 	int createBullet(BulletManager* bulletmanager, Vec2 enemypos)override
 	{
 
-		bulletmanager->CreateStraight(Pos, enemypos - Pos, 100.0, 8.0, BulletType::enemy, 1.0, 0);
+		bulletmanager->CreateStraight(HitBox.center(), enemypos - HitBox.center(), 100.0, 8.0, BulletType::enemy, 1.0, 0);
 
 		return 0;
 	}

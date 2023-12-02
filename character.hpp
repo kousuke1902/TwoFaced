@@ -8,7 +8,7 @@ class Character
 
 protected:
 
-	Vec2 Pos;//座標
+	RectF HitBox;//当たり判定
 	int Life;//体力
 	double Speed;//移動速度
 	double shotCoolTime;//弾発射のクールタイム
@@ -20,7 +20,13 @@ public:
 	//座標取得
 	Vec2 readPos()
 	{
-		return Pos;
+		return HitBox.center();
+	}
+
+	//当たり判定取得
+	RectF readHitBox()
+	{
+		return HitBox;;	
 	}
 
 	//体力取得
@@ -51,7 +57,14 @@ public:
 	//座標上書き
 	int writePos(Vec2 x)
 	{
-		Pos = x;
+		HitBox.setCenter(x);
+		return 0;
+	}
+
+	//当たり判定上書き
+	int writeHitBox(Vec2 x, Vec2 w)
+	{
+		HitBox = RectF(Arg::center(x), w);
 		return 0;
 	}
 
@@ -86,7 +99,7 @@ public:
 	//キャラクターの移動操作
 	int movePos(Vec2 vec, double deltaTime)
 	{
-		Pos.moveBy(vec * Speed * deltaTime);
+		HitBox.moveBy(vec * Speed * deltaTime);
 		return 0;
 	}
 
@@ -107,7 +120,7 @@ public:
 	//弾の生成
 	virtual int createBullet(BulletManager* bulletmanager, Vec2 enemypos)
 	{
-		bulletmanager->CreateStraight(Pos, Vec2(0.0, 1.0), 100.0, 50.0, BulletType::player, 1.0, 0);
+		bulletmanager->CreateStraight(HitBox.center(), Vec2(0.0, 1.0), 100.0, 50.0, BulletType::player, 1.0, 0);
 
 		return 0;
 	}

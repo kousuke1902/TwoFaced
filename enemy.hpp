@@ -29,7 +29,7 @@ public:
 
 	int writeMoveCommand(Array<Vec2> commands)
 	{
-		for (int32 it = 0; it < commands.size(); ++it)MoveCommand.push_back(commands[it]);
+		for (int it = 0; it < commands.size(); ++it)MoveCommand.push_back(commands[it]);
 		return 1;
 	}
 
@@ -46,7 +46,7 @@ public:
 	{
 		if(!MoveCommand.empty())
 		{
-			Vec2 vector = Pos - MoveCommand.front();
+			Vec2 vector = HitBox.center() - MoveCommand.front();
 			if(Abs(vector.length()) > 0.1) MoveCommand.pop_front();
 			movePos(vector.setLength(1.0), deltatime);
 

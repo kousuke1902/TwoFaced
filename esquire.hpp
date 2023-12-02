@@ -13,7 +13,7 @@ public:
 
 	Esquire(Vec2 pos)
 	{
-		Pos = pos;
+		HitBox = RectF(Arg::center(pos), 10);
 		Life = 100;
 		Speed = 200;
 		shotCoolTime = 1.0;
@@ -26,7 +26,7 @@ public:
 	//弾生成
 	int createBullet(BulletManager* bulletmanager, Vec2 enemypos) override
 	{
-		bulletmanager->CreateStraight(Pos, Vec2(0, -1.0), 100.0, 6.0, BulletType::player, 1.0, 0);
+		bulletmanager->CreateStraight(HitBox.center(), Vec2(0, -1.0), 100.0, 6.0, BulletType::player, 1.0, 0);
 		return 0;
 	}
 
