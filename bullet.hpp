@@ -7,7 +7,7 @@ class Bullet
 {
 protected:
 
-	Vec2 Pos;//弾の座標
+	RectF HitBox;//当たり判定
 	Vec2 Vector;//弾の向き
 	double Speed;//弾の速度
 	double LifeSpan;//弾の時間的寿命
@@ -18,7 +18,7 @@ public:
 
 	Bullet(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		Pos = pos;
+		HitBox = RectF(Arg::center(pos), 10);
 		Vector = vector.setLength(1.0);
 		Speed = speed;
 		LifeSpan = lifespan;
@@ -29,7 +29,13 @@ public:
 	//座標取得
 	Vec2 readPos()
 	{
-		return Pos;
+		return HitBox.center();
+	}
+
+	//当たり判定取得
+	RectF readHitBox()
+	{
+		return HitBox;;
 	}
 
 	//弾のスピード取得
@@ -50,6 +56,17 @@ public:
 		return Vector;
 	}
 
+	//ダメージ取得
+	double readDamage()
+	{
+		return Damage;
+	}
+
+	int readImgType()
+	{
+		return ImgType;
+	}
+
 	//寿命確認
 	bool Lifecheck(double deltatime)
 	{
@@ -63,7 +80,7 @@ public:
 	//弾の移動
 	virtual int movePos(double deltatime)
 	{
-		Pos.moveBy(Vector * Speed * deltatime);
+		HitBox.moveBy(Vector * Speed * deltatime);
 
 		return 0;
 	}
