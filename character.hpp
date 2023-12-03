@@ -15,6 +15,7 @@ protected:
 	double shotCoolTimer;//弾発射のクールタイムタイマー
 	const Texture image;//キャラクターテクスチャ
 
+
 public:
 
 	//座標取得
@@ -120,7 +121,7 @@ public:
 	//弾の生成
 	virtual int createBullet(BulletManager* bulletmanager, Vec2 enemypos)
 	{
-		bulletmanager->CreateStraight(HitBox.center(), Vec2(0.0, 1.0), 100.0, 50.0, BulletType::player, 1.0, 0);
+		bulletmanager->CreateStraightP(HitBox.center(), Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
 
 		return 0;
 	}
@@ -133,9 +134,13 @@ public:
 	}
 
 	//ダメージ処理
-	int HitDamage()
+	int HitDamage(Rect x)
 	{
+		if (HitBox.intersects(x))
+		{
 
+
+		}
 		return 0;
 	}
 

@@ -20,13 +20,12 @@ public:
 		shotCoolTimer = 0.0;
 		Mode = false;
 		Inherence = 100;
-
 	};
 
 	//弾生成
 	int createBullet(BulletManager* bulletmanager, Vec2 enemypos) override
 	{
-		bulletmanager->CreateStraight(HitBox.center(), Vec2(0, -1.0), 100.0, 6.0, BulletType::player, 1.0, 0);
+		bulletmanager->CreateStraightP(HitBox.center(), Vec2(0, -1.0), 100.0, 6.0, 1.0, 0);
 		return 0;
 	}
 

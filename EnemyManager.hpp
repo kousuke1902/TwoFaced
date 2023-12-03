@@ -63,6 +63,7 @@ public:
 
 			//ダメージ処理
 
+
 			//描画処理
 			Circle(enemy->readPos(), 4.0).draw(Palette::Red);
 

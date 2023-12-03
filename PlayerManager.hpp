@@ -57,7 +57,6 @@ public:
 		//ダメージ処理
 
 		//描画
-		Circle(player->readPos(), 4.0).draw(Palette::Black);
 		player->readHitBox().draw();
 
 		return 0;

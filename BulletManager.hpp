@@ -2,14 +2,6 @@
 #include <Siv3D.hpp>
 #include "bullet.hpp"
 #include "waveB.hpp"
-
-enum class BulletType
-{
-	player, enemy, strong
-
-};
-
-
 //弾の処理に関するマネージャー
 
 class BulletManager
@@ -28,14 +20,27 @@ public:
 		strongbullets.clear();
 	}
 
-	//直進弾の生成
-	int CreateStraight(Vec2 pos, Vec2 vector, double speed, double lifespan, BulletType type, double damage, int imgtype)
+	//プレイヤー直進弾の生成
+	int CreateStraightP(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
 		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
-		if (type == BulletType::player)playerbullets << bullet;
-		else if (type == BulletType::enemy)enemybullets << bullet;
-		else if (type == BulletType::strong)strongbullets << bullet;
+		playerbullets << bullet;
+		return 0;
+	}
 
+	//エネミー直進弾の生成
+	int CreateStraightE(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	{
+		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
+		enemybullets << bullet;
+		return 0;
+	}
+
+	//全体攻撃直進弾の生成
+	int CreateStraightS(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	{
+		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
+		strongbullets << bullet;
 		return 0;
 	}
 
@@ -46,6 +51,8 @@ public:
 
 	}
 
+
+
 	//情報の更新
 	int Update(double deltatime)
 	{
@@ -55,8 +62,6 @@ public:
 		{
 			Bullet* bullet = *it;
 
-			//弾の衝突
-			
 			//寿命を迎えた
 			if (bullet->Lifecheck(deltatime))
 			{
@@ -75,8 +80,6 @@ public:
 		{
 			Bullet* bullet = *it;
 
-			//弾の衝突
-
 			//寿命を迎えた
 			if (bullet->Lifecheck(deltatime))
 			{
@@ -94,8 +97,6 @@ public:
 		for (auto it = strongbullets.begin(); it != strongbullets.end();)
 		{
 			Bullet* bullet = *it;
-
-			//弾の衝突
 
 			//寿命を迎えた
 			if (bullet->Lifecheck(deltatime))
