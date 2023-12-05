@@ -14,12 +14,12 @@ public:
 	Esquire(Vec2 pos)
 	{
 		HitBox = RectF(Arg::center(pos), 10);
-		Life = 100;
-		Speed = 200;
+		Life = 100.0;
+		Speed = 200.0;
 		shotCoolTime = 1.0;
 		shotCoolTimer = 0.0;
 		Mode = false;
-		Inherence = 100;
+		Inherence = 100.0;
 	};
 
 	//弾生成

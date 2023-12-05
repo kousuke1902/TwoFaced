@@ -51,7 +51,11 @@ public:
 
 	}
 
-
+	//弾の情報取得
+	Array<Bullet*> readPlayerBullets()
+	{
+		return playerbullets;
+	}
 
 	//情報の更新
 	int Update(double deltatime)

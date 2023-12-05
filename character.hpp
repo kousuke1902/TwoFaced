@@ -9,7 +9,7 @@ class Character
 protected:
 
 	RectF HitBox;//当たり判定
-	int Life;//体力
+	double Life;//体力
 	double Speed;//移動速度
 	double shotCoolTime;//弾発射のクールタイム
 	double shotCoolTimer;//弾発射のクールタイムタイマー
@@ -31,7 +31,7 @@ public:
 	}
 
 	//体力取得
-	int readLife()
+	double readLife()
 	{
 		return Life;
 	}
@@ -134,13 +134,9 @@ public:
 	}
 
 	//ダメージ処理
-	int HitDamage(Rect x)
+	int HitDamage(double x)
 	{
-		if (HitBox.intersects(x))
-		{
-
-
-		}
+		Life -= x;
 		return 0;
 	}
 

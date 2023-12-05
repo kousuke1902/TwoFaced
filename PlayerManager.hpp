@@ -34,6 +34,7 @@ public:
 		return player->readPos();
 	}
 
+
 	//更新
 	int Update(BulletManager* bulletmanager, PlayerInput input, double deltatime)
 	{

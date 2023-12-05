@@ -15,8 +15,8 @@ public:
 	GlockDrone(Vec2 pos)
 	{
 		HitBox = RectF(Arg::center(pos), 10);
-		Life = 20;
-		Speed = 300;
+		Life = 20.0;
+		Speed = 300.0;
 		shotCoolTime = 2.0;
 		shotCoolTimer = 0.0;
 	}
