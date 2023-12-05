@@ -62,9 +62,17 @@ public:
 		return Damage;
 	}
 
+	//弾の画像種類取得
 	int readImgType()
 	{
 		return ImgType;
+	}
+
+	//時間的寿命の削り取り
+	int reduceLifeSpan()
+	{
+		LifeSpan = 0;
+		return 0;
 	}
 
 	//寿命確認

@@ -55,7 +55,16 @@ public:
 
 		//固有値操作
 
-		//ダメージ処理
+		//当たり判定処理
+		//エネミー弾
+		for (auto& bullet : bulletmanager->readEnemyBullets())
+		{
+			if (bullet->readHitBox().intersects(player->readHitBox()))
+			{
+				player->HitDamage(bullet->readDamage());
+				bullet->reduceLifeSpan();
+			}
+		}
 
 		//描画
 		player->readHitBox().draw();

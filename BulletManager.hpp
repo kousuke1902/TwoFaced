@@ -20,6 +20,31 @@ public:
 		strongbullets.clear();
 	}
 
+	//弾数
+	size_t readPlayerBulletsize()
+	{
+		return playerbullets.size();
+
+	}
+
+	//プレイヤー弾の情報取得
+	Array<Bullet*> readPlayerBullets()
+	{
+		return playerbullets;
+	}
+
+	//エネミー弾の情報取得
+	Array<Bullet*> readEnemyBullets()
+	{
+		return enemybullets;
+	}
+
+	//全体攻撃弾の情報取得
+	Array<Bullet*> readStrongBullets()
+	{
+		return strongbullets;
+	}
+
 	//プレイヤー直進弾の生成
 	int CreateStraightP(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
@@ -42,19 +67,6 @@ public:
 		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
 		strongbullets << bullet;
 		return 0;
-	}
-
-	//弾数
-	size_t readPlayerBulletsize()
-	{
-		return playerbullets.size();
-
-	}
-
-	//弾の情報取得
-	Array<Bullet*> readPlayerBullets()
-	{
-		return playerbullets;
 	}
 
 	//情報の更新
