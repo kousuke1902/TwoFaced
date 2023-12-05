@@ -44,11 +44,23 @@ public:
 	int Update(BulletManager* bulletmanager, Vec2 playerpos, double deltatime)
 	{
 
-		/*for (auto it = enemies.begin(); it != enemies.end();)
+		for (auto it = enemies.begin(); it != enemies.end();)
 		{
 			//敵の生存確認
+			Enemy* enemy = *it;
 
-		}*/
+			//寿命を迎えた
+			if (enemy->deadFlag())
+			{
+				delete enemy;
+				it = enemies.erase(it);
+			}
+			else
+			{
+				++it;
+
+			}
+		}
 
 		for (auto& enemy : enemies)
 		{
@@ -61,8 +73,26 @@ public:
 			if (enemy->fire())enemy->createBullet(bulletmanager, playerpos);
 			enemy->countshotCoolTimer(deltatime);
 
-			//ダメージ処理
+			//当たり判定処理
+					//エネミー弾
+			for (auto& bullet : bulletmanager->readPlayerBullets())
+			{
+				if (bullet->readHitBox().intersects(enemy->readHitBox()))
+				{
+					enemy->HitDamage(bullet->readDamage());
+					bullet->reduceLifeSpan();
+				}
+			}
 
+			//全体攻撃弾
+			for (auto& bullet : bulletmanager->readStrongBullets())
+			{
+				if (bullet->readHitBox().intersects(enemy->readHitBox()))
+				{
+					enemy->HitDamage(bullet->readDamage());
+					bullet->reduceLifeSpan();
+				}
+			}
 
 			//描画処理
 			Circle(enemy->readPos(), 4.0).draw(Palette::Red);

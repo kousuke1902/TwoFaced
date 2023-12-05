@@ -26,7 +26,7 @@ public:
 		return 0;
 
 	}
-
+	//移動命令を書き込む
 	int writeMoveCommand(Array<Vec2> commands)
 	{
 		for (int it = 0; it < commands.size(); ++it)MoveCommand.push_back(commands[it]);

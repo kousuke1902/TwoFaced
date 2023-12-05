@@ -140,6 +140,13 @@ public:
 		return 0;
 	}
 
+	//生死判定
+	bool deadFlag()
+	{
+		if (Life <= 0)return true;
+		else return false;
+	}
+
 	//描画
 	int draw()
 	{
