@@ -34,52 +34,60 @@ public:
 		return player->readPos();
 	}
 
+	bool deadFlag()
+	{
+		return player->deadFlag();
+	}
 
 	//更新
 	int Update(BulletManager* bulletmanager, PlayerInput input, double deltatime)
 	{
-		//移動処理
-		player->movePos(input.KeyInputMoveVector(), deltatime);
-
-		//攻撃処理
-		if (input.pressFire() && player->fire())
+		//生存判定
+		if (!player->deadFlag())
 		{
-			player->createBullet(bulletmanager, Vec2(0.0, 0.0));
+			//移動処理
+			player->movePos(input.KeyInputMoveVector(), deltatime);
 
-		}
-
-		player->countshotCoolTimer(deltatime);
-
-		//切り替え処理
-
-
-		//固有値操作
-
-		//当たり判定処理
-		//エネミー弾
-		for (auto& bullet : bulletmanager->readEnemyBullets())
-		{
-			if (bullet->readHitBox().intersects(player->readHitBox()))
+			//攻撃処理
+			if (input.pressFire() && player->fire())
 			{
-				player->HitDamage(bullet->readDamage());
-				bullet->reduceLifeSpan();
-			}
-		}
+				player->createBullet(bulletmanager, Vec2(0.0, 0.0));
 
-		//全体攻撃弾
-		for (auto& bullet : bulletmanager->readStrongBullets())
-		{
-			if (bullet->readHitBox().intersects(player->readHitBox()))
+			}
+
+			player->countshotCoolTimer(deltatime);
+
+			//切り替え処理
+
+
+			//固有値操作
+
+			//当たり判定処理
+			//エネミー弾
+			for (auto& bullet : bulletmanager->readEnemyBullets())
 			{
-				player->HitDamage(bullet->readDamage());
-				bullet->reduceLifeSpan();
+				if (bullet->readHitBox().intersects(player->readHitBox()))
+				{
+					player->HitDamage(bullet->readDamage());
+					bullet->reduceLifeSpan();
+				}
 			}
+
+			//全体攻撃弾
+			for (auto& bullet : bulletmanager->readStrongBullets())
+			{
+				if (bullet->readHitBox().intersects(player->readHitBox()))
+				{
+					player->HitDamage(bullet->readDamage());
+					bullet->reduceLifeSpan();
+				}
+			}
+
+			//描画
+			player->readHitBox().draw();
+
+			return 0;
 		}
-
-		//描画
-		player->readHitBox().draw();
-
-		return 0;
 	}
 
 };

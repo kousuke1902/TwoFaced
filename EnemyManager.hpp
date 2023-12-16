@@ -43,13 +43,13 @@ public:
 	//更新
 	int Update(BulletManager* bulletmanager, Vec2 playerpos, double deltatime)
 	{
-
+		//敵の生存確認
 		for (auto it = enemies.begin(); it != enemies.end();)
 		{
-			//敵の生存確認
+			
 			Enemy* enemy = *it;
 
-			//寿命を迎えた
+			//生存フラグの確認
 			if (enemy->deadFlag())
 			{
 				delete enemy;
@@ -74,7 +74,7 @@ public:
 			enemy->countshotCoolTimer(deltatime);
 
 			//当たり判定処理
-					//プレイヤー弾
+			//プレイヤー弾
 			for (auto& bullet : bulletmanager->readPlayerBullets())
 			{
 				if (bullet->readHitBox().intersects(enemy->readHitBox()))
