@@ -74,7 +74,7 @@ public:
 			enemy->countshotCoolTimer(deltatime);
 
 			//当たり判定処理
-					//エネミー弾
+					//プレイヤー弾
 			for (auto& bullet : bulletmanager->readPlayerBullets())
 			{
 				if (bullet->readHitBox().intersects(enemy->readHitBox()))

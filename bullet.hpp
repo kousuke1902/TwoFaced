@@ -18,7 +18,7 @@ public:
 
 	Bullet(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		HitBox = RectF(Arg::center(pos), 10);
+		HitBox = RectF(Arg::center(pos), 5);
 		Vector = vector.setLength(1.0);
 		Speed = speed;
 		LifeSpan = lifespan;

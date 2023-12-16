@@ -133,7 +133,7 @@ public:
 			//弾の移動
 			bullet->movePos(deltatime);
 			//描画
-			Circle(bullet->readPos(), 2.0).draw(Palette::Red);
+			bullet->readHitBox().draw(Palette::Red);
 		}
 
 		//エネミー弾
@@ -142,7 +142,7 @@ public:
 			//弾の移動
 			bullet->movePos(deltatime);
 			//描画
-			Circle(bullet->readPos(), 2.0).draw(Palette::Red);
+			bullet->readHitBox().draw(Palette::Red);
 		}
 
 		//全体攻撃弾
@@ -151,7 +151,7 @@ public:
 			//弾の移動
 			bullet->movePos(deltatime);
 			//描画
-			Circle(bullet->readPos(), 2.0).draw(Palette::Red);
+			bullet->readHitBox().draw(Palette::Red);
 		}
 
 		return 0;
