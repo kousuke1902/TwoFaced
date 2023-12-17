@@ -4,6 +4,12 @@
 #include "PlayerManager.hpp"
 #include "BulletManager.hpp"
 
+enum class EnemyName
+{
+	glockdronenomove, glockdrone
+
+};
+
 class EnemyManager
 {
 
@@ -20,14 +26,23 @@ public:
 	}
 
 	//敵の生成
-	int EnemySpawn(Vec2 pos, int enemynum)
+	int EnemySpawn(Vec2 pos, EnemyName enemyname, Array<Vec2> movecommand = { Vec2(100.0, 100.0) } )
 	{
-		if (enemynum == 0)
+		//グロックドローン移動なし
+		if (enemyname == EnemyName::glockdronenomove)
 		{
 
 			Enemy* enemy = new GlockDrone(pos);
 			enemies << enemy;
 			return 0;
+
+		}
+		//グロックドローン
+		else if (enemyname == EnemyName::glockdrone)
+		{
+			Enemy* enemy = new GlockDrone(pos, movecommand);
+			enemies << enemy;
+			return 1;
 
 		}
 
@@ -39,6 +54,18 @@ public:
 
 		return enemies.size();
 	}
+
+	//エネミーの情報取得
+	Enemy* readEnemy(size_t place)
+	{
+		if (enemies.size() > place)
+		{
+			return enemies[place];
+		}
+		return NULL;
+	}
+
+
 
 	//更新
 	int Update(BulletManager* bulletmanager, Vec2 playerpos, double deltatime)

@@ -25,10 +25,10 @@ public:
 	{
 		HitBox = RectF(Arg::center(pos), 10);
 		Life = 20;
-		Speed = 300;
+		Speed = 200;
 		shotCoolTime = 2.0;
 		shotCoolTimer = 0.0;
-		MoveCommand = movecommand;
+		overwriteMoveCommand(movecommand);
 	}
 
 	//弾生成

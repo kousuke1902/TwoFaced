@@ -85,9 +85,9 @@ public:
 
 			//描画
 			player->readHitBox().draw();
-
-			return 0;
 		}
+
+		return 0;
 	}
 
 };

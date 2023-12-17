@@ -14,7 +14,7 @@ public:
 
 
 	//移動命令を閲覧する
-	Array<Vec2> showMoveCommand()
+	Array<Vec2> readMoveCommand()
 	{
 		return MoveCommand;
 	}
@@ -44,10 +44,10 @@ public:
 	//エネミー移動
 	int moveEnemy(double deltatime)
 	{
-		if(!MoveCommand.empty())
+		if (!MoveCommand.empty())
 		{
-			Vec2 vector = HitBox.center() - MoveCommand.front();
-			if(Abs(vector.length()) > 0.1) MoveCommand.pop_front();
+			Vec2 vector = MoveCommand.front() - HitBox.center();
+			if(Abs(vector.length()) <= 0.1) MoveCommand.pop_front();
 			movePos(vector.setLength(1.0), deltatime);
 
 		}
