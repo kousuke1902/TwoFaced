@@ -6,9 +6,6 @@ class PlayerInput
 {
 private:
 
-	const size_t playerIndex = 0;
-
-
 
 public:
 
@@ -17,22 +14,28 @@ public:
 	Vec2 KeyInputMoveVector()
 	{
 		
-		bool Right = KeyD.pressed(), Left = KeyA.pressed(), Down = KeyS.pressed(), Up = KeyW.pressed();
+		return Vec2(KeyD.pressed() - KeyA.pressed(), KeyS.pressed() - KeyW.pressed()).setLength(1.0);
 
-		return Vec2(Right - Left, Down - Up).setLength(1.0);
+	}
+
+	//移動ベクトルを算出する
+	Vec2 MoveVector()
+	{
+
+
 
 	}
 
 	//射撃ボタン検知
 	bool pressFire()
 	{
-		return KeySpace.pressed();
+		return KeySpace.pressed() || XInput(0).buttonA.pressed();
 	}
 
 	//切り替えボタン検知
 	bool downModechange()
 	{
-		return KeyV.down();
+		return KeyV.down() || XInput(0).buttonB.pressed();
 	}
 
 

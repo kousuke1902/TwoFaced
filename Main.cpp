@@ -13,7 +13,7 @@ void Main()
 	PlayerManager playermanager;
 	EnemyManager enemymanager;
 	BulletManager bulletmanager;
-	Array<Vec2> movecommandtest = { Vec2(50, 50), Vec2(200, 300) };
+	Array<Vec2> movecommandtest = { Vec2(50, 50), Vec2(200, 300), Vec2(600, -10)};
 
 	enemymanager.EnemySpawn(Vec2(50, 50), EnemyName::glockdronenomove);
 	enemymanager.EnemySpawn(Vec2(400, 50), EnemyName::glockdrone, movecommandtest);
@@ -21,13 +21,13 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
-		Print << U"in update" << enemymanager.readEnemy(1)->readMoveCommand();
+		Print << XInput(0).leftThumbX <<U"," << XInput(0).leftThumbY;
 
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
 
 		//プレイヤー処理
-		playermanager.Update(&bulletmanager, input, deltatime);
+		playermanager.Update(&bulletmanager, &input, deltatime);
 
 		//エネミー処理
 		enemymanager.Update(&bulletmanager, playermanager.PlayerPos(), deltatime);

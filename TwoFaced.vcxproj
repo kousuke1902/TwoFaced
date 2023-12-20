@@ -318,7 +318,6 @@
     <ClInclude Include="bullet.hpp" />
     <ClInclude Include="BulletManager.hpp" />
     <ClInclude Include="character.hpp" />
-    <ClInclude Include="collision.hpp" />
     <ClInclude Include="enemy.hpp" />
     <ClInclude Include="EnemyManager.hpp" />
     <ClInclude Include="esquire.hpp" />

@@ -47,7 +47,7 @@ public:
 		if (!MoveCommand.empty())
 		{
 			Vec2 vector = MoveCommand.front() - HitBox.center();
-			if(Abs(vector.length()) <= 0.1) MoveCommand.pop_front();
+			if(Abs(vector.length()) <= 1.0) MoveCommand.pop_front();
 			movePos(vector.setLength(1.0), deltatime);
 
 		}

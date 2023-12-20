@@ -40,16 +40,16 @@ public:
 	}
 
 	//更新
-	int Update(BulletManager* bulletmanager, PlayerInput input, double deltatime)
+	int Update(BulletManager* bulletmanager, PlayerInput *input, double deltatime)
 	{
 		//生存判定
 		if (!player->deadFlag())
 		{
 			//移動処理
-			player->movePos(input.KeyInputMoveVector(), deltatime);
+			player->movePos(input->KeyInputMoveVector(), deltatime);
 
 			//攻撃処理
-			if (input.pressFire() && player->fire())
+			if (input->pressFire() && player->fire())
 			{
 				player->createBullet(bulletmanager, Vec2(0.0, 0.0));
 

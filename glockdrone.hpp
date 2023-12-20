@@ -25,7 +25,7 @@ public:
 	{
 		HitBox = RectF(Arg::center(pos), 10);
 		Life = 20;
-		Speed = 200;
+		Speed = 300;
 		shotCoolTime = 2.0;
 		shotCoolTimer = 0.0;
 		overwriteMoveCommand(movecommand);

@@ -824,8 +824,5 @@
     <ClInclude Include="input.hpp">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="collision.hpp">
-      <Filter>Header Files\Systems</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
