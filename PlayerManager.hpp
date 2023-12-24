@@ -34,6 +34,13 @@ public:
 		return player->readPos();
 	}
 
+	//プレイヤーのモード状態
+	bool PlayerMode()
+	{
+		return player->readMode();
+	}
+
+	//生死フラグ
 	bool deadFlag()
 	{
 		return player->deadFlag();
@@ -46,10 +53,10 @@ public:
 		if (!player->deadFlag())
 		{
 			//移動処理
-			player->movePos(input->MoveVector(), deltatime);
+			player->movePos(input->readVector(), deltatime);
 
 			//攻撃処理
-			if (input->pressFire() && player->fire())
+			if (input->readFire() && player->fire())
 			{
 				player->createBullet(bulletmanager, Vec2(0.0, 0.0));
 
@@ -58,7 +65,10 @@ public:
 			player->countshotCoolTimer(deltatime);
 
 			//切り替え処理
-
+			if (input->readChange())
+			{
+				player->switchMode();
+			}
 
 			//固有値操作
 

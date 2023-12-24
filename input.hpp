@@ -6,20 +6,33 @@ class PlayerInput
 {
 private:
 
+	Vec2 Vector;//移動ベクトル
+	bool Fire;//射撃フラグ
+	bool Change;//モード変更フラグ
+
 
 public:
 
-
-	//キーボード入力でのプレイヤーの移動ベクトルを取得する
-	Vec2 KeyInputMoveVector()
+	//移動ベクトルの取得
+	Vec2 readVector()
 	{
-		
-		return Vec2(KeyD.pressed() - KeyA.pressed(), KeyS.pressed() - KeyW.pressed()).setLength(1.0);
+		return Vector;
+	}
 
+	//射撃フラグの状態の取得
+	bool readFire()
+	{
+		return Fire;
+	}
+
+	//モード変更状態の取得
+	bool readChange()
+	{
+		return Change;
 	}
 
 	//移動ベクトルを算出する
-	Vec2 MoveVector()
+	Vec2 MoveVectorLogic()
 	{
 		Vec2 KeyInput = Vec2(KeyD.pressed() - KeyA.pressed(), KeyS.pressed() - KeyW.pressed()).setLength(1.0);
 		Vec2 GamePadInput(XInput(0).leftThumbX, -XInput(0).leftThumbY);
@@ -41,8 +54,17 @@ public:
 	//切り替えボタン検知
 	bool downModechange()
 	{
-		return KeyV.down() || XInput(0).buttonB.pressed();
+		return KeyV.down() || XInput(0).buttonB.down();
 	}
 
+	//更新
+	int Update()
+	{
+		Vector = MoveVectorLogic();
+		Fire = pressFire();
+		Change = downModechange();
+
+		return 0;
+	}
 
 };

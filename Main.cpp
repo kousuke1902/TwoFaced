@@ -21,7 +21,10 @@ void Main()
 	while (System::Update())
 	{
 		ClearPrint();
-		Print << XInput(0).leftThumbX <<U"," << XInput(0).leftThumbY;
+		Print <<U"mode:" << playermanager.PlayerMode();
+
+		//入力状態の更新
+		input.Update();
 
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
