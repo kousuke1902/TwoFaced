@@ -46,7 +46,7 @@ public:
 		if (!player->deadFlag())
 		{
 			//移動処理
-			player->movePos(input->KeyInputMoveVector(), deltatime);
+			player->movePos(input->MoveVector(), deltatime);
 
 			//攻撃処理
 			if (input->pressFire() && player->fire())
