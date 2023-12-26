@@ -48,7 +48,6 @@ public:
 		return shotCoolTime;
 	}
 
-
 	//発射クールタイムタイマー
 	double readshotCoolTimer()
 	{
@@ -97,6 +96,13 @@ public:
 		return 0;
 	}
 
+	//発射クールタイムタイマーの更新
+	virtual int setshotCoolTimer()
+	{
+		shotCoolTimer = shotCoolTime;
+		return 0;
+	}
+
 	//キャラクターの移動操作
 	int movePos(Vec2 vec, double deltaTime)
 	{
@@ -107,27 +113,22 @@ public:
 	//発砲の有無
 	bool fire()
 	{
-		if (shotCoolTimer <= 0.0)
-		{
-			shotCoolTimer += shotCoolTime;
-			return true;
-
-		}
+		if (shotCoolTimer <= 0.0)return true;
 
 		else return false;
-		
 	}
 
 	//弾の生成
 	virtual int createBullet(BulletManager* bulletmanager, Vec2 enemypos)
 	{
+
 		bulletmanager->CreateStraightP(HitBox.center(), Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
 
 		return 0;
 	}
 
 	//発射クールタイム処理
-	int countshotCoolTimer(double deltatime)
+	virtual int countshotCoolTimer(double deltatime)
 	{
 		shotCoolTimer = Max((shotCoolTimer - deltatime), 0.0);
 		return 0;

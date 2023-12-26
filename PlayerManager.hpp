@@ -58,6 +58,7 @@ public:
 			//攻撃処理
 			if (input->readFire() && player->fire())
 			{
+				player->setshotCoolTimer();
 				player->createBullet(bulletmanager, Vec2(0.0, 0.0));
 
 			}
@@ -65,10 +66,8 @@ public:
 			player->countshotCoolTimer(deltatime);
 
 			//切り替え処理
-			if (input->readChange())
-			{
-				player->switchMode();
-			}
+			if (input->readChange() && player->Modechange())player->switchMode();
+			player->countModechangeCoolTimer(deltatime);
 
 			//固有値操作
 

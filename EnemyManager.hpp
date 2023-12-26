@@ -97,7 +97,12 @@ public:
 			enemy->moveEnemy(deltatime);
 
 			//攻撃処理
-			if (enemy->fire())enemy->createBullet(bulletmanager, playerpos);
+			if (enemy->fire())
+			{
+				enemy->setshotCoolTimer();
+				enemy->createBullet(bulletmanager, playerpos);
+			}
+
 			enemy->countshotCoolTimer(deltatime);
 
 			//当たり判定処理

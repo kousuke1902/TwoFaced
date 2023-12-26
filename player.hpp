@@ -13,6 +13,8 @@ protected:
 	double Inherence;//キャラクター固有値
 	double shotCoolTime2;//キャラクター二つ目の武器の発射間隔
 	double shotCoolTimer2;//キャラクター二つ目の武器のクールタイムタイマー
+	double ModechangeCoolTime;//モード切替の変更間隔
+	double ModechangeCoolTimer;//モード切替のクールタイムタイマー
 
 
 public:
@@ -29,10 +31,30 @@ public:
 		return Inherence;
 	}
 
+	//モードチェンジの変更間隔の取得
+	double readModechangeCooltime()
+	{
+		return ModechangeCoolTime;
+	}
+
+	//モード切替のクールタイムタイマーの取得
+	double readModechangeCoolTimer()
+	{
+		return ModechangeCoolTimer;
+	}
+
+	//モード切替の有無
+	bool Modechange()
+	{
+		if (ModechangeCoolTimer <= 0.0)return true;
+		else return false;
+	}
+
 	//モード切り替え
 	int switchMode()
 	{
-		Mode =! Mode;
+		ModechangeCoolTimer = ModechangeCoolTime;
+		Mode = !Mode;
 		return 0;
 	}
 
@@ -51,28 +73,34 @@ public:
 		return 0;
 	}
 
+	//発射クールタイムタイマーの更新
+	int setshotCoolTimer() override
+	{
+		shotCoolTimer = shotCoolTime;
+		shotCoolTimer2 = shotCoolTime2;
+		return 0;
+	}
+
 	//二つ目の武器の発砲の有無
 	bool fire2()
 	{
-		if (shotCoolTimer2 <= 0.0)
-		{
-			shotCoolTimer2 += shotCoolTime2;
-			return true;
-
-		}
-
+		if (shotCoolTimer2 <= 0.0)return true;
 		else return false;
-
 	}
 
 	//発射クールタイム処理
-	int countshotCoolTimer(double deltatime)
+	int countshotCoolTimer(double deltatime) override
 	{
 		shotCoolTimer = Max((shotCoolTimer - deltatime), 0.0);
 		shotCoolTimer2 = Max((shotCoolTimer2 - deltatime), 0.0);
 		return 0;
 	}
 
-
+	//モード切替クールタイム処理
+	int countModechangeCoolTimer(double deltatime)
+	{
+		ModechangeCoolTimer = Max((ModechangeCoolTimer - deltatime), 0.0);
+		return 0;
+	}
 
 };

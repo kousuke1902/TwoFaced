@@ -18,6 +18,8 @@ public:
 		Speed = 200.0;
 		shotCoolTime = 1.0;
 		shotCoolTimer = 0.0;
+		ModechangeCoolTime = 1.0;
+		ModechangeCoolTimer = 0.0;
 		Mode = false;
 		Inherence = 100.0;
 	};
