@@ -34,15 +34,13 @@ public:
 	//移動ベクトルを算出する
 	Vec2 MoveVectorLogic()
 	{
-		Vec2 KeyInput = Vec2(KeyD.pressed() - KeyA.pressed(), KeyS.pressed() - KeyW.pressed()).setLength(1.0);
-		Vec2 GamePadInput(XInput(0).leftThumbX, -XInput(0).leftThumbY);
-
+		Vec2 GamePadThumbInput(XInput(0).leftThumbX, -XInput(0).leftThumbY);
+		Vec2 GamePadPovInput(XInput(0).buttonRight.pressed() - XInput(0).buttonLeft.pressed(), XInput(0).buttonDown.pressed() - XInput(0).buttonUp.pressed());
 		//スティックの個体差やわずかなブレで動くのを塞ぐ為に小さい値をカットする
 		//切り捨てる以上であればゲームパッドのインプットを優先する
-		if (GamePadInput.length() < 0.05)GamePadInput.setLength(0.0);
-		else  return GamePadInput;
-
-		return KeyInput;
+		if (GamePadThumbInput.length() >= 0.05)return GamePadThumbInput;
+		else if(GamePadPovInput.length() == 1.0) return GamePadPovInput.setLength(1.0);
+		else return Vec2(KeyD.pressed() - KeyA.pressed(), KeyS.pressed() - KeyW.pressed()).setLength(1.0);
 	}
 
 	//射撃ボタン検知
