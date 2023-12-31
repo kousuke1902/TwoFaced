@@ -1,4 +1,5 @@
 ﻿#pragma once
+//シーンで使用するデータセット
 
 enum class State
 {

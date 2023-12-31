@@ -321,6 +321,7 @@
     <ClInclude Include="enemy.hpp" />
     <ClInclude Include="EnemyManager.hpp" />
     <ClInclude Include="esquire.hpp" />
+    <ClInclude Include="GameRule.hpp" />
     <ClInclude Include="glockdrone.hpp" />
     <ClInclude Include="input.hpp" />
     <ClInclude Include="player.hpp" />

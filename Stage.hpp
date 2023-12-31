@@ -12,11 +12,12 @@ class Stage : public App::Scene
 
 private:
 
-	PlayerInput input;
-	PlayerManager playermanager;
-	EnemyManager enemymanager;
-	BulletManager bulletmanager;
-
+	PlayerInput input;//プレイヤーインプット
+	PlayerManager playermanager;//プレイヤー処理
+	EnemyManager enemymanager;//エネミー処理
+	BulletManager bulletmanager;//弾処理
+	double Time;//ステージ経過時間
+	Array<EnemyName> EnemyCount;//撃破エネミー数
 
 
 public:
@@ -27,6 +28,9 @@ public:
 		Array<Vec2> movecommandtest = { Vec2(50, 50), Vec2(200, 300), Vec2(600, -10) };
 		enemymanager.EnemySpawn(Vec2(50, 50), EnemyName::glockdronenomove);
 		enemymanager.EnemySpawn(Vec2(400, 50), EnemyName::glockdrone, movecommandtest);
+
+		Time = 0.0;
+		EnemyCount.clear();
 
 	}
 
