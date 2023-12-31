@@ -824,5 +824,11 @@
     <ClInclude Include="input.hpp">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Stage.hpp">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneData.hpp">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

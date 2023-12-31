@@ -13,6 +13,13 @@ private:
 
 public:
 
+	PlayerInput()
+	{
+		Vector.clear();
+		Fire = false;
+		Change = false;
+	}
+
 	//移動ベクトルの取得
 	Vec2 readVector()
 	{

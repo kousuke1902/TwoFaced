@@ -325,6 +325,8 @@
     <ClInclude Include="input.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="PlayerManager.hpp" />
+    <ClInclude Include="SceneData.hpp" />
+    <ClInclude Include="Stage.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="waveB.hpp" />
   </ItemGroup>

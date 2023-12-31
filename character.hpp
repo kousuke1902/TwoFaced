@@ -119,7 +119,7 @@ public:
 	}
 
 	//弾の生成
-	virtual int createBullet(BulletManager* bulletmanager, Vec2 enemypos)
+	virtual int createBullet(BulletManager* bulletmanager, Vec2 targetpos)
 	{
 
 		bulletmanager->CreateStraightP(HitBox.center(), Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
