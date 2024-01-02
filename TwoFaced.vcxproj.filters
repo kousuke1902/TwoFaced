@@ -836,6 +836,9 @@
     <ClInclude Include="SceneData.hpp">
       <Filter>Header Files\Systems\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="GoalRule.hpp">
+      <Filter>Header Files\Systems\GameRule</Filter>
+    </ClInclude>
     <ClInclude Include="GameRule.hpp">
       <Filter>Header Files\Systems\GameRule</Filter>
     </ClInclude>

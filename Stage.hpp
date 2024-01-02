@@ -5,6 +5,7 @@
 #include "PlayerManager.hpp"
 #include "EnemyManager.hpp"
 #include "BulletManager.hpp"
+#include "GoalRule.hpp"
 
 //ステージに関する処理
 class Stage : public App::Scene
@@ -16,8 +17,8 @@ private:
 	PlayerManager playermanager;//プレイヤー処理
 	EnemyManager enemymanager;//エネミー処理
 	BulletManager bulletmanager;//弾処理
-	double Time;//ステージ経過時間
-	Array<EnemyName> EnemyCount;//撃破エネミー数
+	GoalRule *gamerule;//ステージクリア，ゲームオーバー判定
+	
 
 
 public:
@@ -29,9 +30,8 @@ public:
 		enemymanager.EnemySpawn(Vec2(50, 50), EnemyName::glockdronenomove);
 		enemymanager.EnemySpawn(Vec2(400, 50), EnemyName::glockdrone, movecommandtest);
 
-		Time = 0.0;
-		EnemyCount.clear();
-
+		//ステージ情報を読み込みクリアルールを設定する
+		gamerule = new GoalRule(10.0);
 	}
 
 
