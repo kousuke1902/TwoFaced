@@ -32,7 +32,7 @@ public:
 	//撃破エネミーの追加
 	int AddEnemyCount(EnemyName x)
 	{
-		EnemyCount.push_back(x);
+		EnemyCount << x;
 		return 0;
 	}
 

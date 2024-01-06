@@ -21,7 +21,7 @@ public:
 		shotCoolTimer = 0.0;
 	}
 
-	GlockDrone(Vec2 pos, Array<Vec2> movecommand)
+	GlockDrone(Vec2 pos, Array<MoveCommand*> movecommand)
 	{
 		HitBox = RectF(Arg::center(pos), 10);
 		Life = 20;

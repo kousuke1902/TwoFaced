@@ -325,11 +325,14 @@
     <ClInclude Include="GoalRule.hpp" />
     <ClInclude Include="glockdrone.hpp" />
     <ClInclude Include="input.hpp" />
+    <ClInclude Include="movecommand.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="PlayerManager.hpp" />
     <ClInclude Include="SceneData.hpp" />
     <ClInclude Include="Stage.hpp" />
+    <ClInclude Include="StageInformation.hpp" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="straight.hpp" />
     <ClInclude Include="waveB.hpp" />
   </ItemGroup>
   <ItemGroup>

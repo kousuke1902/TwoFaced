@@ -25,8 +25,24 @@ public:
 		enemies.clear();
 	}
 
+	//敵の生成(テスト)
+	int EnemySpawn(Vec2 pos, EnemyName enemyname)
+	{
+		//グロックドローン移動なし
+		if (enemyname == EnemyName::glockdronenomove)
+		{
+
+			Enemy* enemy = new GlockDrone(pos);
+			enemies << enemy;
+			return 0;
+
+		}
+
+		return -1;
+	}
+
 	//敵の生成
-	int EnemySpawn(Vec2 pos, EnemyName enemyname, Array<Vec2> movecommand = { Vec2(100.0, 100.0) } )
+	int EnemySpawn(Vec2 pos, EnemyName enemyname, Array<MoveCommand*> movecommand)
 	{
 		//グロックドローン移動なし
 		if (enemyname == EnemyName::glockdronenomove)
@@ -95,7 +111,7 @@ public:
 			//判断処理
 
 			//移動処理
-			enemy->moveEnemy(deltatime);
+			enemy->moveEnemy(playerpos, deltatime);
 
 			//攻撃処理
 			if (enemy->fire())

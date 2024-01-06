@@ -157,6 +157,12 @@
     <Filter Include="Header Files\Systems\GameRule">
       <UniqueIdentifier>{db5efd9d-09e3-41d8-88ee-c2b235d6931b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\ReadInformation">
+      <UniqueIdentifier>{4e60a66b-1751-4d8f-a0ab-e0644115e857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Character\Enemy\EnemyMove">
+      <UniqueIdentifier>{7dea61e1-7a77-4309-9851-936665503428}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -841,6 +847,15 @@
     </ClInclude>
     <ClInclude Include="GameRule.hpp">
       <Filter>Header Files\Systems\GameRule</Filter>
+    </ClInclude>
+    <ClInclude Include="StageInformation.hpp">
+      <Filter>Header Files\Systems\ReadInformation</Filter>
+    </ClInclude>
+    <ClInclude Include="movecommand.hpp">
+      <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
+    </ClInclude>
+    <ClInclude Include="straight.hpp">
+      <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

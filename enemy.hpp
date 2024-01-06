@@ -1,53 +1,60 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
 #include "character.hpp"
+#include "Straight.hpp"
 
 class Enemy : public Character
 {
 
 protected:
 
-	Array<int*> AttackCommand;//攻撃命令
-	Array<Vec2> MoveCommand;//移動命令
+	Array<MoveCommand*> movecommand;//移動命令
 
 public:
 
 
-	//移動命令を閲覧する
-	Array<Vec2> readMoveCommand()
+	Enemy()
 	{
-		return MoveCommand;
+		movecommand.clear();
+
+	}
+
+	//移動命令を閲覧する
+	Array<MoveCommand*> readMoveCommand()
+	{
+		return movecommand;
 	}
 
 	//移動命令を書き込む
-	int writeMoveCommand(Vec2 command)
+	int writeMoveCommand(MoveCommand* command)
 	{
-		MoveCommand << command;
+		movecommand << command;
 		return 0;
 
 	}
 	//移動命令を書き込む
-	int writeMoveCommand(Array<Vec2> commands)
+	int writeMoveCommand(Array<MoveCommand*> commands)
 	{
-		for (int it = 0; it < commands.size(); ++it)MoveCommand.push_back(commands[it]);
+		for (int it = 0; it < commands.size(); ++it)movecommand.push_back(commands[it]);
 		return 1;
 	}
 
 	//移動命令のリストを上書き
-	int overwriteMoveCommand(Array<Vec2> commands)
+	int overwriteMoveCommand(Array<MoveCommand*> commands)
 	{
-		MoveCommand.clear();
-		MoveCommand = commands;
+		movecommand.clear();
+		movecommand = commands;
 		return 0;
 	}
 
 	//エネミー移動
-	int moveEnemy(double deltatime)
+	int moveEnemy(Vec2 playerPos, double deltatime)
 	{
-		if (!MoveCommand.empty())
+		if (!movecommand.empty())
 		{
-			Vec2 vector = MoveCommand.front() - HitBox.center();
-			if(Abs(vector.length()) <= 1.0) MoveCommand.pop_front();
+			MoveCommand* command = movecommand.front();
+			if(command->readFlag()) movecommand.pop_front();
+			Vec2 vector = command->moveVector(HitBox.center(), playerPos, deltatime);
 			movePos(vector.setLength(1.0), deltatime);
 
 		}

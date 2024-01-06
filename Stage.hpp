@@ -26,7 +26,8 @@ public:
 	Stage(const InitData& init) : IScene{ init }
 	{
 		//テスト
-		Array<Vec2> movecommandtest = { Vec2(50, 50), Vec2(200, 300), Vec2(600, -10) };
+		Array<MoveCommand*> movecommandtest;
+
 		enemymanager.EnemySpawn(Vec2(50, 50), EnemyName::glockdronenomove);
 		enemymanager.EnemySpawn(Vec2(400, 50), EnemyName::glockdrone, movecommandtest);
 
