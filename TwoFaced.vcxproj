@@ -333,6 +333,7 @@
     <ClInclude Include="StageInformation.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="straight.hpp" />
+    <ClInclude Include="wait.hpp" />
     <ClInclude Include="waveB.hpp" />
   </ItemGroup>
   <ItemGroup>

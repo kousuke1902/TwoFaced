@@ -18,6 +18,15 @@ protected:
 
 public:
 
+	Character(Vec2 pos, double boxsize, double life, double speed, double setcooltime)
+	{
+		HitBox = RectF(Arg::center(pos), boxsize);
+		Life = life;
+		Speed = speed;
+		shotCoolTime = setcooltime;
+		shotCoolTimer = 0.0;
+	}
+
 	//座標取得
 	Vec2 readPos()
 	{

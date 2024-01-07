@@ -12,23 +12,14 @@ private:
 
 public:
 
-	GlockDrone(Vec2 pos)
+	GlockDrone(Vec2 pos) : Enemy(pos, 10.0, 20.0, 300.0, 2.0)
 	{
-		HitBox = RectF(Arg::center(pos), 10);
-		Life = 20.0;
-		Speed = 300.0;
-		shotCoolTime = 2.0;
-		shotCoolTimer = 0.0;
+
 	}
 
-	GlockDrone(Vec2 pos, Array<MoveCommand*> movecommand)
+	GlockDrone(Vec2 pos, Array<MoveCommand*> setmovecommand) : Enemy(pos, 10.0, 20.0, 300.0, 2.0, setmovecommand)
 	{
-		HitBox = RectF(Arg::center(pos), 10);
-		Life = 20;
-		Speed = 300;
-		shotCoolTime = 2.0;
-		shotCoolTimer = 0.0;
-		overwriteMoveCommand(movecommand);
+
 	}
 
 	//弾生成

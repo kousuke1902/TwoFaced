@@ -46,18 +46,15 @@ public:
 	{
 		//グロックドローン移動なし
 		if (enemyname == EnemyName::glockdronenomove)
-		{
-
-			Enemy* enemy = new GlockDrone(pos);
-			enemies << enemy;
+		{			 
+			enemies << new GlockDrone(pos);
 			return 0;
 
 		}
 		//グロックドローン
 		else if (enemyname == EnemyName::glockdrone)
 		{
-			Enemy* enemy = new GlockDrone(pos, movecommand);
-			enemies << enemy;
+			enemies << new GlockDrone(pos, movecommand);
 			return 1;
 
 		}

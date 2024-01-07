@@ -11,17 +11,9 @@ class Esquire : public Player
 
 public:
 
-	Esquire(Vec2 pos)
+	Esquire(Vec2 pos) : Player(pos, 10.0, 100.0, 200.0, 1.0, 1.0, 100.0, 2.0)
 	{
-		HitBox = RectF(Arg::center(pos), 10);
-		Life = 100.0;
-		Speed = 200.0;
-		shotCoolTime = 1.0;
-		shotCoolTimer = 0.0;
-		ModechangeCoolTime = 1.0;
-		ModechangeCoolTimer = 0.0;
-		Mode = false;
-		Inherence = 100.0;
+
 	};
 
 	//弾生成

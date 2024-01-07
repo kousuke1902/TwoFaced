@@ -857,5 +857,8 @@
     <ClInclude Include="straight.hpp">
       <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
     </ClInclude>
+    <ClInclude Include="wait.hpp">
+      <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

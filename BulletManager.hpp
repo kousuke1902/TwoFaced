@@ -48,24 +48,21 @@ public:
 	//プレイヤー直進弾の生成
 	int CreateStraightP(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
-		playerbullets << bullet;
+		playerbullets << new Bullet(pos, vector, speed, lifespan, damage, imgtype);
 		return 0;
 	}
 
 	//エネミー直進弾の生成
 	int CreateStraightE(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
-		enemybullets << bullet;
+		enemybullets << new Bullet(pos, vector, speed, lifespan, damage, imgtype);
 		return 0;
 	}
 
 	//全体攻撃直進弾の生成
 	int CreateStraightS(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		Bullet* bullet = new Bullet(pos, vector, speed, lifespan, damage, imgtype);
-		strongbullets << bullet;
+		strongbullets << new Bullet(pos, vector, speed, lifespan, damage, imgtype);
 		return 0;
 	}
 

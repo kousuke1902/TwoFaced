@@ -19,6 +19,15 @@ protected:
 
 public:
 
+	Player(Vec2 pos, double boxsize, double life, double speed, double setcooltime, double setcooltime2, double inherence, double setmodetime) : Character(pos, boxsize, life, speed, setcooltime)
+	{
+		Mode = false;
+		Inherence = inherence;
+		shotCoolTime2 = setcooltime2;
+		ModechangeCoolTime = setmodetime;
+		ModechangeCoolTimer = 0.0;
+	}
+
 	//モード取得
 	bool readMode()
 	{

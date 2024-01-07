@@ -12,10 +12,15 @@ protected:
 
 public:
 
-
-	Enemy()
+	Enemy(Vec2 pos, double boxsize, double life, double speed, double setcooltime) : Character(pos, boxsize, life, speed, setcooltime)
 	{
 		movecommand.clear();
+
+	}
+
+	Enemy(Vec2 pos, double boxsize, double life, double speed, double setcooltime, Array<MoveCommand*> setmovecommand) : Character(pos, boxsize, life, speed, setcooltime)
+	{
+		movecommand = setmovecommand;
 
 	}
 
