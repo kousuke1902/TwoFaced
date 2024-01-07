@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
 #include "character.hpp"
-#include "Straight.hpp"
+#include "straight.hpp"
+#include "wait.hpp"
 
 class Enemy : public Character
 {
