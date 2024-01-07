@@ -54,8 +54,8 @@ public:
 		{
 			MoveCommand* command = movecommand.front();
 			if(command->readFlag()) movecommand.pop_front();
-			Vec2 vector = command->moveVector(HitBox.center(), playerPos, deltatime);
-			movePos(vector.setLength(1.0), deltatime);
+			movePos(command->moveVector(HitBox.center(), playerPos, deltatime), deltatime);
+			
 
 		}
 		return 0;
