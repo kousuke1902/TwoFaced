@@ -24,6 +24,7 @@ public:
 		Mode = false;
 		Inherence = inherence;
 		shotCoolTime2 = setcooltime2;
+		shotCoolTimer2 = 0.0;
 		ModechangeCoolTime = setmodetime;
 		ModechangeCoolTimer = 0.0;
 	}
