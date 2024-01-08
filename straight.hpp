@@ -5,19 +5,35 @@
 //直進移動
 class Straight : public MoveCommand
 {
+protected:
+
+
+
 public:
 
-	Straight(Vec2 setPos) : MoveCommand(setPos)
+	Straight(Vec2 settargetPos) : MoveCommand(settargetPos)
 	{
 
 
 	}
 
-	//移動ベクトル
-	Vec2 moveVector(Vec2 nowPos, Vec2 playerPos, double deltatime)override
+	Straight(Vec2 settargetPos, Vec2 setstartPos) : MoveCommand(settargetPos)
 	{
-		Flagcheck(nowPos);
-		return Vec2(targetPos - nowPos).setLength(1.0);
+
+		moveVector = Vec2(targetPos - setstartPos).setLength(1.0);
+	}
+
+	//命令開始前の設定
+	int setup(Vec2 setstartPos)override
+	{
+		moveVector = Vec2(targetPos - setstartPos).setLength(1.0);
+		return 1;
+	}
+
+	//この命令で行う行動
+	Vec2 moveAction(Vec2 playerPos, double deltatime)override
+	{
+		return moveVector;
 	}
 
 

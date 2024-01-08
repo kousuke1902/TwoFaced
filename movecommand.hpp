@@ -18,42 +18,46 @@ class MoveCommand
 protected:
 
 	Vec2 targetPos;//目標座標
-	bool deleteFlag;//行動削除フラグ
+	Vec2 moveVector;//移動ベクトル
 
-	int Flagcheck(Vec2 nowPos)
-	{
-		if (abs(Vec2(targetPos - nowPos).length()) <= 1.0)deleteFlag = true;
-		return 0;
-	}
+
 
 public:
 
 	MoveCommand()
 	{
 		targetPos = Vec2(0.0, 0.0);
-		deleteFlag = false;
+		moveVector = Vec2(0.0, 0.0);
 
 	}
 
-	MoveCommand(Vec2 setPos)
+	MoveCommand(Vec2 settargetPos)
 	{
-		targetPos = setPos;
-		deleteFlag = false;
+		targetPos = settargetPos;
+		moveVector = Vec2(0.0, 0.0);
 	}
 
-	//行動削除フラグの閲覧
-	bool readFlag()
+
+	//行動削除フラグの確認
+	virtual bool checkFlag(Vec2 nowPos)
+	{
+		if (abs(Vec2(targetPos - nowPos).length()) <= 1.0)return true;
+		return false;
+	}
+
+	//命令開始前の設定
+	virtual int setup(Vec2 setstartPos)
 	{
 
-		return deleteFlag;
+		return 0;
 	}
 
-	//移動ベクトル
-	virtual Vec2 moveVector(Vec2 nowPos, Vec2 playerPos, double deltatime)
+	//この命令で行う行動
+	virtual Vec2 moveAction(Vec2 playerPos, double deltatime)
 	{
 		
 		
-		return targetPos;
+		return Vec2(0.0, 0.0);
 
 	}
 

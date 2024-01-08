@@ -16,11 +16,16 @@ public:
 		sec = setsec;
 	}
 
-	//移動ベクトル
-	Vec2 moveVector(Vec2 nowPos, Vec2 playerPos, double deltatime)override
+	bool checkFlag(Vec2 nowPos = Vec2(0.0, 0.0))override
+	{
+		if (sec <= 0.0)return true;
+		return false;
+	}
+
+	//この命令で行う行動
+	Vec2 moveAction(Vec2 playerPos, double deltatime)override
 	{
 		sec -= deltatime;
-		if (sec <= 0.0)deleteFlag = true;
 		return Vec2(0.0, 0.0);
 	}
 

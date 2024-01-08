@@ -27,7 +27,7 @@ public:
 	{
 		//テスト
 		Array<MoveCommand*> movecommandtest;
-		movecommandtest << new Straight(Vec2(100, 100)) << new Wait(3.0) << new Straight(Vec2(600, 400));
+		movecommandtest << new Straight(Vec2(100, 100), Vec2(400, 50)) << new Wait(3.0) << new Straight(Vec2(600, 400));
 		enemymanager.EnemySpawn(Vec2(50, 50), EnemyName::glockdronenomove);
 		enemymanager.EnemySpawn(Vec2(400, 50), EnemyName::glockdrone, movecommandtest);
 

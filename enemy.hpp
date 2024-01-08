@@ -58,9 +58,13 @@ public:
 	{
 		if (!movecommand.empty())
 		{
-			MoveCommand* command = movecommand.front();
-			if(command->readFlag()) movecommand.pop_front();
-			movePos(command->moveVector(HitBox.center(), playerPos, deltatime), deltatime);
+			if (movecommand.front()->checkFlag(HitBox.center()))
+			{
+				movecommand.pop_front();
+				if (!movecommand.empty())movecommand.front()->setup(HitBox.center());
+			}
+
+			else movePos(movecommand.front()->moveAction(playerPos, deltatime), deltatime);
 			
 
 		}
