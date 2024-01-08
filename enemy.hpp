@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "straight.hpp"
 #include "wait.hpp"
+#include "kill.hpp"
 
 class Enemy : public Character
 {
@@ -61,7 +62,12 @@ public:
 			if (movecommand.front()->checkFlag(HitBox.center()))
 			{
 				movecommand.pop_front();
-				if (!movecommand.empty())movecommand.front()->setup(HitBox.center());
+
+				if (!movecommand.empty())
+				{
+					if (movecommand.front()->readType() == MoveType::kill) Life = 0;
+					else movecommand.front()->setup(HitBox.center());
+				}
 			}
 
 			else movePos(movecommand.front()->moveAction(playerPos, deltatime), deltatime);

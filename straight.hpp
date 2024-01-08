@@ -11,13 +11,13 @@ protected:
 
 public:
 
-	Straight(Vec2 settargetPos) : MoveCommand(settargetPos)
+	Straight(Vec2 settargetPos) : MoveCommand(settargetPos, MoveType::straight)
 	{
 
 
 	}
 
-	Straight(Vec2 settargetPos, Vec2 setstartPos) : MoveCommand(settargetPos)
+	Straight(Vec2 settargetPos, Vec2 setstartPos) : MoveCommand(settargetPos, MoveType::straight)
 	{
 
 		moveVector = Vec2(targetPos - setstartPos).setLength(1.0);

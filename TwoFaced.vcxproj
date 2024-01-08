@@ -325,6 +325,7 @@
     <ClInclude Include="GoalRule.hpp" />
     <ClInclude Include="glockdrone.hpp" />
     <ClInclude Include="input.hpp" />
+    <ClInclude Include="kill.hpp" />
     <ClInclude Include="movecommand.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="PlayerManager.hpp" />
