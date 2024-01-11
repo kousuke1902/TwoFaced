@@ -6,7 +6,8 @@
 
 enum class EnemyName
 {
-	glockdronenomove, glockdrone
+	glockdronenomove,
+	glockdrone
 
 };
 

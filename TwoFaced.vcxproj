@@ -320,6 +320,7 @@
     <ClInclude Include="character.hpp" />
     <ClInclude Include="enemy.hpp" />
     <ClInclude Include="EnemyManager.hpp" />
+    <ClInclude Include="EnemyStartUpInformation.hpp" />
     <ClInclude Include="esquire.hpp" />
     <ClInclude Include="GameRule.hpp" />
     <ClInclude Include="GoalRule.hpp" />

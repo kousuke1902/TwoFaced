@@ -23,7 +23,7 @@ public:
 	Enemy(Vec2 pos, double boxsize, double life, double speed, double setcooltime, Array<MoveCommand*> setmovecommand) : Character(pos, boxsize, life, speed, setcooltime)
 	{
 		movecommand = setmovecommand;
-
+		movecommand.front()->setup(HitBox.center());
 	}
 
 	//移動命令を閲覧する

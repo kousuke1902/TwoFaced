@@ -863,5 +863,8 @@
     <ClInclude Include="kill.hpp">
       <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyStartUpInformation.hpp">
+      <Filter>Header Files\Systems\ReadInformation</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
