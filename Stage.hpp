@@ -19,7 +19,7 @@ private:
 	EnemyManager enemymanager;//エネミー処理
 	BulletManager bulletmanager;//弾処理
 	GameRule *gamerule;//ステージクリア，ゲームオーバー判定
-	EnemyStartUpInformation startup;//エネミーのスポーン情報
+	//EnemyStartUpInformation startup;//エネミーのスポーン情報
 
 
 public:
@@ -27,7 +27,7 @@ public:
 	Stage(const InitData& init) : IScene{ init }
 	{
 		//テスト
-		StageInformation(U"test.csv", gamerule, startup);
+		//StageInformation(U"test.csv", gamerule, startup);
 
 	}
 
@@ -52,11 +52,11 @@ public:
 		//エネミーの更新
 		enemymanager.Update(&bulletmanager, playermanager.PlayerPos(), deltatime);
 		//エネミーのスポーン
-		if (!startup.spawntimes.empty())
+		/*if (!startup.spawntimes.empty())
 		{
 
 
-		}
+		}*/
 
 		//弾処理
 		bulletmanager.Update(deltatime);

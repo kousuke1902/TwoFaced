@@ -3,12 +3,23 @@
 #include "EnemyManager.hpp"
 #include "movecommand.hpp"
 
-struct EnemyStartUpInformation
+class EnemyStartUpInformation
 {
-	
-	Array<double*> spawntimes;//エネミーのスポーン時間
-	Array<Vec2*> spawnPos;//エネミーの初期スポーン座標
-	Array<EnemyName> name;//スポーンするエネミーの名称
-	Array<Array<MoveCommand*>> movecomands;//行動命令の列挙
+private:
+
+	double spawntime;//エネミーのスポーン時間
+	Vec2 spawnPos;//エネミーの初期スポーン座標
+	EnemyName name;//スポーンするエネミーの名称
+	Array<MoveCommand*> movecomands;//行動命令の列挙
+
+public:
+
+	EnemyStartUpInformation(double setspawntime, EnemyName setname, Vec2 setspawnPos,  Array<MoveCommand*> setmovecommands)
+	{
+		spawntime = setspawntime;
+		name = setname;
+		spawnPos = setspawnPos;
+		movecomands = setmovecommands;
+	}
 
 };
