@@ -7,7 +7,7 @@ class Kill : public MoveCommand
 
 public:
 
-	Kill() : MoveCommand(MoveType::kill)
+	Kill()
 	{
 
 	}

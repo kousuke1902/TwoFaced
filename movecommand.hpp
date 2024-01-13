@@ -1,16 +1,6 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
 
-enum class MoveType
-{
-	straight,
-	sin,
-	curve,
-	stalker,
-	wait,
-	kill
-
-};
 
 //エネミーの移動制御
 class MoveCommand
@@ -19,32 +9,23 @@ protected:
 
 	Vec2 targetPos;//目標座標
 	Vec2 moveVector;//移動ベクトル
-	MoveType Type;//行動種類
 
 
 
 public:
 
-	MoveCommand(MoveType setType)
+	MoveCommand()
 	{
 		targetPos = Vec2(0.0, 0.0);
 		moveVector = Vec2(0.0, 0.0);
-		Type = setType;
-
 	}
 
-	MoveCommand(Vec2 settargetPos, MoveType setType)
+	MoveCommand(Vec2 settargetPos)
 	{
 		targetPos = settargetPos;
 		moveVector = Vec2(0.0, 0.0);
-		Type = setType;
 	}
 
-	//行動方法の閲覧
-	MoveType readType()
-	{
-		return Type;
-	}
 
 	//行動削除フラグの確認
 	virtual bool checkFlag(Vec2 nowPos)
