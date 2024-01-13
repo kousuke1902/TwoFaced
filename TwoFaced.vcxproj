@@ -332,7 +332,6 @@
     <ClInclude Include="PlayerManager.hpp" />
     <ClInclude Include="SceneData.hpp" />
     <ClInclude Include="Stage.hpp" />
-    <ClInclude Include="StageInformation.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="straight.hpp" />
     <ClInclude Include="wait.hpp" />

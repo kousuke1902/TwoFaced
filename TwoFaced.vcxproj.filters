@@ -848,9 +848,6 @@
     <ClInclude Include="GameRule.hpp">
       <Filter>Header Files\Systems\GameRule</Filter>
     </ClInclude>
-    <ClInclude Include="StageInformation.hpp">
-      <Filter>Header Files\Systems\ReadInformation</Filter>
-    </ClInclude>
     <ClInclude Include="movecommand.hpp">
       <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
     </ClInclude>

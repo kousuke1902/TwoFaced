@@ -70,7 +70,7 @@ public:
 				}
 			}
 
-			else movePos(movecommand.front()->moveAction(playerPos, deltatime), deltatime);
+			else movePos(movecommand.front()->moveAction(playerPos, deltatime));
 			
 
 		}

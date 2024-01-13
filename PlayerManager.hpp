@@ -53,7 +53,7 @@ public:
 		if (!player->deadFlag())
 		{
 			//移動処理
-			player->movePos(input->readVector(), deltatime);
+			player->movePos(input->readVector() * deltatime);
 
 			//攻撃処理
 			if (input->readFire() && player->fire())

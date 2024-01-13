@@ -113,9 +113,9 @@ public:
 	}
 
 	//キャラクターの移動操作
-	int movePos(Vec2 vec, double deltaTime)
+	int movePos(Vec2 vec)
 	{
-		HitBox.moveBy(vec * Speed * deltaTime);
+		HitBox.moveBy(vec * Speed);
 		return 0;
 	}
 

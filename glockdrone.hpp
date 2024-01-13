@@ -12,12 +12,12 @@ private:
 
 public:
 
-	GlockDrone(Vec2 pos) : Enemy(pos, 10.0, 20.0, 300.0, 2.0)
+	GlockDrone(Vec2 pos) : Enemy(pos, 10.0, 20.0, 300.0, 1.0)
 	{
 
 	}
 
-	GlockDrone(Vec2 pos, Array<MoveCommand*> setmovecommand) : Enemy(pos, 10.0, 20.0, 300.0, 2.0, setmovecommand)
+	GlockDrone(Vec2 pos, Array<MoveCommand*> setmovecommand) : Enemy(pos, 10.0, 20.0, 300.0, 1.0, setmovecommand)
 	{
 
 	}

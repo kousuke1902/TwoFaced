@@ -11,7 +11,7 @@ class Esquire : public Player
 
 public:
 
-	Esquire(Vec2 pos) : Player(pos, 10.0, 100.0, 200.0, 1.0, 1.0, 100.0, 2.0)
+	Esquire(Vec2 pos) : Player(pos, 10.0, 100.0, 200.0, 0.5, 1.0, 100.0, 2.0)
 	{
 
 	};

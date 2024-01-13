@@ -33,7 +33,7 @@ public:
 	//この命令で行う行動
 	Vec2 moveAction(Vec2 playerPos, double deltatime)override
 	{
-		return moveVector;
+		return moveVector * deltatime;
 	}
 
 
