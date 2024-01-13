@@ -10,7 +10,7 @@ private:
 
 public:
 
-	Wait(double setsec)
+	Wait(double setsec) : MoveCommand(MoveType::wait)
 	{
 
 		sec = setsec;
