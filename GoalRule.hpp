@@ -21,7 +21,7 @@ public:
 	//ステージクリア判定
 	bool Clear() override
 	{
-		if (Time >= ClearTime)return true;
+		if (Timer >= ClearTime)return true;
 		else return false;
 
 

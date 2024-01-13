@@ -18,15 +18,29 @@ class GameRule
 
 protected:
 
-	double Time;//ステージを起動してからの時間
+	double Timer;//ステージを起動してからの時間
 	Array<EnemyName> EnemyCount;//撃破エネミー数
 
 public:
 
 	GameRule()
 	{
-		Time = 0.0;
+		Timer = 0.0;
 		EnemyCount.clear();
+	}
+
+
+	//経過時間の閲覧
+	double readTimer()
+	{
+		return Timer;
+	}
+
+	//時間の加算
+	int addTimer(double deltatime)
+	{
+		Timer += deltatime;
+		return 0;
 	}
 
 	//撃破エネミーの追加

@@ -3,6 +3,7 @@
 #include "glockdrone.hpp"
 #include "PlayerManager.hpp"
 #include "BulletManager.hpp"
+#include "EnemyStartUpInformation.hpp"
 
 enum class EnemyName
 {
@@ -56,6 +57,27 @@ public:
 		else if (enemyname == EnemyName::glockdrone)
 		{
 			enemies << new GlockDrone(pos, movecommand);
+			return 1;
+
+		}
+
+		return -1;
+	}
+
+	//敵の生成
+	int EnemySpawn(EnemyStartUpInformation* startup)
+	{
+		//グロックドローン移動なし
+		if (startup->readID() == (int)EnemyName::glockdronenomove)
+		{
+			enemies << new GlockDrone(startup->readspawnPos());
+			return 0;
+
+		}
+		//グロックドローン
+		else if (startup->readID() == (int)EnemyName::glockdrone)
+		{
+			enemies << new GlockDrone(startup->readspawnPos(), startup->readMoveCommands());
 			return 1;
 
 		}
