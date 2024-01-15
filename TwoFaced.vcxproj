@@ -330,6 +330,7 @@
     <ClInclude Include="movecommand.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="PlayerManager.hpp" />
+    <ClInclude Include="Result.hpp" />
     <ClInclude Include="SceneData.hpp" />
     <ClInclude Include="Stage.hpp" />
     <ClInclude Include="stdafx.h" />

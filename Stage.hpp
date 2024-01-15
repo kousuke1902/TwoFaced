@@ -116,6 +116,18 @@ public:
 
 		ClearPrint();
 
+		//クリア判定
+		if (gamerule->Clear())
+		{
+			changeScene(State::Result);
+		}
+
+		//ゲームオーバー判定
+		if (gamerule->GameOver() || !playermanager.deadFlag())
+		{
+
+
+		}
 		//入力状態の更新
 		input.Update();
 
@@ -127,17 +139,15 @@ public:
 
 		//エネミー処理
 		//エネミーの更新
-		enemymanager.Update(&bulletmanager, playermanager.PlayerPos(), deltatime);
+		enemymanager.Update(&bulletmanager, &playermanager, deltatime);
 		//エネミーのスポーン
 		if (!startup.empty())
 		{
 			//スポーン時間を超過
 			if (gamerule->readTimer() > startup.front()->readSpawnTime())
 			{
-				
 				enemymanager.EnemySpawn(startup.front());
 				startup.pop_front();
-
 			}
 
 		}

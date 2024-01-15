@@ -105,7 +105,7 @@ public:
 
 
 	//更新
-	int Update(BulletManager* bulletmanager, Vec2 playerpos, double deltatime)
+	int Update(BulletManager* bulletmanager, PlayerManager* player, double deltatime)
 	{
 		//敵の生存確認
 		for (auto it = enemies.begin(); it != enemies.end();)
@@ -131,13 +131,13 @@ public:
 			//判断処理
 
 			//移動処理
-			enemy->moveEnemy(playerpos, deltatime);
+			enemy->moveEnemy(player->PlayerHitBox().center(), deltatime);
 
 			//攻撃処理
 			if (enemy->fire())
 			{
 				enemy->setshotCoolTimer();
-				enemy->createBullet(bulletmanager, playerpos);
+				enemy->createBullet(bulletmanager, player->PlayerHitBox().center());
 			}
 
 			enemy->countshotCoolTimer(deltatime);
@@ -161,6 +161,13 @@ public:
 					enemy->HitDamage(bullet->readDamage());
 					bullet->reduceLifeSpan();
 				}
+			}
+
+			//プレイヤー，エネミー接触
+			if (enemy->readHitBox().intersects(player->PlayerHitBox().center()))
+			{
+				player->HitDamage(deltatime);
+				enemy->HitDamage(deltatime);
 			}
 
 			//描画処理

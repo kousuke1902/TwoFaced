@@ -1,6 +1,7 @@
 ﻿#include <Siv3D.hpp> // OpenSiv3D v0.6.10
 #include "SceneData.hpp"
 #include "Stage.hpp"
+#include "Result.hpp"
 
 void Main()
 {
@@ -9,6 +10,7 @@ void Main()
 	App manager;
 
 	manager.add<Stage>(State::Stage);
+	manager.add<Result>(State::Result);
 
 	manager.init(State::Stage);
 

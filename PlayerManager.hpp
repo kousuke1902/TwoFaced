@@ -29,9 +29,9 @@ public:
 	}
 
 	//プレイヤー座標
-	Vec2 PlayerPos()
+	RectF PlayerHitBox()
 	{
-		return player->readPos();
+		return player->readHitBox();
 	}
 
 	//プレイヤーのモード状態
@@ -44,6 +44,13 @@ public:
 	bool deadFlag()
 	{
 		return player->deadFlag();
+	}
+
+	//ダメージ付与
+	int HitDamage(double x)
+	{
+		player->HitDamage(x);
+		return 0;
 	}
 
 	//更新
@@ -66,7 +73,7 @@ public:
 			player->countshotCoolTimer(deltatime);
 
 			//切り替え処理
-			if (input->readChange() && player->Modechange())player->switchMode();
+			if (input->readChange() && player->Modechange()) player->switchMode();
 			player->countModechangeCoolTimer(deltatime);
 
 			//固有値操作

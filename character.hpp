@@ -150,7 +150,7 @@ public:
 		return 0;
 	}
 
-	//生死判定
+	//生死判定 生存:true
 	bool deadFlag()
 	{
 		if (Life <= 0)return true;
