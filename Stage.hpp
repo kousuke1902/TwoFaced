@@ -119,6 +119,7 @@ public:
 		//クリア判定
 		if (gamerule->Clear())
 		{
+			getData().ResultLife = playermanager.PlayerLife();
 			changeScene(State::Result);
 		}
 

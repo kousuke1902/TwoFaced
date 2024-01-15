@@ -130,7 +130,7 @@ public:
 			//弾の移動
 			bullet->movePos(deltatime);
 			//描画
-			bullet->readHitBox().draw(Palette::Red);
+			bullet->readHitBox().draw(Palette::Blue);
 		}
 
 		//エネミー弾
@@ -148,7 +148,7 @@ public:
 			//弾の移動
 			bullet->movePos(deltatime);
 			//描画
-			bullet->readHitBox().draw(Palette::Red);
+			bullet->readHitBox().draw(Palette::Gold);
 		}
 
 		return 0;

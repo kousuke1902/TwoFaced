@@ -12,14 +12,10 @@ enum class State
 
 struct GameData
 {
-
-	//選択キャラ
-	Optional<int> PlayerIndex;
-
-	//選択されたステージ
-	Optional<int> Stage;
-
-
+	Optional<int> PlayerIndex;//選択キャラ	
+	Optional<int> Stage;//選択されたステージ
+	double ResultLife = 0.0;//リザルトで使用するライフ
+	
 
 };
 

@@ -53,6 +53,11 @@ public:
 		return 0;
 	}
 
+	double PlayerLife()
+	{
+		return player->readLife();
+	}
+
 	//更新
 	int Update(BulletManager* bulletmanager, PlayerInput *input, double deltatime)
 	{
