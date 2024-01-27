@@ -136,32 +136,29 @@
     <Filter Include="Resource Files\engine\font\min">
       <UniqueIdentifier>{1b103960-f11a-4515-b4f1-f59333ce00d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Character">
-      <UniqueIdentifier>{22b4f32e-9f0d-4134-8c09-29f1976ed03e}</UniqueIdentifier>
+    <Filter Include="Header Files\character">
+      <UniqueIdentifier>{99946ef2-b324-434e-874f-7a8fd5e559eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Bullet">
-      <UniqueIdentifier>{522871ae-a7a0-4d01-a6fa-dfdcab312893}</UniqueIdentifier>
+    <Filter Include="Header Files\character\player">
+      <UniqueIdentifier>{f7921863-4dc5-4301-9b8c-267f6a0ff3fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Character\Enemy">
-      <UniqueIdentifier>{ae8e8e13-0387-4575-8a1d-dab3115a68c4}</UniqueIdentifier>
+    <Filter Include="Header Files\character\enemy">
+      <UniqueIdentifier>{f3427bdc-ac2b-4c5f-8a0a-d18bfd05cc48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Character\Player">
-      <UniqueIdentifier>{e9f16d60-a20c-4010-872f-79b0414e145e}</UniqueIdentifier>
+    <Filter Include="Header Files\character\enemy\movecommand">
+      <UniqueIdentifier>{77390694-e4e5-4f1f-950e-cb5c79b6c34c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Systems">
-      <UniqueIdentifier>{ce1af7f8-0441-4744-9416-687fa4c71fa5}</UniqueIdentifier>
+    <Filter Include="Header Files\bullet">
+      <UniqueIdentifier>{06f822af-5ae0-439b-9a67-a7efaa96db61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Systems\Scene">
-      <UniqueIdentifier>{ab1a55da-d9e7-4092-b324-2b706b521bc8}</UniqueIdentifier>
+    <Filter Include="Header Files\syatem">
+      <UniqueIdentifier>{13e027c6-c189-40b9-b0a5-7c14f73bb6ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Systems\GameRule">
-      <UniqueIdentifier>{db5efd9d-09e3-41d8-88ee-c2b235d6931b}</UniqueIdentifier>
+    <Filter Include="Header Files\syatem\scene">
+      <UniqueIdentifier>{dfe862c7-3e5a-4e0e-9fb6-bd9a5df28306}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Systems\ReadInformation">
-      <UniqueIdentifier>{4e60a66b-1751-4d8f-a0ab-e0644115e857}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Character\Enemy\EnemyMove">
-      <UniqueIdentifier>{7dea61e1-7a77-4309-9851-936665503428}</UniqueIdentifier>
+    <Filter Include="Header Files\syatem\scene\stage">
+      <UniqueIdentifier>{7865ff32-0b1b-4617-a2a7-ec30587bf33c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -804,67 +801,67 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="character.hpp">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="bullet.hpp">
-      <Filter>Header Files\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="waveB.hpp">
-      <Filter>Header Files\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletManager.hpp">
-      <Filter>Header Files\Bullet</Filter>
+      <Filter>Header Files\character</Filter>
     </ClInclude>
     <ClInclude Include="player.hpp">
-      <Filter>Header Files\Character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="esquire.hpp">
-      <Filter>Header Files\Character\Player</Filter>
+      <Filter>Header Files\character\player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.hpp">
-      <Filter>Header Files\Character\Player</Filter>
+      <Filter>Header Files\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="esquire.hpp">
+      <Filter>Header Files\character\player</Filter>
     </ClInclude>
     <ClInclude Include="enemy.hpp">
-      <Filter>Header Files\Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="glockdrone.hpp">
-      <Filter>Header Files\Character\Enemy</Filter>
+      <Filter>Header Files\character\enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyManager.hpp">
-      <Filter>Header Files\Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="input.hpp">
-      <Filter>Header Files\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.hpp">
-      <Filter>Header Files\Systems\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneData.hpp">
-      <Filter>Header Files\Systems\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GoalRule.hpp">
-      <Filter>Header Files\Systems\GameRule</Filter>
-    </ClInclude>
-    <ClInclude Include="GameRule.hpp">
-      <Filter>Header Files\Systems\GameRule</Filter>
-    </ClInclude>
-    <ClInclude Include="movecommand.hpp">
-      <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
-    </ClInclude>
-    <ClInclude Include="straight.hpp">
-      <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
-    </ClInclude>
-    <ClInclude Include="wait.hpp">
-      <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
-    </ClInclude>
-    <ClInclude Include="kill.hpp">
-      <Filter>Header Files\Character\Enemy\EnemyMove</Filter>
+      <Filter>Header Files\character\enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyStartUpInformation.hpp">
-      <Filter>Header Files\Systems\ReadInformation</Filter>
+      <Filter>Header Files\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="glockdrone.hpp">
+      <Filter>Header Files\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="kill.hpp">
+      <Filter>Header Files\character\enemy\movecommand</Filter>
+    </ClInclude>
+    <ClInclude Include="movecommand.hpp">
+      <Filter>Header Files\character\enemy\movecommand</Filter>
+    </ClInclude>
+    <ClInclude Include="wait.hpp">
+      <Filter>Header Files\character\enemy\movecommand</Filter>
+    </ClInclude>
+    <ClInclude Include="straight.hpp">
+      <Filter>Header Files\character\enemy\movecommand</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.hpp">
+      <Filter>Header Files\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.hpp">
+      <Filter>Header Files\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="waveB.hpp">
+      <Filter>Header Files\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneData.hpp">
+      <Filter>Header Files\syatem\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalRule.hpp">
+      <Filter>Header Files\syatem\scene\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="GameRule.hpp">
+      <Filter>Header Files\syatem\scene\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.hpp">
+      <Filter>Header Files\syatem\scene\stage</Filter>
     </ClInclude>
     <ClInclude Include="Result.hpp">
-      <Filter>Header Files\Systems\Scene</Filter>
+      <Filter>Header Files\syatem\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="input.hpp">
+      <Filter>Header Files\syatem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
