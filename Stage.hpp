@@ -112,6 +112,9 @@ public:
 
 		ClearPrint();
 
+		//処理フレーム間の経過時間
+		const double deltatime = Scene::DeltaTime();
+
 		//クリア判定
 		if (gamerule->Clear())
 		{
@@ -125,11 +128,9 @@ public:
 
 
 		}
+
 		//入力状態の更新
 		input.Update();
-
-		//処理フレーム間の経過時間
-		const double deltatime = Scene::DeltaTime();
 
 		//プレイヤー処理
 		playermanager.Update(&bulletmanager, &input, deltatime);

@@ -151,14 +151,14 @@
     <Filter Include="Header Files\bullet">
       <UniqueIdentifier>{06f822af-5ae0-439b-9a67-a7efaa96db61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\syatem">
+    <Filter Include="Header Files\system">
       <UniqueIdentifier>{13e027c6-c189-40b9-b0a5-7c14f73bb6ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\syatem\scene">
+    <Filter Include="Header Files\system\scene">
       <UniqueIdentifier>{dfe862c7-3e5a-4e0e-9fb6-bd9a5df28306}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\syatem\scene\stage">
-      <UniqueIdentifier>{7865ff32-0b1b-4617-a2a7-ec30587bf33c}</UniqueIdentifier>
+    <Filter Include="Header Files\system\scene\GameRule">
+      <UniqueIdentifier>{34570454-ab07-4faa-8f4d-ea25855f1a78}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -845,23 +845,32 @@
     <ClInclude Include="waveB.hpp">
       <Filter>Header Files\bullet</Filter>
     </ClInclude>
-    <ClInclude Include="SceneData.hpp">
-      <Filter>Header Files\syatem\scene</Filter>
+    <ClInclude Include="input.hpp">
+      <Filter>Header Files\system</Filter>
     </ClInclude>
     <ClInclude Include="GoalRule.hpp">
-      <Filter>Header Files\syatem\scene\stage</Filter>
+      <Filter>Header Files\system\scene\GameRule</Filter>
     </ClInclude>
     <ClInclude Include="GameRule.hpp">
-      <Filter>Header Files\syatem\scene\stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.hpp">
-      <Filter>Header Files\syatem\scene\stage</Filter>
+      <Filter>Header Files\system\scene\GameRule</Filter>
     </ClInclude>
     <ClInclude Include="Result.hpp">
-      <Filter>Header Files\syatem\scene</Filter>
+      <Filter>Header Files\system\scene</Filter>
     </ClInclude>
-    <ClInclude Include="input.hpp">
-      <Filter>Header Files\syatem</Filter>
+    <ClInclude Include="Stage.hpp">
+      <Filter>Header Files\system\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneData.hpp">
+      <Filter>Header Files\system\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelect.hpp">
+      <Filter>Header Files\system\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.hpp">
+      <Filter>Header Files\system\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="stagelist.hpp">
+      <Filter>Header Files\system\scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -28,37 +28,37 @@ public:
 	}
 
 	//座標取得
-	Vec2 readPos()
+	Vec2 readPos() const
 	{
 		return HitBox.center();
 	}
 
 	//当たり判定取得
-	RectF readHitBox()
+	RectF readHitBox() const 
 	{
-		return HitBox;;	
+		return HitBox;	
 	}
 
 	//体力取得
-	double readLife()
+	double readLife() const
 	{
 		return Life;
 	}
 
 	//移動速度取得
-	double readspeed()
+	double readspeed() const
 	{
 		return Speed;
 	}
 
 	//発射間隔
-	double readshotCoolTime()
+	double readshotCoolTime() const
 	{
 		return shotCoolTime;
 	}
 
 	//発射クールタイムタイマー
-	double readshotCoolTimer()
+	double readshotCoolTimer() const
 	{
 		return shotCoolTimer;
 	}
@@ -120,7 +120,7 @@ public:
 	}
 
 	//発砲の有無
-	bool fire()
+	bool fire() const
 	{
 		if (shotCoolTimer <= 0.0)return true;
 
@@ -151,7 +151,7 @@ public:
 	}
 
 	//生死判定 生存:true
-	bool deadFlag()
+	bool deadFlag() const
 	{
 		if (Life <= 0)return true;
 		else return false;

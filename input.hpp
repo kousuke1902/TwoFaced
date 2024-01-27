@@ -21,19 +21,19 @@ public:
 	}
 
 	//移動ベクトルの取得
-	Vec2 readVector()
+	Vec2 readVector() const
 	{
 		return Vector;
 	}
 
 	//射撃フラグの状態の取得
-	bool readFire()
+	bool readFire() const
 	{
 		return Fire;
 	}
 
 	//モード変更状態の取得
-	bool readChange()
+	bool readChange() const
 	{
 		return Change;
 	}

@@ -333,8 +333,11 @@
     <ClInclude Include="Result.hpp" />
     <ClInclude Include="SceneData.hpp" />
     <ClInclude Include="Stage.hpp" />
+    <ClInclude Include="stagelist.hpp" />
+    <ClInclude Include="StageSelect.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="straight.hpp" />
+    <ClInclude Include="Title.hpp" />
     <ClInclude Include="wait.hpp" />
     <ClInclude Include="waveB.hpp" />
   </ItemGroup>
