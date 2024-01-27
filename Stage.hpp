@@ -106,10 +106,6 @@ public:
 	
 	}
 
-
-
-
-
 	//更新処理
 	void update()override
 	{

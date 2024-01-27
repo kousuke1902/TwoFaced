@@ -1,5 +1,6 @@
 ﻿#include <Siv3D.hpp>
 #include "SceneData.hpp"
+#include "Title.hpp"
 #include "Stage.hpp"
 #include "Result.hpp"
 
@@ -9,6 +10,7 @@ void Main()
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 	App manager;
 
+	manager.add<Title>(State::Title);
 	manager.add<Stage>(State::Stage);
 	manager.add<Result>(State::Result);
 
