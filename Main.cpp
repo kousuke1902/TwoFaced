@@ -1,6 +1,7 @@
 ﻿#include <Siv3D.hpp>
 #include "SceneData.hpp"
 #include "Title.hpp"
+#include "StageSelect.hpp"
 #include "Stage.hpp"
 #include "Result.hpp"
 
@@ -11,10 +12,11 @@ void Main()
 	App manager;
 
 	manager.add<Title>(State::Title);
+	manager.add<StageSelect>(State::StageSelect);
 	manager.add<Stage>(State::Stage);
 	manager.add<Result>(State::Result);
 
-	manager.init(State::Stage);
+	manager.init(State::StageSelect);
 
 	while (System::Update())
 	{
