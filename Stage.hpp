@@ -99,7 +99,7 @@ public:
 	Stage(const InitData& init) : IScene{ init }
 	{
 		//テスト
-		stagefile = FilePath{ U"test.csv" };
+		stagefile = getData().Stagepath;
 		CSV csv{ stagefile };
 		setGameRule(csv);
 		loadspawnEnemies(csv);

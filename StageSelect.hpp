@@ -45,7 +45,7 @@ public:
 		{
 			if (downtime == 0.0)
 			{
-				downtime = 1.0;
+				downtime = 0.5;
 				cursol++;
 			}
 		}
@@ -53,7 +53,7 @@ public:
 		{
 			if (downtime == 0.0)
 			{
-				downtime = 1.0;
+				downtime = 0.5;
 				cursol--;
 			}
 		}
@@ -71,12 +71,20 @@ public:
 		Rect{ 40, 420, 400, 50 }.draw(Palette::Royalblue);
 		Rect{ -20, 530, 400, 50 }.draw(Palette::Royalblue);
 
+		//ステージ名表示
 		if (cursol - 3 >= 0)font(stagelist[cursol - 3].readNum() + U" : " + stagelist[cursol - 3].readName()).draw(-60, -44);
 		if (cursol - 2 >= 0)font(stagelist[cursol - 2].readNum() + U" : " + stagelist[cursol - 2].readName()).draw(-10, 76);
 		if (cursol - 1 >= 0)font(stagelist[cursol - 1].readNum() + U" : " + stagelist[cursol - 1].readName()).draw(40, 186);
 		font(stagelist[cursol].readNum() + U" : " + stagelist[cursol].readName()).draw(100, 296);
 		if (cursol + 1 < stagelist.size())font(stagelist[cursol + 1].readNum() + U" : " + stagelist[cursol + 1].readName()).draw(40, 406);
 		if (cursol + 2 < stagelist.size())font(stagelist[cursol + 2].readNum() + U" : " + stagelist[cursol + 2].readName()).draw(-10, 516);
+
+		//ステージ選択決定
+		if (input.pressFire())
+		{
+			getData().Stagepath = stagelist[cursol].readStagepath();
+			changeScene(State::Stage);
+		}
 
 		downtime -= deltatime;
 
