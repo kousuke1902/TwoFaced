@@ -1,11 +1,13 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
 #include "SceneData.hpp"
+#include "input.hpp"
 
 class Result : public App::Scene
 {
 
 private:
+	PlayerInput input;
 	Font font;
 
 public:
@@ -19,7 +21,10 @@ public:
 	void update() override
 	{
 
-
+		if (input.pressFire())
+		{
+			changeScene(State::StageSelect);
+		}
 
 	}
 
