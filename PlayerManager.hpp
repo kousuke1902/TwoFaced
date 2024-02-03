@@ -53,6 +53,7 @@ public:
 		return 0;
 	}
 
+	//体力の閲覧
 	double PlayerLife()
 	{
 		return player->readLife();

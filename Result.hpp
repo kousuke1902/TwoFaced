@@ -3,6 +3,7 @@
 #include "SceneData.hpp"
 #include "input.hpp"
 
+//リザルト画面
 class Result : public App::Scene
 {
 
@@ -34,6 +35,10 @@ public:
 		{
 			changeScene(State::StageSelect);
 		}
+		else if (input.downModechange())
+		{
+			changeScene(State::Stage);
+		}
 
 	}
 
@@ -41,8 +46,9 @@ public:
 	void draw() const override
 	{
 		ClearPrint();
-		font(Evalute).drawAt(300, 400);
-		font(U"残耐久値 : {:.2f}%"_fmt(Score)).drawAt(300, 500);
+		font(U"実戦試験評価").drawAt(300, 100);
+		font(Evalute).drawAt(300, 200);
+		font(U"残耐久値 : {:.2f}%"_fmt(Score)).drawAt(300, 300);
 	}
 
 };

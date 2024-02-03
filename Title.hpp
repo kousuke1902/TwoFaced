@@ -3,6 +3,7 @@
 #include "SceneData.hpp"
 #include "input.hpp"
 
+//タイトル画面
 class Title : public App::Scene
 {
 private:

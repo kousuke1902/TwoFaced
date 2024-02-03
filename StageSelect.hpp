@@ -38,10 +38,19 @@ public:
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
 
+		downtime -= deltatime;
 		downtime = Max(0.0, downtime);
 
+
+		//ステージ選択決定
+		if (input.pressFire())
+		{
+			getData().Stagepath = stagelist[cursol].readStagepath();
+			changeScene(State::Stage);
+		}
+
 		//移動方向を検知してカーソル移動の検知を行う
-		if (input.MoveVectorLogic().y > 0.5)
+		else if (input.MoveVectorLogic().y > 0.5)
 		{
 			if (downtime == 0.0)
 			{
@@ -60,8 +69,8 @@ public:
 		else downtime = 0.0;
 
 		//カーソル位置の超過検知
-		if (cursol < 0)cursol = 0;
-		else if (cursol > stagelist.size() - 1)cursol = stagelist.size() - 1;
+		if (cursol < 0)cursol = stagelist.size() - 1;
+		else if (cursol > stagelist.size() - 1)cursol = 0;
 
 		//テキストマーカー
 		Rect{ -60, -30, 400, 50 }.draw(Palette::Royalblue);
@@ -79,14 +88,6 @@ public:
 		if (cursol + 1 < stagelist.size())font(stagelist[cursol + 1].readNum() + U" : " + stagelist[cursol + 1].readName()).draw(40, 406);
 		if (cursol + 2 < stagelist.size())font(stagelist[cursol + 2].readNum() + U" : " + stagelist[cursol + 2].readName()).draw(-10, 516);
 
-		//ステージ選択決定
-		if (input.pressFire())
-		{
-			getData().Stagepath = stagelist[cursol].readStagepath();
-			changeScene(State::Stage);
-		}
-
-		downtime -= deltatime;
 
 	}
 

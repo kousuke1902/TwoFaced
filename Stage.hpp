@@ -21,6 +21,10 @@ private:
 	GameRule* gamerule;//ステージクリア，ゲームオーバー判定
 	Array<EnemyStartUpInformation*> startup;//エネミーの初期設定情報
 	FilePath stagefile;//ステージのファイル情報
+	bool PauseFlag;//ポーズメニューの状態
+	Font font;//表示
+	int cursol;//メニューのカーソル位置
+	double downtime;//カーソル入力時間
 
 	//ゲームルールを設定する
 	int setGameRule(CSV csv)
@@ -98,12 +102,14 @@ public:
 
 	Stage(const InitData& init) : IScene{ init }
 	{
-		//テスト
 		stagefile = getData().Stagepath;
 		CSV csv{ stagefile };
 		setGameRule(csv);
 		loadspawnEnemies(csv);
-	
+		PauseFlag = false;
+		font = Font{ 40 };
+		cursol = 0;
+		downtime = 0.0;
 	}
 
 	//更新処理
@@ -115,47 +121,107 @@ public:
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
 
-		//クリア判定
-		if (gamerule->Clear())
+		//ポーズがOFFの状態であることの確認
+		if (!PauseFlag)
 		{
-			getData().ResultLife = playermanager.PlayerLife();
-			changeScene(State::Result);
-		}
-
-		//ゲームオーバー判定
-		if (gamerule->GameOver() || !playermanager.deadFlag())
-		{
-
-
-		}
-
-		//入力状態の更新
-		input.Update();
-
-		//プレイヤー処理
-		playermanager.Update(&bulletmanager, &input, deltatime);
-
-		//エネミー処理
-		//エネミーの更新
-		enemymanager.Update(&bulletmanager, &playermanager, deltatime);
-		//エネミーのスポーン
-		if (!startup.empty())
-		{
-			//スポーン時間を超過
-			if (gamerule->readTimer() > startup.front()->readSpawnTime())
+			//ポーズボタン確認
+			if (input.downStartbottan())PauseFlag = true;
+			
+			//クリア，ゲームオーバー判定
+			if (gamerule->Clear() || gamerule->GameOver() || playermanager.deadFlag())
 			{
-				enemymanager.EnemySpawn(startup.front());
-				startup.pop_front();
+				getData().ResultLife = playermanager.PlayerLife();
+				changeScene(State::Result);
 			}
 
+
+			//入力状態の更新
+			input.Update();
+
+			//プレイヤー処理
+			playermanager.Update(&bulletmanager, &input, deltatime);
+
+			//エネミー処理
+			//エネミーの更新
+			enemymanager.Update(&bulletmanager, &playermanager, deltatime);
+			//エネミーのスポーン
+			if (!startup.empty())
+			{
+				//スポーン時間を超過
+				if (gamerule->readTimer() > startup.front()->readSpawnTime())
+				{
+					enemymanager.EnemySpawn(startup.front());
+					startup.pop_front();
+				}
+			}
+
+			//弾処理
+			bulletmanager.Update(deltatime);
+			//時間経過
+			gamerule->addTimer(deltatime);
 		}
 
-		//弾処理
-		bulletmanager.Update(deltatime);
+		//ポーズメニュー表示
+		else
+		{
+			//入力時間
+			downtime -= deltatime;
+			downtime = Max(0.0, downtime);
 
-		//時間経過
-		gamerule->addTimer(deltatime);
+			//ポーズボタン確認
+			if (input.downStartbottan())
+			{
+				PauseFlag = false;
+				cursol = 0;
+			}
+			//決定ボタン
+			else if (input.pressFire())
+			{
+				if (cursol == 0)PauseFlag = false;
+				else if (cursol == 1)changeScene(State::Stage);
+				else if (cursol == 2)changeScene(State::StageSelect);
+			}
 
+			//キャンセルボタン
+			else if (input.downModechange())
+			{
+				PauseFlag = false;
+				cursol = 0;
+			}
+
+			//移動方向を検知してカーソル移動の検知を行う
+			else if (input.MoveVectorLogic().y > 0.5)
+			{
+				if (downtime == 0.0)
+				{
+					downtime = 0.5;
+					cursol++;
+				}
+			}
+			else if (input.MoveVectorLogic().y < -0.5)
+			{
+				if (downtime == 0.0)
+				{
+					downtime = 0.5;
+					cursol--;
+				}
+			}
+			else downtime = 0.0;
+
+			//カーソル位置の超過検知
+			if (cursol < 0)cursol = 2;
+			else if (cursol > 2)cursol = 0;
+
+			//表示
+			font(U"Pause").drawAt(400, 100);
+			font(U"続ける").drawAt(400, 300);
+			font(U"最初から").drawAt(400, 400);
+			font(U"ステージ選択に戻る").drawAt(400, 500);
+
+			font(U"->").drawAt(50, cursol * 100 + 300);
+
+
+		}
 	}
 
 	//描画処理

@@ -107,7 +107,7 @@ public:
 	//更新
 	int Update(BulletManager* bulletmanager, PlayerManager* player, double deltatime)
 	{
-		//敵の生存確認
+		//敵の処理確認
 		for (auto it = enemies.begin(); it != enemies.end();)
 		{
 			
@@ -121,58 +121,55 @@ public:
 			}
 			else
 			{
+
+				//判断処理
+
+				//移動処理
+				enemy->moveEnemy(player->PlayerHitBox().center(), deltatime);
+
+				//攻撃処理
+				if (enemy->fire())
+				{
+					enemy->setshotCoolTimer();
+					enemy->createBullet(bulletmanager, player->PlayerHitBox().center());
+				}
+
+				enemy->countshotCoolTimer(deltatime);
+
+				//当たり判定処理
+				//プレイヤー弾
+				for (auto& bullet : bulletmanager->readPlayerBullets())
+				{
+					if (bullet->readHitBox().intersects(enemy->readHitBox()))
+					{
+						enemy->HitDamage(bullet->readDamage());
+						bullet->reduceLifeSpan();
+					}
+				}
+
+				//全体攻撃弾
+				for (auto& bullet : bulletmanager->readStrongBullets())
+				{
+					if (bullet->readHitBox().intersects(enemy->readHitBox()))
+					{
+						enemy->HitDamage(bullet->readDamage());
+						bullet->reduceLifeSpan();
+					}
+				}
+
+				//プレイヤー，エネミー接触
+				if (enemy->readHitBox().intersects(player->PlayerHitBox().center()))
+				{
+					player->HitDamage(deltatime);
+					enemy->HitDamage(deltatime);
+				}
+
+				//描画処理
+				Circle(enemy->readPos(), 4.0).draw(Palette::Red);
+
 				++it;
 
 			}
-		}
-
-		for (auto& enemy : enemies)
-		{
-			//判断処理
-
-			//移動処理
-			enemy->moveEnemy(player->PlayerHitBox().center(), deltatime);
-
-			//攻撃処理
-			if (enemy->fire())
-			{
-				enemy->setshotCoolTimer();
-				enemy->createBullet(bulletmanager, player->PlayerHitBox().center());
-			}
-
-			enemy->countshotCoolTimer(deltatime);
-
-			//当たり判定処理
-			//プレイヤー弾
-			for (auto& bullet : bulletmanager->readPlayerBullets())
-			{
-				if (bullet->readHitBox().intersects(enemy->readHitBox()))
-				{
-					enemy->HitDamage(bullet->readDamage());
-					bullet->reduceLifeSpan();
-				}
-			}
-
-			//全体攻撃弾
-			for (auto& bullet : bulletmanager->readStrongBullets())
-			{
-				if (bullet->readHitBox().intersects(enemy->readHitBox()))
-				{
-					enemy->HitDamage(bullet->readDamage());
-					bullet->reduceLifeSpan();
-				}
-			}
-
-			//プレイヤー，エネミー接触
-			if (enemy->readHitBox().intersects(player->PlayerHitBox().center()))
-			{
-				player->HitDamage(deltatime);
-				enemy->HitDamage(deltatime);
-			}
-
-			//描画処理
-			Circle(enemy->readPos(), 4.0).draw(Palette::Red);
-
 		}
 
 		return 0;

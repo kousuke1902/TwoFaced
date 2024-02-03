@@ -8,16 +8,16 @@ class BulletManager
 {
 private:
 
-	Array<Bullet*> playerbullets, enemybullets, strongbullets;
+	Array<Bullet*> playerbullets, enemybullets, strongbullets, defencebullets;
 
 public:
 
 	BulletManager()
 	{
-
 		playerbullets.clear();
 		enemybullets.clear();
 		strongbullets.clear();
+		defencebullets.clear();
 	}
 
 	//弾数
@@ -83,8 +83,12 @@ public:
 			}
 			else
 			{
-				++it;
+				//弾の移動
+				bullet->movePos(deltatime);
+				//描画
+				bullet->readHitBox().draw(Palette::Blue);
 
+				++it;
 			}
 		}
 
@@ -101,8 +105,12 @@ public:
 			}
 			else
 			{
-				++it;
+				//弾の移動
+				bullet->movePos(deltatime);
+				//描画
+				bullet->readHitBox().draw(Palette::Red);
 
+				++it;
 			}
 		}
 
@@ -119,37 +127,15 @@ public:
 			}
 			else
 			{
-				++it;
+				//弾の移動
+				bullet->movePos(deltatime);
+				//描画
+				bullet->readHitBox().draw(Palette::Gold);
 
+				++it;
 			}
 		}
 
-		//プレイヤー弾
-		for (auto& bullet : playerbullets)
-		{
-			//弾の移動
-			bullet->movePos(deltatime);
-			//描画
-			bullet->readHitBox().draw(Palette::Blue);
-		}
-
-		//エネミー弾
-		for (auto& bullet : enemybullets)
-		{
-			//弾の移動
-			bullet->movePos(deltatime);
-			//描画
-			bullet->readHitBox().draw(Palette::Red);
-		}
-
-		//全体攻撃弾
-		for (auto& bullet : strongbullets)
-		{
-			//弾の移動
-			bullet->movePos(deltatime);
-			//描画
-			bullet->readHitBox().draw(Palette::Gold);
-		}
 
 		return 0;
 	}

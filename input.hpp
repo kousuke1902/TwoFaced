@@ -53,13 +53,19 @@ public:
 	//射撃ボタン検知
 	bool pressFire()
 	{
-		return KeySpace.pressed() || XInput(0).buttonA.pressed();
+		return KeySpace.pressed() || KeyDown.pressed() || XInput(0).buttonA.pressed();
 	}
 
 	//切り替えボタン検知
 	bool downModechange()
 	{
-		return KeyV.down() || XInput(0).buttonB.down();
+		return KeyV.down() || KeyRight.down() || XInput(0).buttonB.down();
+	}
+
+	//スタートボタン検知
+	bool downStartbottan()
+	{
+		return KeyEscape.down() || KeyHome.down() || XInput(0).buttonStart.down();
 	}
 
 	//更新
