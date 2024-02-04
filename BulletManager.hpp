@@ -45,6 +45,7 @@ public:
 		return strongbullets;
 	}
 
+
 	//プレイヤー直進弾の生成
 	int CreateStraightP(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
@@ -66,11 +67,18 @@ public:
 		return 0;
 	}
 
+	//防御弾生成
+	int CreateDefence(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	{
+		defencebullets << new Bullet(pos, vector, speed, lifespan, damage, imgtype);
+		return 0;
+	}
+
 	//情報の更新
 	int Update(double deltatime)
 	{
 
-		//プレイヤー弾の生存確認
+		//プレイヤー弾の確認
 		for (auto it = playerbullets.begin(); it != playerbullets.end();)
 		{
 			Bullet* bullet = *it;
@@ -92,7 +100,7 @@ public:
 			}
 		}
 
-		//エネミー弾の生存確認
+		//エネミー弾の確認
 		for (auto it = enemybullets.begin(); it != enemybullets.end();)
 		{
 			Bullet* bullet = *it;
@@ -114,7 +122,7 @@ public:
 			}
 		}
 
-		//全体攻撃弾の生存確認
+		//全体攻撃弾の確認
 		for (auto it = strongbullets.begin(); it != strongbullets.end();)
 		{
 			Bullet* bullet = *it;
@@ -136,6 +144,45 @@ public:
 			}
 		}
 
+		//防御弾の確認
+		for (auto it = defencebullets.begin(); it != defencebullets.end();)
+		{
+			Bullet* bullet = *it;
+
+			//寿命を迎えた
+			if (bullet->Lifecheck(deltatime))
+			{
+				delete bullet;
+				it = defencebullets.erase(it);
+			}
+			else
+			{
+				//弾の移動
+				bullet->movePos(deltatime);
+				//描画
+				bullet->readHitBox().draw(Palette::Antiquewhite);
+			}
+
+			//弾同士の衝突確認
+			//プレイヤー弾
+			for (auto& players : playerbullets)
+			{
+				if(bullet->readHitBox().intersects(players->readHitBox())) players->reduceLifeSpan();
+
+			}
+			//エネミー弾
+			for (auto& enemies : enemybullets)
+			{
+				if (bullet->readHitBox().intersects(enemies->readHitBox())) enemies->reduceLifeSpan();
+
+			}
+			//全体攻撃弾
+			for (auto& strongs : strongbullets)
+			{
+				if (bullet->readHitBox().intersects(strongs->readHitBox())) strongs->reduceLifeSpan();
+			}
+
+		}
 
 		return 0;
 	}
