@@ -157,6 +157,16 @@ public:
 					}
 				}
 
+				//防御弾
+				for (auto& bullet : bulletmanager->readDefenceBullets())
+				{
+					if (bullet->readHitBox().intersects(enemy->readHitBox()))
+					{
+						enemy->HitDamage(bullet->readDamage());
+						bullet->reduceLifeSpan();
+					}
+				}
+
 				//プレイヤー，エネミー接触
 				if (enemy->readHitBox().intersects(player->PlayerHitBox().center()))
 				{

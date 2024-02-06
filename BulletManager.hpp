@@ -45,32 +45,37 @@ public:
 		return strongbullets;
 	}
 
+	//防御弾の情報取得
+	Array<Bullet*> readDefenceBullets()
+	{
+		return defencebullets;
+	}
 
 	//プレイヤー直進弾の生成
-	int CreateStraightP(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateStraightP(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		playerbullets << new Bullet(pos, vector, speed, lifespan, damage, imgtype);
+		playerbullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype);
 		return 0;
 	}
 
 	//エネミー直進弾の生成
-	int CreateStraightE(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateStraightE(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		enemybullets << new Bullet(pos, vector, speed, lifespan, damage, imgtype);
+		enemybullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype);
 		return 0;
 	}
 
 	//全体攻撃直進弾の生成
-	int CreateStraightS(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateStraightS(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		strongbullets << new Bullet(pos, vector, speed, lifespan, damage, imgtype);
+		strongbullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype);
 		return 0;
 	}
 
 	//防御弾生成
-	int CreateDefence(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateDefence(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		defencebullets << new Bullet(pos, vector, speed, lifespan, damage, imgtype);
+		defencebullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype);
 		return 0;
 	}
 

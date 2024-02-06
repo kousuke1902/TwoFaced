@@ -105,6 +105,16 @@ public:
 				}
 			}
 
+			//防御弾
+			for (auto& bullet : bulletmanager->readDefenceBullets())
+			{
+				if (bullet->readHitBox().intersects(player->readHitBox()))
+				{
+					player->HitDamage(bullet->readDamage());
+					bullet->reduceLifeSpan();
+				}
+			}
+
 			//描画
 			player->readHitBox().draw();
 		}

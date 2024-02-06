@@ -16,7 +16,7 @@ private:
 
 public:
 
-	WaveB(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype) : Bullet(pos, vector, speed, lifespan, damage, imgtype)
+	WaveB(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype) : Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype)
 	{
 
 	}

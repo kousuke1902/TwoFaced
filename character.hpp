@@ -131,7 +131,7 @@ public:
 	virtual int createBullet(BulletManager* bulletmanager, Vec2 targetpos)
 	{
 
-		bulletmanager->CreateStraightP(HitBox.center(), Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
+		bulletmanager->CreateStraightP(HitBox.center(), 5, 5,Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
 
 		return 0;
 	}

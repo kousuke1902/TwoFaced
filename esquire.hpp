@@ -19,7 +19,16 @@ public:
 	//弾生成
 	int createBullet(BulletManager* bulletmanager, Vec2 targetpos) override
 	{
-		bulletmanager->CreateStraightP(HitBox.center(), Vec2(0, -1.0), 100.0, 6.0, 1.0, 0);
+		//レフトサイドとライトサイドでの出力の違い
+		if (Mode == false)
+		{
+			bulletmanager->CreateStraightP(HitBox.center(), 5.0, 5.0,Vec2(Random(-0.1, 0.1), -1.0), 100.0, 6.0, 1.0, 0);
+		}
+		else
+		{
+			
+		}
+
 		return 0;
 	}
 

@@ -872,5 +872,8 @@
     <ClInclude Include="stagelist.hpp">
       <Filter>Header Files\system\scene</Filter>
     </ClInclude>
+    <ClInclude Include="defenceB.hpp">
+      <Filter>Header Files\bullet</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

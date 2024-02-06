@@ -26,7 +26,7 @@ public:
 	int createBullet(BulletManager* bulletmanager, Vec2 enemypos)override
 	{
 
-		bulletmanager->CreateStraightE(HitBox.center(), enemypos - HitBox.center(), 100.0, 8.0, 1.0, 0);
+		bulletmanager->CreateStraightE(HitBox.center(), 5, 5, enemypos - HitBox.center(), 100.0, 8.0, 1.0, 0);
 
 		return 0;
 	}

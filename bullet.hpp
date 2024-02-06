@@ -16,15 +16,16 @@ protected:
 
 public:
 
-	Bullet(Vec2 pos, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	Bullet(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		HitBox = RectF(Arg::center(pos), 5);
+		HitBox = RectF(Arg::center(pos), w, h);
 		Vector = vector.setLength(1.0);
 		Speed = speed;
 		LifeSpan = lifespan;
 		Damage = damage;
 		ImgType = imgtype;
 	}
+
 
 	//座標取得
 	Vec2 readPos()
