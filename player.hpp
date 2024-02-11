@@ -91,6 +91,22 @@ public:
 		return 0;
 	}
 
+	//発砲の有無
+	bool fire() const override
+	{
+		if (Mode == false)
+		{
+			if (shotCoolTimer <= 0.0)return true;
+		}
+
+		else if (Mode == true)
+		{
+			if (shotCoolTimer2 <= 0.0)return true;
+		}
+
+		return false;
+	}
+
 	//二つ目の武器の発砲の有無
 	bool fire2()
 	{

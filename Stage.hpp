@@ -159,6 +159,8 @@ public:
 			bulletmanager.Update(deltatime);
 			//時間経過
 			gamerule->addTimer(deltatime);
+
+			Print << playermanager.PlayerMode();
 		}
 
 		//ポーズメニュー表示

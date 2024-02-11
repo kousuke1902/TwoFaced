@@ -2,13 +2,18 @@
 #include <Siv3D.hpp>
 #include "bullet.hpp"
 #include "waveB.hpp"
+#include "defenceB.hpp"
+
 //弾の処理に関するマネージャー
 
 class BulletManager
 {
 private:
 
-	Array<Bullet*> playerbullets, enemybullets, strongbullets, defencebullets;
+	Array<Bullet*> playerbullets;
+	Array<Bullet*> enemybullets;
+	Array<Bullet*> strongbullets;
+	Array<Bullet*> defencebullets;
 
 public:
 
@@ -18,13 +23,6 @@ public:
 		enemybullets.clear();
 		strongbullets.clear();
 		defencebullets.clear();
-	}
-
-	//弾数
-	size_t readPlayerBulletsize()
-	{
-		return playerbullets.size();
-
 	}
 
 	//プレイヤー弾の情報取得
@@ -75,7 +73,7 @@ public:
 	//防御弾生成
 	int CreateDefence(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
 	{
-		defencebullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype);
+		defencebullets << new DefenceB(pos, w, h, vector, speed, lifespan, damage, imgtype);
 		return 0;
 	}
 
@@ -143,7 +141,7 @@ public:
 				//弾の移動
 				bullet->movePos(deltatime);
 				//描画
-				bullet->readHitBox().draw(Palette::Gold);
+				bullet->readHitBox().draw(Palette::Red);
 
 				++it;
 			}
@@ -165,27 +163,30 @@ public:
 				//弾の移動
 				bullet->movePos(deltatime);
 				//描画
-				bullet->readHitBox().draw(Palette::Antiquewhite);
+				bullet->readHitBox().draw(Palette::Darkviolet);
+
+				//弾同士の衝突確認
+				//プレイヤー弾
+				for (auto& players : playerbullets)
+				{
+					if (bullet->readHitBox().intersects(players->readHitBox())) players->reduceLifeSpan();
+
+				}
+				//エネミー弾
+				for (auto& enemies : enemybullets)
+				{
+					if (bullet->readHitBox().intersects(enemies->readHitBox())) enemies->reduceLifeSpan();
+
+				}
+				//全体攻撃弾
+				for (auto& strongs : strongbullets)
+				{
+					if (bullet->readHitBox().intersects(strongs->readHitBox())) strongs->reduceLifeSpan();
+				}
+
+				++it;
 			}
 
-			//弾同士の衝突確認
-			//プレイヤー弾
-			for (auto& players : playerbullets)
-			{
-				if(bullet->readHitBox().intersects(players->readHitBox())) players->reduceLifeSpan();
-
-			}
-			//エネミー弾
-			for (auto& enemies : enemybullets)
-			{
-				if (bullet->readHitBox().intersects(enemies->readHitBox())) enemies->reduceLifeSpan();
-
-			}
-			//全体攻撃弾
-			for (auto& strongs : strongbullets)
-			{
-				if (bullet->readHitBox().intersects(strongs->readHitBox())) strongs->reduceLifeSpan();
-			}
 
 		}
 

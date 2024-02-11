@@ -11,7 +11,7 @@ class Esquire : public Player
 
 public:
 
-	Esquire(Vec2 pos) : Player(pos, 10.0, 100.0, 200.0, 0.5, 1.0, 100.0, 2.0)
+	Esquire(Vec2 pos) : Player(pos, 10.0, 100.0, 200.0, 0.5, 0.0, 100.0, 2.0)
 	{
 
 	};
@@ -24,9 +24,10 @@ public:
 		{
 			bulletmanager->CreateStraightP(HitBox.center(), 5.0, 5.0,Vec2(Random(-0.1, 0.1), -1.0), 100.0, 6.0, 1.0, 0);
 		}
-		else
+		else if(Mode == true)
 		{
-			
+			bulletmanager->CreateDefence(HitBox.center() + Vec2(0.0, -10.0) , 40.0, 5.0, Vec2(0.0, 0.0), 0.0, 0.008, 0.0, 0);
+	
 		}
 
 		return 0;

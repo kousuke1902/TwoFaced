@@ -120,11 +120,11 @@ public:
 	}
 
 	//発砲の有無
-	bool fire() const
+	virtual bool fire() const
 	{
 		if (shotCoolTimer <= 0.0)return true;
 
-		else return false;
+		return false;
 	}
 
 	//弾の生成

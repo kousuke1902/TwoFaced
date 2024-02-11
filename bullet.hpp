@@ -36,7 +36,7 @@ public:
 	//当たり判定取得
 	RectF readHitBox()
 	{
-		return HitBox;;
+		return HitBox;
 	}
 
 	//弾のスピード取得
@@ -70,7 +70,7 @@ public:
 	}
 
 	//時間的寿命の削り取り
-	int reduceLifeSpan()
+	virtual int reduceLifeSpan()
 	{
 		LifeSpan = 0;
 		return 0;

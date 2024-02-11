@@ -2,15 +2,21 @@
 #include <Siv3D.hpp>
 #include "bullet.hpp"
 
-//防御弾クラス
 class DefenceB : public Bullet
 {
 
 public:
 
-	DefenceB(Vec2 pos, double w, double h, double lifespan, double damage, int imgtype) : Bullet(pos, w, h, Vec2(0, 0), 0, lifespan, damage, imgtype)
+	DefenceB(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype) : Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype)
 	{
 
+
+	}
+
+	//時間的寿命の削り取り
+	int reduceLifeSpan()
+	{
+		return 0;
 	}
 
 };
