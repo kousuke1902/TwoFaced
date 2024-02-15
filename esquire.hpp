@@ -16,19 +16,33 @@ public:
 
 	};
 
+	int AddInherence(double deltatime) override
+	{
+		Inherence += 1.0 * deltatime;
+		Inherence = Min(MaxInherence, Inherence);
+		Inherence = Max(Inherence, 0.0);
+		return 0;
+	}
+
 	//弾生成
 	int createBullet(BulletManager* bulletmanager, Vec2 targetpos) override
 	{
-		//レフトサイドとライトサイドでの出力の違い
-		if (Mode == false)
+		if (Inherence > 0.2)
 		{
-			bulletmanager->CreateStraightP(HitBox.center(), 5.0, 5.0,Vec2(Random(-0.1, 0.1), -1.0), 100.0, 6.0, 1.0, 0);
+			Inherence -= 0.2;
+			//レフトサイドとライトサイドでの出力の違い
+			if (Mode == false)
+			{
+				bulletmanager->CreateStraightP(HitBox.center(), 5.0, 5.0, Vec2(Random(-0.1, 0.1), -1.0), 100.0, 6.0, 1.0, 0);
+			}
+			else if (Mode == true)
+			{
+				bulletmanager->CreateDefence(HitBox.center() + Vec2(0.0, -10.0), 40.0, 5.0, Vec2(0.0, 0.0), 0.0, 0.008, 0.0, 0);
+
+			}
+
 		}
-		else if(Mode == true)
-		{
-			bulletmanager->CreateDefence(HitBox.center() + Vec2(0.0, -10.0) , 40.0, 5.0, Vec2(0.0, 0.0), 0.0, 0.008, 0.0, 0);
-	
-		}
+
 
 		return 0;
 	}

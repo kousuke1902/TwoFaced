@@ -7,7 +7,10 @@
 
 void Main()
 {
-	// 背景の色を設定する | Set the background color
+
+	Window::Resize(1000, 800);
+
+	
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 	App manager;
 

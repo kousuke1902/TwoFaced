@@ -59,6 +59,24 @@ public:
 		return player->readLife();
 	}
 
+	//固有値の閲覧
+	double PlayerInherence()
+	{
+		return player->readInherence();
+	}
+
+	//モード切替時間間隔
+	double PlayerModeCoolTime()
+	{
+		return player->readModechangeCooltime();
+	}
+
+	//モード切替クールタイマー
+	double PlayerModeCoolTimer()
+	{
+		return player->readModechangeCoolTimer();
+	}
+
 	//更新
 	int Update(BulletManager* bulletmanager, PlayerInput *input, double deltatime)
 	{
@@ -83,6 +101,7 @@ public:
 			player->countModechangeCoolTimer(deltatime);
 
 			//固有値操作
+			player->AddInherence(deltatime);
 
 			//当たり判定処理
 			//エネミー弾

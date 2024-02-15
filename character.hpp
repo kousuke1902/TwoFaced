@@ -10,6 +10,7 @@ protected:
 
 	RectF HitBox;//当たり判定
 	double Life;//体力
+	double MaxLife;//最大体力
 	double Speed;//移動速度
 	double shotCoolTime;//弾発射のクールタイム
 	double shotCoolTimer;//弾発射のクールタイムタイマー
@@ -22,6 +23,7 @@ public:
 	{
 		HitBox = RectF(Arg::center(pos), boxsize);
 		Life = life;
+		MaxLife = life;
 		Speed = speed;
 		shotCoolTime = setcooltime;
 		shotCoolTimer = 0.0;

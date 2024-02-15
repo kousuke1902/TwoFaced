@@ -140,6 +140,8 @@ public:
 
 			//プレイヤー処理
 			playermanager.Update(&bulletmanager, &input, deltatime);
+			//ステージの範囲外へ出たか確認
+
 
 			//エネミー処理
 			//エネミーの更新
@@ -155,12 +157,31 @@ public:
 				}
 			}
 
+
 			//弾処理
 			bulletmanager.Update(deltatime);
+
+			//パラメータ表示
+			double PlayerLife = playermanager.PlayerLife();
+			double PlayerInherence = playermanager.PlayerInherence();
+			double PlayerModeCoolTime = playermanager.PlayerModeCoolTimer() / playermanager.PlayerModeCoolTime();
+			Rect(800, 0, 200, 800).draw(Palette::Black);
+			RectF(810.0, 780.0, 40, -4.0 * PlayerLife).draw(Palette::Orange);
+			RectF(860.0, 780.0, 40, -4.0 * PlayerInherence).draw(Palette::Antiquewhite);
+			RectF(910.0, 780.0, 40, -400.0 * PlayerModeCoolTime).draw(Palette::Antiquewhite);
+			if (playermanager.PlayerMode())
+			{
+				font(U"レフトサイド").draw(810, 300);
+			}
+			else
+			{
+				font(U"ライトサイド").draw(810, 300);
+			}
+
 			//時間経過
 			gamerule->addTimer(deltatime);
 
-			Print << playermanager.PlayerMode();
+			
 		}
 
 		//ポーズメニュー表示

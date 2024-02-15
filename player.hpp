@@ -11,6 +11,7 @@ protected:
 	
 	bool Mode;//2モードの状態フラグ
 	double Inherence;//キャラクター固有値
+	double MaxInherence;//最大キャラクター固有値
 	double shotCoolTime2;//キャラクター二つ目の武器の発射間隔
 	double shotCoolTimer2;//キャラクター二つ目の武器のクールタイムタイマー
 	double ModechangeCoolTime;//モード切替の変更間隔
@@ -23,6 +24,7 @@ public:
 	{
 		Mode = false;
 		Inherence = inherence;
+		MaxInherence = inherence;
 		shotCoolTime2 = setcooltime2;
 		shotCoolTimer2 = 0.0;
 		ModechangeCoolTime = setmodetime;
@@ -76,10 +78,9 @@ public:
 	}
 
 	//キャラクター固有値操作
-	int AddInherence(double x)
+	virtual int AddInherence(double deltatime)
 	{
-		if (Inherence < x)Inherence = 0;
-		else Inherence += x;
+		Inherence += 1.0 * deltatime;
 		return 0;
 	}
 
