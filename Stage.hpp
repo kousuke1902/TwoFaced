@@ -25,6 +25,7 @@ private:
 	Font font;//表示
 	int cursol;//メニューのカーソル位置
 	double downtime;//カーソル入力時間
+	double warningTime;//作戦領域離脱時間
 
 	//ゲームルールを設定する
 	int setGameRule(CSV csv)
@@ -110,6 +111,7 @@ public:
 		font = Font{ 40 };
 		cursol = 0;
 		downtime = 0.0;
+		warningTime = 10.0;
 	}
 
 	//更新処理
@@ -134,14 +136,12 @@ public:
 				changeScene(State::Result);
 			}
 
-
 			//入力状態の更新
 			input.Update();
 
 			//プレイヤー処理
 			playermanager.Update(&bulletmanager, &input, deltatime);
-			//ステージの範囲外へ出たか確認
-
+			
 
 			//エネミー処理
 			//エネミーの更新
@@ -160,6 +160,16 @@ public:
 
 			//弾処理
 			bulletmanager.Update(deltatime);
+
+			//ステージの範囲外へ出たか確認
+			if (!Rect(0, 0, 800, 800).intersects(playermanager.PlayerHitBox()))
+			{
+				warningTime -= deltatime;
+
+				Rect(0, 0, 800, 800).draw(Color(200, 0, 0, 100));
+				font(U"作戦領域へ戻れ").drawAt(400, 300);
+				font(U"{:.1f}"_fmt(warningTime)).drawAt(400, 350);
+			}
 
 			//パラメータ表示
 			double PlayerLife = playermanager.PlayerLife();
