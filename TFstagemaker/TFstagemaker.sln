@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TFstagemaker", "TFstagemaker.vcxproj", "{275429EB-7BEB-41BD-BF74-E4A1F266F7BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{275429EB-7BEB-41BD-BF74-E4A1F266F7BA}.Debug|x64.ActiveCfg = Debug|x64
+		{275429EB-7BEB-41BD-BF74-E4A1F266F7BA}.Debug|x64.Build.0 = Debug|x64
+		{275429EB-7BEB-41BD-BF74-E4A1F266F7BA}.Release|x64.ActiveCfg = Release|x64
+		{275429EB-7BEB-41BD-BF74-E4A1F266F7BA}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A937CF0-AFF9-439D-AE30-B2E1CCF1C282}
+	EndGlobalSection
+EndGlobal

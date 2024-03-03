@@ -19,7 +19,7 @@ void Main()
 	manager.add<Stage>(State::Stage);
 	manager.add<Result>(State::Result);
 
-	manager.init(State::StageSelect);
+	//manager.init(State::StageSelect);
 
 	while (System::Update())
 	{
