@@ -231,27 +231,36 @@ void Main()
 			for (size_t count = 0; count < count_max; ++count)
 			{
 				String command = spawndatas[enemynum].commands[count].readType();
+				Vec2 Pos = spawndatas[enemynum].commands[count].readParamater();
 
 				//直進
 				if (command == U"straight")
 				{
-					Vec2 forwardPos = spawndatas[enemynum].commands[count].readParamater() + Vec2{ 100.0, 100.0 };
+					Vec2 forwardPos = Pos + Vec2{ 100.0, 100.0 };
 					Line{ backPos, forwardPos }.draw(Palette::Darkorange);
 					backPos = forwardPos;
-
 				}
 
 				//待機
 				else if (command == U"wait")
 				{
 					Circle{ backPos, 5.0 }.draw(Palette::Slateblue);
-
 				}
 
 				//削除
 				else if (command == U"kill")
 				{
 					RectF{ Arg::center(backPos), 5.0 }.draw(Palette::Yellow);
+				}
+
+
+				//行動一覧表示
+				if (SimpleGUI::Button(command, Vec2{ 1010, 200 + 100 * count }, 100))
+				{
+					if (command == U"straight") spawndatas[enemynum].commands[count].setType(U"wait");
+					else if (command == U"wait") spawndatas[enemynum].commands[count].setType(U"kill");
+					else if (command == U"kill") spawndatas[enemynum].commands[count].setType(U"straight");
+
 				}
 
 			}
@@ -264,7 +273,6 @@ void Main()
 
 		}
 
-			
 		
 
 	}

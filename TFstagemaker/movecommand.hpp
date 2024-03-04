@@ -34,10 +34,18 @@ public:
 		return type;
 	}
 
+	//移動タイプの設定
+	int setType(String x)
+	{
+		type = x;
+		return 0;
+	}
+
 	//パラメータの確認
 	Vec2 readParamater()
 	{
 		return Pos;
 	}
+
 
 };
