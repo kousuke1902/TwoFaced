@@ -222,6 +222,7 @@ void Main()
 			//スポーン座標の表示
 			Vec2 SpawnPos = spawndatas[enemynum].readSpawnPos() + Vec2{ 100.0, 100.0 };
 			Circle{ SpawnPos, 5.0}.draw(Palette::Red);
+			font(U"スポーン座標:", SpawnPos).draw(1010, 150);
 
 			//一つ前の座標の記録
 			Vec2 backPos = SpawnPos;
@@ -255,13 +256,24 @@ void Main()
 
 
 				//行動一覧表示
-				if (SimpleGUI::Button(command, Vec2{ 1010, 200 + 100 * count }, 100))
+				if (SimpleGUI::Button(command, Vec2{ 1010, 230 + 100 * count }, 100))
 				{
 					if (command == U"straight") spawndatas[enemynum].commands[count].setType(U"wait");
 					else if (command == U"wait") spawndatas[enemynum].commands[count].setType(U"kill");
 					else if (command == U"kill") spawndatas[enemynum].commands[count].setType(U"straight");
 
 				}
+
+				//座標表示
+				font(spawndatas[enemynum].commands[count].readParamater()).draw(1010, 280 + 100 * count);
+
+				//座標入力
+				//TextEditState teX{ Format(spawndatas[enemynum].commands[count].readParamater().x) };
+				//TextEditState teY{ Format(spawndatas[enemynum].commands[count].readParamater().y) };
+
+				//座標入力検知
+				//SimpleGUI::TextBox(teX, Vec2{ 1010, 250 + 100 * count }, 100);
+				//SimpleGUI::TextBox(teY, Vec2{ 1110, 250 + 100 * count }, 100);
 
 			}
 
