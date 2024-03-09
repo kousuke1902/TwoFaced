@@ -47,5 +47,17 @@ public:
 		return Pos;
 	}
 
+	//パラメータの設定
+	int addParamaterX(double x)
+	{
+		Pos.x += x;
+		return 0;
+	}
+
+	int addParamaterY(double x)
+	{
+		Pos.y += x;
+		return 0;
+	}
 
 };

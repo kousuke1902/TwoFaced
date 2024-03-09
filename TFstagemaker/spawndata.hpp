@@ -42,6 +42,17 @@ public:
 		return spawnPos;
 	}
 
+	//スポーン座標xの操作
+	int addSpaownPosX(double x)
+	{
+		spawnPos.x += x;
+		return 0;
+	}
 
-
+	//スポーン座標yの操作
+	int addSpaownPosY(double x)
+	{
+		spawnPos.y += x;
+		return 0;
+	}
 };

@@ -1,6 +1,8 @@
 ﻿# include <Siv3D.hpp>
 #include "spawndata.hpp"
 
+#define TASK_SPACE 150
+
 void Main()
 {
 	Window::Resize(1400, 1000);
@@ -13,6 +15,7 @@ void Main()
 	String cleartype = U"None";//クリア種類
 	double stagetime = 0.0;//ステージ時間
 	size_t enemynum = 0;//エネミーの切り替え用の数
+	size_t target_cursor = 0;//変更を加えるポイントの番号
 
 	Font font{ 20 };
 
@@ -210,11 +213,20 @@ void Main()
 		}
 
 		//ファイルネーム
-		if (path)font(FileSystem::FileName(*path)).draw(1010, 60);
+		if (path)font(FileSystem::FileName(*path)).draw(1010, 50);
 
-		//表示情報
-		font(U"ステージルール:", cleartype).draw(1010, 90);
-		font(U"設定時間:", stagetime).draw(1010, 110);
+		//ステージルール操作
+		font(U"ステージルール:", cleartype).draw(1010, 80);
+
+		//表示時間操作
+		font(U"設定時間").draw(1010, 110);
+		font(stagetime).draw(1175, 145);
+		if (SimpleGUI::Button(U"- 60", Vec2{ 1010, 140 }, 50)) stagetime -= 60;
+		else if (SimpleGUI::Button(U"-10", Vec2{ 1065, 140 }, 50)) stagetime -= 10;
+		else if (SimpleGUI::Button(U"-1", Vec2{ 1120, 140 }, 50)) stagetime -= 1;
+		else if (SimpleGUI::Button(U"1", Vec2{ 1240, 140 }, 50)) stagetime += 1;
+		else if (SimpleGUI::Button(U"10", Vec2{ 1295, 140 }, 50)) stagetime += 10;
+		else if (SimpleGUI::Button(U"60", Vec2{ 1350, 140 }, 50)) stagetime += 60;
 
 		//画面上での軌跡の表示
 		if (spawndatas)
@@ -222,7 +234,27 @@ void Main()
 			//スポーン座標の表示
 			Vec2 SpawnPos = spawndatas[enemynum].readSpawnPos() + Vec2{ 100.0, 100.0 };
 			Circle{ SpawnPos, 5.0}.draw(Palette::Red);
-			font(U"スポーン座標:", SpawnPos).draw(1010, 150);
+
+			//スポーン座標の操作
+			font(U"スポーン座標").draw(1010, 180);
+			font(spawndatas[enemynum].readSpawnPos().x).draw(1180, 210);
+			font(spawndatas[enemynum].readSpawnPos().y).draw(1180, 260);
+
+			//x座標
+			if (SimpleGUI::Button(U"-100", Vec2{ 1010, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(-100.0);
+			else if (SimpleGUI::Button(U"-10", Vec2{ 1065, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(-10.0);
+			else if (SimpleGUI::Button(U"-1", Vec2{ 1120, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(-1.0);
+			else if (SimpleGUI::Button(U"1", Vec2{ 1230, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(1.0);
+			else if (SimpleGUI::Button(U"10", Vec2{ 1285, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(10.0);
+			else if (SimpleGUI::Button(U"100", Vec2{ 1340, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(100.0);
+
+			//y座標
+			else if (SimpleGUI::Button(U"-100", Vec2{ 1010, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(-100.0);
+			else if (SimpleGUI::Button(U"-10", Vec2{ 1065, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(-10.0);
+			else if (SimpleGUI::Button(U"-1", Vec2{ 1120, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(-1.0);
+			else if (SimpleGUI::Button(U"1", Vec2{ 1230, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(1.0);
+			else if (SimpleGUI::Button(U"10", Vec2{ 1285, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(10.0);
+			else if (SimpleGUI::Button(U"100", Vec2{ 1340, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(100.0);
 
 			//一つ前の座標の記録
 			Vec2 backPos = SpawnPos;
@@ -254,9 +286,13 @@ void Main()
 					RectF{ Arg::center(backPos), 5.0 }.draw(Palette::Yellow);
 				}
 
+				//操作端末処理
+
+				//命令番号
+				font(count).draw(Vec2{ 1010, 330 + TASK_SPACE * count });
 
 				//行動一覧表示
-				if (SimpleGUI::Button(command, Vec2{ 1010, 230 + 100 * count }, 100))
+				if (SimpleGUI::Button(command, Vec2{ 1100, 330 + TASK_SPACE * count }, 100))
 				{
 					if (command == U"straight") spawndatas[enemynum].commands[count].setType(U"wait");
 					else if (command == U"wait") spawndatas[enemynum].commands[count].setType(U"kill");
@@ -265,15 +301,25 @@ void Main()
 				}
 
 				//座標表示
-				font(spawndatas[enemynum].commands[count].readParamater()).draw(1010, 280 + 100 * count);
+				font(spawndatas[enemynum].commands[count].readParamater().x).draw(1180, 380 + TASK_SPACE * count);
+				font(spawndatas[enemynum].commands[count].readParamater().y).draw(1180, 430 + TASK_SPACE * count);
 
-				//座標入力
-				//TextEditState teX{ Format(spawndatas[enemynum].commands[count].readParamater().x) };
-				//TextEditState teY{ Format(spawndatas[enemynum].commands[count].readParamater().y) };
+				//座標操作
+				//x座標
+				if (SimpleGUI::Button(U"-100", Vec2{ 1010, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-100.0);
+				else if (SimpleGUI::Button(U"-10", Vec2{ 1065, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-10.0);
+				else if (SimpleGUI::Button(U"-1", Vec2{ 1120, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-1.0);
+				else if (SimpleGUI::Button(U"1", Vec2{ 1230, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(1.0);
+				else if (SimpleGUI::Button(U"10", Vec2{ 1285, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(10.0);
+				else if (SimpleGUI::Button(U"100", Vec2{ 1340, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(100.0);
 
-				//座標入力検知
-				//SimpleGUI::TextBox(teX, Vec2{ 1010, 250 + 100 * count }, 100);
-				//SimpleGUI::TextBox(teY, Vec2{ 1110, 250 + 100 * count }, 100);
+				//y座標
+				else if (SimpleGUI::Button(U"-100", Vec2{ 1010, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-100.0);
+				else if (SimpleGUI::Button(U"-10", Vec2{ 1065, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-10.0);
+				else if (SimpleGUI::Button(U"-1", Vec2{ 1120, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-1.0);
+				else if (SimpleGUI::Button(U"1", Vec2{ 1230, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(1.0);
+				else if (SimpleGUI::Button(U"10", Vec2{ 1285, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(10.0);
+				else if (SimpleGUI::Button(U"100", Vec2{ 1340, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(100.0);
 
 			}
 
