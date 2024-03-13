@@ -28,6 +28,12 @@ public:
 		Pos = setPos;
 	}
 
+	MoveCommand()
+	{
+		type = U"wait";
+		Pos = Vec2{ 0.0,0.0 };
+	}
+
 	//移動タイプの閲覧
 	String readType()
 	{

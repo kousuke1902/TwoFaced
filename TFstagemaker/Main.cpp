@@ -2,6 +2,9 @@
 #include "spawndata.hpp"
 
 #define TASK_SPACE 150
+#define TASK_FIRST_COLUMNS 340
+#define TASK_SECOND_COLUMNS 390
+#define TASK_THIRD_COLUMNS 430
 
 void Main()
 {
@@ -20,6 +23,8 @@ void Main()
 	Font font{ 20 };
 
 	spawndatas.clear();
+
+	
 
 	while (System::Update())
 	{
@@ -228,6 +233,8 @@ void Main()
 		if (SimpleGUI::Button(U"10", Vec2{ 1295, 140 }, 50)) stagetime += 10;
 		if (SimpleGUI::Button(U"60", Vec2{ 1350, 140 }, 50)) stagetime += 60;
 
+
+
 		//画面上での軌跡の表示
 		if (spawndatas)
 		{
@@ -237,8 +244,8 @@ void Main()
 
 			//スポーン座標の操作
 			font(U"スポーン座標").draw(1010, 180);
-			font(spawndatas[enemynum].readSpawnPos().x).draw(1180, 210);
-			font(spawndatas[enemynum].readSpawnPos().y).draw(1180, 260);
+			font(spawndatas[enemynum].readSpawnPos().x).draw(1180, 205);
+			font(spawndatas[enemynum].readSpawnPos().y).draw(1180, 255);
 
 			//x座標
 			if (SimpleGUI::Button(U"-100", Vec2{ 1010, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(-100.0);
@@ -249,24 +256,34 @@ void Main()
 			if (SimpleGUI::Button(U"100", Vec2{ 1340, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(100.0);
 
 			//y座標
-			if (SimpleGUI::Button(U"-100", Vec2{ 1010, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(-100.0);
-			if (SimpleGUI::Button(U"-10", Vec2{ 1065, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(-10.0);
-			if (SimpleGUI::Button(U"-1", Vec2{ 1120, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(-1.0);
-			if (SimpleGUI::Button(U"1", Vec2{ 1230, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(1.0);
-			if (SimpleGUI::Button(U"10", Vec2{ 1285, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(10.0);
-			if (SimpleGUI::Button(U"100", Vec2{ 1340, 260 }, 50)) spawndatas[enemynum].addSpaownPosY(100.0);
+			if (SimpleGUI::Button(U"-100", Vec2{ 1010, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(-100.0);
+			if (SimpleGUI::Button(U"-10", Vec2{ 1065, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(-10.0);
+			if (SimpleGUI::Button(U"-1", Vec2{ 1120, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(-1.0);
+			if (SimpleGUI::Button(U"1", Vec2{ 1230, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(1.0);
+			if (SimpleGUI::Button(U"10", Vec2{ 1285, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(10.0);
+			if (SimpleGUI::Button(U"100", Vec2{ 1340, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(100.0);
+
+
+			//先頭への行動追加
+			if (SimpleGUI::Button(U"+", Vec2{ 1250, 300 }, 20))
+			{
+				spawndatas[enemynum].commands.push_front(MoveCommand());
+			}
+
+			//追加削除の為のポインタ
+			auto it = spawndatas[enemynum].commands.begin();
 
 			//一つ前の座標の記録
 			Vec2 backPos = SpawnPos;
 
-			//軌跡の描画
+			//各要素の処理
 			size_t count_max = spawndatas[enemynum].commands.size();
-
 			for (size_t count = 0; count < count_max; ++count)
 			{
 				String command = spawndatas[enemynum].commands[count].readType();
 				Vec2 Pos = spawndatas[enemynum].commands[count].readParamater();
 
+				//経路描画処理
 				//直進
 				if (command == U"straight")
 				{
@@ -290,10 +307,10 @@ void Main()
 				//操作端末処理
 
 				//命令番号
-				font(count).draw(Vec2{ 1010, 330 + TASK_SPACE * count });
+				font(count).draw(Vec2{ 1010, TASK_FIRST_COLUMNS + TASK_SPACE * count });
 
 				//行動一覧表示
-				if (SimpleGUI::Button(command, Vec2{ 1100, 330 + TASK_SPACE * count }, 100))
+				if (SimpleGUI::Button(command, Vec2{ 1100, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 100))
 				{
 					if (command == U"straight") spawndatas[enemynum].commands[count].setType(U"wait");
 					else if (command == U"wait") spawndatas[enemynum].commands[count].setType(U"kill");
@@ -303,7 +320,7 @@ void Main()
 
 				//前後入れ替え
 				//下へ移動
-				if (SimpleGUI::Button(U"▼", Vec2{ 1060, 330 + TASK_SPACE * count }, 30, count != count_max - 1))
+				if (SimpleGUI::Button(U"▼", Vec2{ 1060, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, count != count_max - 1))
 				{
 					MoveCommand buf_command = spawndatas[enemynum].commands[count];
 					spawndatas[enemynum].commands[count] = spawndatas[enemynum].commands[count + 1];
@@ -311,37 +328,53 @@ void Main()
 				}
 
 				//上へ移動
-				if (SimpleGUI::Button(U"▲", Vec2{ 1210, 330 + TASK_SPACE * count }, 30, count != 0))
+				if (SimpleGUI::Button(U"▲", Vec2{ 1210, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, count != 0))
 				{
 					MoveCommand buf_command = spawndatas[enemynum].commands[count];
 					spawndatas[enemynum].commands[count] = spawndatas[enemynum].commands[count - 1];
 					spawndatas[enemynum].commands[count - 1] = buf_command;
 				}
 
+				//追加
+				if (SimpleGUI::Button(U"+", Vec2{ 1250, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 20))
+				{
+					spawndatas[enemynum].commands.insert(++it,MoveCommand());
+					break;
+				}
+
+				//削除
+				if (SimpleGUI::Button(U"-", Vec2{ 1275, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 20))
+				{
+					spawndatas[enemynum].commands.erase(it);
+					break;
+				}
+
+				else ++it;
+
 				//座標表示
-				font(spawndatas[enemynum].commands[count].readParamater().x).draw(1180, 380 + TASK_SPACE * count);
-				font(spawndatas[enemynum].commands[count].readParamater().y).draw(1180, 430 + TASK_SPACE * count);
+				font(spawndatas[enemynum].commands[count].readParamater().x).draw(1180, TASK_SECOND_COLUMNS + TASK_SPACE * count);
+				font(spawndatas[enemynum].commands[count].readParamater().y).draw(1180, TASK_THIRD_COLUMNS + TASK_SPACE * count);
 
 				//座標操作
 				//x座標
-				if (SimpleGUI::Button(U"-100", Vec2{ 1010, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-100.0);
-				if (SimpleGUI::Button(U"-10", Vec2{ 1065, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-10.0);
-				if (SimpleGUI::Button(U"-1", Vec2{ 1120, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-1.0);
-				if (SimpleGUI::Button(U"1", Vec2{ 1230, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(1.0);
-				if (SimpleGUI::Button(U"10", Vec2{ 1285, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(10.0);
-				if (SimpleGUI::Button(U"100", Vec2{ 1340, 380 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(100.0);
+				if (SimpleGUI::Button(U"-100", Vec2{ 1010, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-100.0);
+				if (SimpleGUI::Button(U"-10", Vec2{ 1065, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-10.0);
+				if (SimpleGUI::Button(U"-1", Vec2{ 1120, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-1.0);
+				if (SimpleGUI::Button(U"1", Vec2{ 1230, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(1.0);
+				if (SimpleGUI::Button(U"10", Vec2{ 1285, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(10.0);
+				if (SimpleGUI::Button(U"100", Vec2{ 1340, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(100.0);
 
 				//y座標
-				if (SimpleGUI::Button(U"-100", Vec2{ 1010, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-100.0);
-				if (SimpleGUI::Button(U"-10", Vec2{ 1065, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-10.0);
-				if (SimpleGUI::Button(U"-1", Vec2{ 1120, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-1.0);
-				if (SimpleGUI::Button(U"1", Vec2{ 1230, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(1.0);
-				if (SimpleGUI::Button(U"10", Vec2{ 1285, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(10.0);
-				if (SimpleGUI::Button(U"100", Vec2{ 1340, 430 + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(100.0);
+				if (SimpleGUI::Button(U"-100", Vec2{ 1010, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-100.0);
+				if (SimpleGUI::Button(U"-10", Vec2{ 1065, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-10.0);
+				if (SimpleGUI::Button(U"-1", Vec2{ 1120, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-1.0);
+				if (SimpleGUI::Button(U"1", Vec2{ 1230, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(1.0);
+				if (SimpleGUI::Button(U"10", Vec2{ 1285, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(10.0);
+				if (SimpleGUI::Button(U"100", Vec2{ 1340, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(100.0);
 
 			}
 
-			//他軌跡の閲覧の為の選択処理
+			//他経路の閲覧の為の選択処理
 			if (0 < enemynum && KeyLeft.down()) --enemynum;
 			else if (enemynum < spawndatas.size() - 1 && KeyRight.down()) ++enemynum;
 

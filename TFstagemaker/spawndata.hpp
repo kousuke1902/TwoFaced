@@ -24,6 +24,14 @@ public:
 		commands = setcommands;
 	}
 
+	Spawndata(double settime, String setname, Vec2 setPos)
+	{
+		spawntime = settime;
+		name = setname;
+		spawnPos = setPos;
+		commands << MoveCommand();
+	}
+
 	//スポーン時間の閲覧
 	double readSpawntime()
 	{
