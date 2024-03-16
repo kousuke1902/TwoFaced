@@ -270,23 +270,19 @@ void Main()
 				spawndatas[enemynum].commands.push_front(MoveCommand());
 			}
 
-			//追加削除の為のポインタ
-			auto it = spawndatas[enemynum].commands.begin();
+
 
 			//一つ前の座標の記録
 			Vec2 backPos = SpawnPos;
 
 			//各要素の処理
-			//表示最大数以下のチェック
 			size_t max_size = spawndatas[enemynum].commands.size();
-			size_t count_max = max_size - target_cursor * 4;
-			if (count_max > 3) count_max = 4;
 
 			//各項の処理
-			for (size_t count = 0; count < count_max; ++count)
+			for (size_t count = 0; count < max_size; ++count)
 			{
-				String command = spawndatas[enemynum].commands[count + target_cursor * 4].readType();
-				Vec2 Pos = spawndatas[enemynum].commands[count + target_cursor * 4].readParamater();
+				String command = spawndatas[enemynum].commands[count].readType();
+				Vec2 Pos = spawndatas[enemynum].commands[count].readParamater();
 
 				//経路描画処理
 				//直進
@@ -294,6 +290,7 @@ void Main()
 				{
 					Vec2 forwardPos = Pos + Vec2{ 100.0, 100.0 };
 					Line{ backPos, forwardPos }.draw(Palette::Darkorange);
+					Circle{ forwardPos, 2.0 }.draw(Palette::Darkorange);
 					backPos = forwardPos;
 				}
 
@@ -309,12 +306,26 @@ void Main()
 					RectF{ Arg::center(backPos), 5.0 }.draw(Palette::Yellow);
 				}
 
-				//操作端末処理
+			}
+
+			//操作端末処理
+			//表示最大数以下のチェック
+			size_t count_max = max_size - target_cursor * 4;
+			if (count_max > 3) count_max = 4;
+
+			//追加削除の為のポインタ
+			auto begin_it = spawndatas[enemynum].commands.begin();
+			auto it = begin_it + target_cursor * 4;
+
+			//各項の処理
+			for (size_t count = 0; count < count_max; ++count)
+			{
 
 				//命令番号
 				font(count + target_cursor * 4).draw(Vec2{ 1010, TASK_FIRST_COLUMNS + TASK_SPACE * count });
 
 				//行動一覧表示
+				String command = spawndatas[enemynum].commands[count + target_cursor * 4].readType();
 				if (SimpleGUI::Button(command, Vec2{ 1100, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 100))
 				{
 					if (command == U"straight") spawndatas[enemynum].commands[count + target_cursor * 4].setType(U"wait");
@@ -325,7 +336,7 @@ void Main()
 
 				//前後入れ替え
 				//下へ移動
-				if (SimpleGUI::Button(U"▼", Vec2{ 1060, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, count != max_size - 1))
+				if (SimpleGUI::Button(U"▼", Vec2{ 1060, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, count + target_cursor * 4 != max_size - 1))
 				{
 					MoveCommand buf_command = spawndatas[enemynum].commands[count + target_cursor * 4];
 					spawndatas[enemynum].commands[count + target_cursor * 4] = spawndatas[enemynum].commands[count + target_cursor * 4 + 1];
@@ -333,7 +344,7 @@ void Main()
 				}
 
 				//上へ移動
-				if (SimpleGUI::Button(U"▲", Vec2{ 1210, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, count != 0))
+				if (SimpleGUI::Button(U"▲", Vec2{ 1210, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, it != begin_it))
 				{
 					MoveCommand buf_command = spawndatas[enemynum].commands[count + target_cursor * 4];
 					spawndatas[enemynum].commands[count + target_cursor * 4] = spawndatas[enemynum].commands[count + target_cursor * 4 - 1];
@@ -343,7 +354,7 @@ void Main()
 				//追加
 				if (SimpleGUI::Button(U"+", Vec2{ 1250, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 20))
 				{
-					spawndatas[enemynum].commands.insert(++it,MoveCommand());
+					spawndatas[enemynum].commands.insert(++it, MoveCommand());
 					break;
 				}
 
@@ -378,6 +389,7 @@ void Main()
 				if (SimpleGUI::Button(U"100", Vec2{ 1340, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterY(100.0);
 
 			}
+			
 
 			//他経路の閲覧の為の選択処理
 			if (0 < enemynum && KeyLeft.down())
