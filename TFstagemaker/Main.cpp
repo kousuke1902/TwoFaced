@@ -277,11 +277,16 @@ void Main()
 			Vec2 backPos = SpawnPos;
 
 			//各要素の処理
-			size_t count_max = spawndatas[enemynum].commands.size();
+			//表示最大数以下のチェック
+			size_t max_size = spawndatas[enemynum].commands.size();
+			size_t count_max = max_size - target_cursor * 4;
+			if (count_max > 3) count_max = 4;
+
+			//各項の処理
 			for (size_t count = 0; count < count_max; ++count)
 			{
-				String command = spawndatas[enemynum].commands[count].readType();
-				Vec2 Pos = spawndatas[enemynum].commands[count].readParamater();
+				String command = spawndatas[enemynum].commands[count + target_cursor * 4].readType();
+				Vec2 Pos = spawndatas[enemynum].commands[count + target_cursor * 4].readParamater();
 
 				//経路描画処理
 				//直進
@@ -307,32 +312,32 @@ void Main()
 				//操作端末処理
 
 				//命令番号
-				font(count).draw(Vec2{ 1010, TASK_FIRST_COLUMNS + TASK_SPACE * count });
+				font(count + target_cursor * 4).draw(Vec2{ 1010, TASK_FIRST_COLUMNS + TASK_SPACE * count });
 
 				//行動一覧表示
 				if (SimpleGUI::Button(command, Vec2{ 1100, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 100))
 				{
-					if (command == U"straight") spawndatas[enemynum].commands[count].setType(U"wait");
-					else if (command == U"wait") spawndatas[enemynum].commands[count].setType(U"kill");
-					else if (command == U"kill") spawndatas[enemynum].commands[count].setType(U"straight");
+					if (command == U"straight") spawndatas[enemynum].commands[count + target_cursor * 4].setType(U"wait");
+					else if (command == U"wait") spawndatas[enemynum].commands[count + target_cursor * 4].setType(U"kill");
+					else if (command == U"kill") spawndatas[enemynum].commands[count + target_cursor * 4].setType(U"straight");
 
 				}
 
 				//前後入れ替え
 				//下へ移動
-				if (SimpleGUI::Button(U"▼", Vec2{ 1060, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, count != count_max - 1))
+				if (SimpleGUI::Button(U"▼", Vec2{ 1060, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, count != max_size - 1))
 				{
-					MoveCommand buf_command = spawndatas[enemynum].commands[count];
-					spawndatas[enemynum].commands[count] = spawndatas[enemynum].commands[count + 1];
-					spawndatas[enemynum].commands[count + 1] = buf_command;
+					MoveCommand buf_command = spawndatas[enemynum].commands[count + target_cursor * 4];
+					spawndatas[enemynum].commands[count + target_cursor * 4] = spawndatas[enemynum].commands[count + target_cursor * 4 + 1];
+					spawndatas[enemynum].commands[count + target_cursor * 4 + 1] = buf_command;
 				}
 
 				//上へ移動
 				if (SimpleGUI::Button(U"▲", Vec2{ 1210, TASK_FIRST_COLUMNS + TASK_SPACE * count }, 30, count != 0))
 				{
-					MoveCommand buf_command = spawndatas[enemynum].commands[count];
-					spawndatas[enemynum].commands[count] = spawndatas[enemynum].commands[count - 1];
-					spawndatas[enemynum].commands[count - 1] = buf_command;
+					MoveCommand buf_command = spawndatas[enemynum].commands[count + target_cursor * 4];
+					spawndatas[enemynum].commands[count + target_cursor * 4] = spawndatas[enemynum].commands[count + target_cursor * 4 - 1];
+					spawndatas[enemynum].commands[count + target_cursor * 4 - 1] = buf_command;
 				}
 
 				//追加
@@ -352,33 +357,43 @@ void Main()
 				else ++it;
 
 				//座標表示
-				font(spawndatas[enemynum].commands[count].readParamater().x).draw(1180, TASK_SECOND_COLUMNS + TASK_SPACE * count);
-				font(spawndatas[enemynum].commands[count].readParamater().y).draw(1180, TASK_THIRD_COLUMNS + TASK_SPACE * count);
+				font(spawndatas[enemynum].commands[count + target_cursor * 4].readParamater().x).draw(1180, TASK_SECOND_COLUMNS + TASK_SPACE * count);
+				font(spawndatas[enemynum].commands[count + target_cursor * 4].readParamater().y).draw(1180, TASK_THIRD_COLUMNS + TASK_SPACE * count);
 
 				//座標操作
 				//x座標
-				if (SimpleGUI::Button(U"-100", Vec2{ 1010, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-100.0);
-				if (SimpleGUI::Button(U"-10", Vec2{ 1065, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-10.0);
-				if (SimpleGUI::Button(U"-1", Vec2{ 1120, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(-1.0);
-				if (SimpleGUI::Button(U"1", Vec2{ 1230, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(1.0);
-				if (SimpleGUI::Button(U"10", Vec2{ 1285, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(10.0);
-				if (SimpleGUI::Button(U"100", Vec2{ 1340, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterX(100.0);
+				if (SimpleGUI::Button(U"-100", Vec2{ 1010, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterX(-100.0);
+				if (SimpleGUI::Button(U"-10", Vec2{ 1065, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterX(-10.0);
+				if (SimpleGUI::Button(U"-1", Vec2{ 1120, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterX(-1.0);
+				if (SimpleGUI::Button(U"1", Vec2{ 1230, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterX(1.0);
+				if (SimpleGUI::Button(U"10", Vec2{ 1285, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterX(10.0);
+				if (SimpleGUI::Button(U"100", Vec2{ 1340, TASK_SECOND_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterX(100.0);
 
 				//y座標
-				if (SimpleGUI::Button(U"-100", Vec2{ 1010, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-100.0);
-				if (SimpleGUI::Button(U"-10", Vec2{ 1065, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-10.0);
-				if (SimpleGUI::Button(U"-1", Vec2{ 1120, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(-1.0);
-				if (SimpleGUI::Button(U"1", Vec2{ 1230, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(1.0);
-				if (SimpleGUI::Button(U"10", Vec2{ 1285, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(10.0);
-				if (SimpleGUI::Button(U"100", Vec2{ 1340, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count].addParamaterY(100.0);
+				if (SimpleGUI::Button(U"-100", Vec2{ 1010, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterY(-100.0);
+				if (SimpleGUI::Button(U"-10", Vec2{ 1065, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterY(-10.0);
+				if (SimpleGUI::Button(U"-1", Vec2{ 1120, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterY(-1.0);
+				if (SimpleGUI::Button(U"1", Vec2{ 1230, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterY(1.0);
+				if (SimpleGUI::Button(U"10", Vec2{ 1285, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterY(10.0);
+				if (SimpleGUI::Button(U"100", Vec2{ 1340, TASK_THIRD_COLUMNS + TASK_SPACE * count }, 50)) spawndatas[enemynum].commands[count + target_cursor * 4].addParamaterY(100.0);
 
 			}
 
 			//他経路の閲覧の為の選択処理
-			if (0 < enemynum && KeyLeft.down()) --enemynum;
-			else if (enemynum < spawndatas.size() - 1 && KeyRight.down()) ++enemynum;
+			if (0 < enemynum && KeyLeft.down())
+			{
+				--enemynum;
+				target_cursor = 0;
+			}
+			else if (enemynum < spawndatas.size() - 1 && KeyRight.down())
+			{
+				++enemynum;
+				target_cursor = 0;
+			} 
 
-
+			//行動のページ送り
+			if (0 < target_cursor && KeyUp.down())--target_cursor;
+			else if (target_cursor < max_size / 4 && KeyDown.down()) ++target_cursor;
 
 		}
 
