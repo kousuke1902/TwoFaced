@@ -1,10 +1,10 @@
-﻿# include <Siv3D.hpp>
+﻿#include <Siv3D.hpp>
 #include "spawndata.hpp"
 
-#define TASK_SPACE 150
-#define TASK_FIRST_COLUMNS 340
-#define TASK_SECOND_COLUMNS 390
-#define TASK_THIRD_COLUMNS 430
+#define TASK_SPACE 130
+#define TASK_FIRST_COLUMNS 410
+#define TASK_SECOND_COLUMNS 450
+#define TASK_THIRD_COLUMNS 490
 
 void Main()
 {
@@ -19,12 +19,10 @@ void Main()
 	double stagetime = 0.0;//ステージ時間
 	size_t enemynum = 0;//エネミーの切り替え用の数
 	size_t target_cursor = 0;//変更を加えるポイントの番号
-
 	Font font{ 20 };
 
 	spawndatas.clear();
 
-	
 
 	while (System::Update())
 	{
@@ -37,7 +35,7 @@ void Main()
 		Rect(100, 100, 800, 800).drawFrame(1.0, Palette::Orangered);
 
 		//CSV内データの読み込み
-		if (SimpleGUI::Button(U"ロード", Vec2{ 1010, 10 }))
+		if (SimpleGUI::Button(U"ロード", Vec2{ 1010, 10 }, 100))
 		{
 			Optional<FilePath> check = Dialog::OpenFile({ FileFilter::CSV() });
 			//パスの確認
@@ -102,12 +100,13 @@ void Main()
 		}
 
 		//CSVへ書き込み
-		if (SimpleGUI::Button(U"セーブ", Vec2{ 1120, 10 }))
+		if (SimpleGUI::Button(U"セーブ", Vec2{ 1120, 10 }, 100))
 		{
 			Optional<FilePath> check = Dialog::OpenFile({ FileFilter::CSV() });
 			//パスの確認
 			if (check)
 			{
+				spawndatas.sort_by([](const Spawndata& a, const Spawndata& b) {return (a.spawntime < b.spawntime); });
 				//保存処理
 				CSV savecsv;
 				path = check;
@@ -163,10 +162,9 @@ void Main()
 		}
 
 		//CSVへ上書き
-		if (SimpleGUI::Button(U"上書き", Vec2{ 1230, 10 }))
+		if (SimpleGUI::Button(U"上書き", Vec2{ 1230, 10 }, 100, path.has_value()))
 		{
-			if (path)
-			{
+				spawndatas.sort_by([](const Spawndata& a, const Spawndata& b) {return (a.spawntime < b.spawntime); });
 				//保存処理
 				CSV savecsv;
 
@@ -215,7 +213,6 @@ void Main()
 				}
 
 			savecsv.save(*path);
-			}
 
 		}
 
@@ -226,26 +223,26 @@ void Main()
 		font(U"ステージルール:", cleartype).draw(1010, 80);
 
 		//表示時間操作
-		font(U"設定時間").draw(1010, 110);
-		font(stagetime).draw(1175, 145);
-		if (SimpleGUI::Button(U"- 60", Vec2{ 1010, 140 }, 50)) stagetime -= 60;
-		if (SimpleGUI::Button(U"-10", Vec2{ 1065, 140 }, 50)) stagetime -= 10;
-		if (SimpleGUI::Button(U"-1", Vec2{ 1120, 140 }, 50)) stagetime -= 1;
-		if (SimpleGUI::Button(U"1", Vec2{ 1240, 140 }, 50)) stagetime += 1;
-		if (SimpleGUI::Button(U"10", Vec2{ 1295, 140 }, 50)) stagetime += 10;
-		if (SimpleGUI::Button(U"60", Vec2{ 1350, 140 }, 50)) stagetime += 60;
+		font(U"設定時間").draw(1010, 105);
+		font(stagetime).draw(1175, 140);
+		if (SimpleGUI::Button(U"- 60", Vec2{ 1010, 135 }, 50)) stagetime -= 60;
+		if (SimpleGUI::Button(U"-10", Vec2{ 1065, 135 }, 50)) stagetime -= 10;
+		if (SimpleGUI::Button(U"-1", Vec2{ 1120, 135 }, 50)) stagetime -= 1;
+		if (SimpleGUI::Button(U"1", Vec2{ 1240, 135 }, 50)) stagetime += 1;
+		if (SimpleGUI::Button(U"10", Vec2{ 1295, 135 }, 50)) stagetime += 10;
+		if (SimpleGUI::Button(U"60", Vec2{ 1350, 135 }, 50)) stagetime += 60;
 
 		//先頭への行動追加
-		if (SimpleGUI::Button(U"+", Vec2{ 1010, 300 }, 20, !spawndatas.empty()))	spawndatas[enemynum].commands.push_front(MoveCommand());
+		if (SimpleGUI::Button(U"+", Vec2{ 1010, 175 }, 20, !spawndatas.empty()))	spawndatas[enemynum].commands.push_front(MoveCommand());
 
 		//エネミーの追加
-		if (SimpleGUI::Button(U"Enemy+", Vec2{ 1040, 300 }, 80))
+		if (SimpleGUI::Button(U"Enemy+", Vec2{ 1040, 175 }, 80))
 		{
 			spawndatas << Spawndata(0, U"glockdrone", Vec2{ 400.0, -100.0 });
 			enemynum = spawndatas.size() - 1;
 		}
 		//エネミーの削除
-		if (SimpleGUI::Button(U"Enemy-", Vec2{ 1130, 300 }, 80, !spawndatas.empty()))
+		if (SimpleGUI::Button(U"Enemy-", Vec2{ 1130, 175 }, 80, !spawndatas.empty()))
 		{
 			auto it = spawndatas.begin() + enemynum;
 			spawndatas.erase(it);
@@ -253,14 +250,14 @@ void Main()
 			
 		}
 		//エネミーのクリア
-		if (SimpleGUI::Button(U"Clear", Vec2{ 1220, 300 }, 80))
+		if (SimpleGUI::Button(U"Clear", Vec2{ 1220, 175 }, 80))
 		{
 			spawndatas.clear();
 			enemynum = 0;
 		}
 
 		//エネミー番号表示
-		font(enemynum).draw(1310, 300);
+		font(enemynum).draw(1310, 175);
 
 		//画面上での軌跡の表示
 		if (spawndatas)
@@ -270,26 +267,36 @@ void Main()
 			Circle{ SpawnPos, 5.0}.draw(Palette::Red);
 
 			//スポーン座標の操作
-			font(U"スポーン座標").draw(1010, 180);
-			font(spawndatas[enemynum].readSpawnPos().x).draw(1180, 205);
-			font(spawndatas[enemynum].readSpawnPos().y).draw(1180, 255);
+			font(U"スポーン座標").draw(1010, 215);
+			font(spawndatas[enemynum].readSpawnPos().x).draw(1180, 245);
+			font(spawndatas[enemynum].readSpawnPos().y).draw(1180, 285);
 
 			//x座標
-			if (SimpleGUI::Button(U"-100", Vec2{ 1010, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(-100.0);
-			if (SimpleGUI::Button(U"-10", Vec2{ 1065, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(-10.0);
-			if (SimpleGUI::Button(U"-1", Vec2{ 1120, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(-1.0);
-			if (SimpleGUI::Button(U"1", Vec2{ 1230, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(1.0);
-			if (SimpleGUI::Button(U"10", Vec2{ 1285, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(10.0);
-			if (SimpleGUI::Button(U"100", Vec2{ 1340, 210 }, 50)) spawndatas[enemynum].addSpaownPosX(100.0);
+			if (SimpleGUI::Button(U"-100", Vec2{ 1010, 245 }, 50)) spawndatas[enemynum].addSpaownPosX(-100.0);
+			if (SimpleGUI::Button(U"-10", Vec2{ 1065, 245 }, 50)) spawndatas[enemynum].addSpaownPosX(-10.0);
+			if (SimpleGUI::Button(U"-1", Vec2{ 1120, 245 }, 50)) spawndatas[enemynum].addSpaownPosX(-1.0);
+			if (SimpleGUI::Button(U"1", Vec2{ 1230, 245 }, 50)) spawndatas[enemynum].addSpaownPosX(1.0);
+			if (SimpleGUI::Button(U"10", Vec2{ 1285, 245 }, 50)) spawndatas[enemynum].addSpaownPosX(10.0);
+			if (SimpleGUI::Button(U"100", Vec2{ 1340, 245 }, 50)) spawndatas[enemynum].addSpaownPosX(100.0);
 
 			//y座標
-			if (SimpleGUI::Button(U"-100", Vec2{ 1010, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(-100.0);
-			if (SimpleGUI::Button(U"-10", Vec2{ 1065, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(-10.0);
-			if (SimpleGUI::Button(U"-1", Vec2{ 1120, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(-1.0);
-			if (SimpleGUI::Button(U"1", Vec2{ 1230, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(1.0);
-			if (SimpleGUI::Button(U"10", Vec2{ 1285, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(10.0);
-			if (SimpleGUI::Button(U"100", Vec2{ 1340, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(100.0);
+			if (SimpleGUI::Button(U"-100", Vec2{ 1010, 285 }, 50)) spawndatas[enemynum].addSpaownPosY(-100.0);
+			if (SimpleGUI::Button(U"-10", Vec2{ 1065, 285 }, 50)) spawndatas[enemynum].addSpaownPosY(-10.0);
+			if (SimpleGUI::Button(U"-1", Vec2{ 1120, 285 }, 50)) spawndatas[enemynum].addSpaownPosY(-1.0);
+			if (SimpleGUI::Button(U"1", Vec2{ 1230, 285 }, 50)) spawndatas[enemynum].addSpaownPosY(1.0);
+			if (SimpleGUI::Button(U"10", Vec2{ 1285, 285 }, 50)) spawndatas[enemynum].addSpaownPosY(10.0);
+			if (SimpleGUI::Button(U"100", Vec2{ 1340, 285 }, 50)) spawndatas[enemynum].addSpaownPosY(100.0);
 
+			//スポーン時間の操作
+			font(U"スポーン時間").draw(1010, 320);
+			font(spawndatas[enemynum].spawntime).draw(1180, 355);
+
+			if (SimpleGUI::Button(U"- 60", Vec2{ 1010, 350 }, 50)) spawndatas[enemynum].spawntime -= 60;
+			if (SimpleGUI::Button(U"-10", Vec2{ 1065, 350 }, 50)) spawndatas[enemynum].spawntime -= 10;
+			if (SimpleGUI::Button(U"-1", Vec2{ 1120, 350 }, 50)) spawndatas[enemynum].spawntime -= 1;
+			if (SimpleGUI::Button(U"1", Vec2{ 1240, 350 }, 50)) spawndatas[enemynum].spawntime += 1;
+			if (SimpleGUI::Button(U"10", Vec2{ 1295, 350 }, 50)) spawndatas[enemynum].spawntime += 10;
+			if (SimpleGUI::Button(U"60", Vec2{ 1350, 350 }, 50)) spawndatas[enemynum].spawntime += 60;
 
 			//一つ前の座標の記録
 			Vec2 backPos = SpawnPos;

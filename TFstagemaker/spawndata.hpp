@@ -6,14 +6,13 @@
 class Spawndata
 {
 private:
-
-	double spawntime;
+		
 	String name;
 	Vec2 spawnPos;
 
 
 public:
-
+	double spawntime;
 	Array<MoveCommand> commands;
 
 	Spawndata(double settime, String setname, Vec2 setPos, Array<MoveCommand> setcommands)
