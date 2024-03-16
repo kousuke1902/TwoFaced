@@ -90,7 +90,7 @@ void Main()
 
 							}
 						}
-
+						spawndatas.clear();
 						spawndatas << Spawndata(spawntime, name, startPos, bufcommand);
 					}
 				}
@@ -233,7 +233,26 @@ void Main()
 		if (SimpleGUI::Button(U"10", Vec2{ 1295, 140 }, 50)) stagetime += 10;
 		if (SimpleGUI::Button(U"60", Vec2{ 1350, 140 }, 50)) stagetime += 60;
 
+		//先頭への行動追加
+		if (SimpleGUI::Button(U"+", Vec2{ 1010, 300 }, 20, !spawndatas.empty()))	spawndatas[enemynum].commands.push_front(MoveCommand());
 
+		//エネミーの追加
+		if (SimpleGUI::Button(U"Enemy+", Vec2{ 1040, 300 }, 80))
+		{
+			spawndatas << Spawndata(0, U"glockdrone", Vec2{ 400.0, -100.0 });
+			enemynum = spawndatas.size() - 1;
+		}
+		//エネミーの削除
+		if (SimpleGUI::Button(U"Enemy-", Vec2{ 1130, 300 }, 80, !spawndatas.empty()))
+		{
+			auto it = spawndatas.begin() + enemynum;
+			spawndatas.erase(it);
+			if (enemynum > spawndatas.size()) enemynum = spawndatas.size() - 1;
+			
+		}
+
+		//エネミー番号表示
+		font(enemynum).draw(1220, 300);
 
 		//画面上での軌跡の表示
 		if (spawndatas)
@@ -262,14 +281,6 @@ void Main()
 			if (SimpleGUI::Button(U"1", Vec2{ 1230, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(1.0);
 			if (SimpleGUI::Button(U"10", Vec2{ 1285, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(10.0);
 			if (SimpleGUI::Button(U"100", Vec2{ 1340, 250 }, 50)) spawndatas[enemynum].addSpaownPosY(100.0);
-
-
-			//先頭への行動追加
-			if (SimpleGUI::Button(U"+", Vec2{ 1250, 300 }, 20))
-			{
-				spawndatas[enemynum].commands.push_front(MoveCommand());
-			}
-
 
 
 			//一つ前の座標の記録
