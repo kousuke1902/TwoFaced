@@ -48,6 +48,8 @@ void Main()
 
 				if (csv)
 				{
+					//初期化
+					spawndatas.clear();
 					//ステージ情報
 					cleartype = csv[0][0];
 					stagetime = Parse<double>(csv[0][1]);
@@ -90,7 +92,7 @@ void Main()
 
 							}
 						}
-						spawndatas.clear();
+
 						spawndatas << Spawndata(spawntime, name, startPos, bufcommand);
 					}
 				}
@@ -250,9 +252,15 @@ void Main()
 			if (enemynum > spawndatas.size()) enemynum = spawndatas.size() - 1;
 			
 		}
+		//エネミーのクリア
+		if (SimpleGUI::Button(U"Clear", Vec2{ 1220, 300 }, 80))
+		{
+			spawndatas.clear();
+			enemynum = 0;
+		}
 
 		//エネミー番号表示
-		font(enemynum).draw(1220, 300);
+		font(enemynum).draw(1310, 300);
 
 		//画面上での軌跡の表示
 		if (spawndatas)
