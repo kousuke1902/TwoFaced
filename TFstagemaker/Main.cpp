@@ -102,7 +102,7 @@ void Main()
 		//CSVへ書き込み
 		if (SimpleGUI::Button(U"セーブ", Vec2{ 1120, 10 }, 100))
 		{
-			Optional<FilePath> check = Dialog::OpenFile({ FileFilter::CSV() });
+			Optional<FilePath> check = Dialog::SaveFile({ FileFilter::CSV() });
 			//パスの確認
 			if (check)
 			{
