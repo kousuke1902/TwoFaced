@@ -418,20 +418,20 @@ void Main()
 			
 
 			//他経路の閲覧の為の選択処理
-			if (0 < enemynum && KeyLeft.down())
+			if (0 < enemynum && (KeyLeft.down() || KeyA.down()) )
 			{
 				--enemynum;
 				target_cursor = 0;
 			}
-			else if (enemynum < spawndatas.size() - 1 && KeyRight.down())
+			else if (enemynum < spawndatas.size() - 1 && (KeyRight.down() || KeyD.down()) )
 			{
 				++enemynum;
 				target_cursor = 0;
 			} 
 
 			//行動のページ送り
-			if (0 < target_cursor && KeyUp.down())--target_cursor;
-			else if (target_cursor < max_size / 4 && KeyDown.down()) ++target_cursor;
+			if (0 < target_cursor && (KeyUp.down() || KeyW.down()) )--target_cursor;
+			else if (target_cursor < max_size / 4 && (KeyDown.down() || KeyS.down()) ) ++target_cursor;
 
 		}
 
