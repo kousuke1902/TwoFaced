@@ -239,7 +239,7 @@ void Main()
 		if (SimpleGUI::Button(U"Enemy+", Vec2{ 1040, 175 }, 80))
 		{
 			spawndatas << Spawndata(0, U"glockdrone", Vec2{ 400.0, -100.0 });
-			enemynum = spawndatas.size() - 1;
+			//enemynum = spawndatas.size() - 1;
 		}
 		//エネミーの削除
 		if (SimpleGUI::Button(U"Enemy-", Vec2{ 1130, 175 }, 80, !spawndatas.empty()))
