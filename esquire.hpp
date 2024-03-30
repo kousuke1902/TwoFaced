@@ -11,7 +11,7 @@ class Esquire : public Player
 
 public:
 
-	Esquire(Vec2 pos) : Player(pos, 10.0, 100.0, 200.0, 0.2, 0.0, 100.0, 2.0)
+	Esquire(Vec2 pos) : Player(pos, 47.0, 100.0, 200.0, 0.2, 0.0, 100.0, 2.0)
 	{
 		image = Texture{ Image{ U"img/player0.png"}.scaled(0.2) };
 		image2 = Texture{ Image{ U"img/player1.png"}.scaled(0.2) };

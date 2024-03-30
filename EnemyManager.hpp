@@ -175,7 +175,7 @@ public:
 				}
 
 				//描画処理
-				//Circle(enemy->readPos(), 4.0).draw(Palette::Red);
+				//enemy->readHitBox().draw();
 				enemy->draw();
 				++it;
 
