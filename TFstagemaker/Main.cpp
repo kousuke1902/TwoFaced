@@ -15,7 +15,7 @@ void Main()
 	Optional<FilePath> path;//ファイルパス
 	Array<Spawndata> spawndatas;//ステージ内敵情報
 	String stagename = U"None";//ステージ名
-	String cleartype = U"None";//クリア種類
+	String cleartype = U"Goal";//クリア種類
 	double stagetime = 0.0;//ステージ時間
 	size_t enemynum = 0;//エネミーの切り替え用の数
 	size_t target_cursor = 0;//変更を加えるポイントの番号

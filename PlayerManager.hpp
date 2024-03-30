@@ -135,7 +135,7 @@ public:
 			}
 
 			//描画
-			player->readHitBox().draw();
+			player->draw();
 		}
 
 		return 0;

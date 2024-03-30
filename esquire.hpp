@@ -11,9 +11,10 @@ class Esquire : public Player
 
 public:
 
-	Esquire(Vec2 pos) : Player(pos, 10.0, 100.0, 200.0, 0.5, 0.0, 100.0, 2.0)
+	Esquire(Vec2 pos) : Player(pos, 10.0, 100.0, 200.0, 0.2, 0.0, 100.0, 2.0)
 	{
-
+		image = Texture{ Image{ U"img/player0.png"}.scaled(0.2) };
+		image2 = Texture{ Image{ U"img/player1.png"}.scaled(0.2) };
 	};
 
 	int AddInherence(double deltatime) override
@@ -33,7 +34,7 @@ public:
 			//レフトサイドとライトサイドでの出力の違い
 			if (Mode == false)
 			{
-				bulletmanager->CreateStraightP(HitBox.center(), 5.0, 5.0, Vec2(Random(-0.1, 0.1), -1.0), 100.0, 6.0, 1.0, 0);
+				bulletmanager->CreateStraightP(HitBox.center(), 5.0, 5.0, Vec2(Random(-0.1, 0.1), -1.0), 400.0, 6.0, 1.0, 0);
 			}
 			else if (Mode == true)
 			{

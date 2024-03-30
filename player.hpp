@@ -16,7 +16,7 @@ protected:
 	double shotCoolTimer2;//キャラクター二つ目の武器のクールタイムタイマー
 	double ModechangeCoolTime;//モード切替の変更間隔
 	double ModechangeCoolTimer;//モード切替のクールタイムタイマー
-
+	Texture image2;//キャラクターテクスチャ
 
 public:
 
@@ -128,6 +128,14 @@ public:
 	{
 		ModechangeCoolTimer = Max((ModechangeCoolTimer - deltatime), 0.0);
 		return 0;
+	}
+
+	//描画と切り替え
+	int draw() override
+	{
+		if(Mode == false)image.drawAt(readPos());
+		else if(Mode == true)image2.drawAt(readPos());
+		return 1;
 	}
 
 };

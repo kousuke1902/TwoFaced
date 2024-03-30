@@ -14,7 +14,7 @@ protected:
 	double Speed;//移動速度
 	double shotCoolTime;//弾発射のクールタイム
 	double shotCoolTimer;//弾発射のクールタイムタイマー
-	const Texture image;//キャラクターテクスチャ
+	Texture image;//キャラクターテクスチャ
 
 
 public:
@@ -160,9 +160,9 @@ public:
 	}
 
 	//描画
-	int draw()
+	virtual int draw()
 	{
-
+		image.drawAt(readPos());
 		return 0;
 	}
 
