@@ -27,6 +27,12 @@ private:
 	double downtime;//カーソル入力時間
 	double warningTime;//作戦領域離脱時間
 
+	Texture Attackimg{ Image{ U"img/ko.png"}.scaled(0.6) };//攻の文字画像
+	Texture Defenceimg{ Image{ U"img/shu.png"}.scaled(0.6) };//守の文字画像
+	Texture Lifeimg{ Image{ U"img/tai.png"}.scaled(1.0) };//体の文字画像
+	Texture Inherenceimg{ Image{ U"img/ryoku.png"}.scaled(1.0) };//力の文字画像
+	Texture Cooltimeimg{ Image{ U"img/tai.png"}.scaled(1.0) };//待の文字画像
+
 	//ゲームルールを設定する
 	int setGameRule(CSV csv)
 	{
@@ -181,11 +187,15 @@ public:
 			RectF(910.0, 780.0, 40, -400.0 * PlayerModeCoolTime).draw(Palette::Antiquewhite);
 			if (playermanager.PlayerMode())
 			{
-				font(U"レフトサイド").draw(810, 300);
+				//font(U"レフトサイド").draw(810, 300);
+				RoundRect{ Arg::center(900, 200), 180, 180, 5 }.draw(Palette::Skyblue).drawFrame(5, Palette::Blue);
+				Defenceimg.drawAt(900, 205);
 			}
 			else
 			{
-				font(U"ライトサイド").draw(810, 300);
+				//font(U"ライトサイド").draw(810, 300);
+				RoundRect{ Arg::center(900, 200), 180, 180, 5 }.draw(Palette::Orangered).drawFrame(5, Palette::Red);
+				Attackimg.drawAt(900, 200);
 			}
 
 			//時間経過
