@@ -29,9 +29,9 @@ private:
 
 	Texture Attackimg{ Image{ U"img/ko.png"}.scaled(0.6) };//攻の文字画像
 	Texture Defenceimg{ Image{ U"img/shu.png"}.scaled(0.6) };//守の文字画像
-	Texture Lifeimg{ Image{ U"img/tai.png"}.scaled(1.0) };//体の文字画像
-	Texture Inherenceimg{ Image{ U"img/ryoku.png"}.scaled(1.0) };//力の文字画像
-	Texture Cooltimeimg{ Image{ U"img/tai.png"}.scaled(1.0) };//待の文字画像
+	Texture Lifeimg{ Image{ U"img/tai.png"}.scaled(0.15) };//体の文字画像
+	Texture Inherenceimg{ Image{ U"img/ryoku.png"}.scaled(0.15) };//力の文字画像
+	Texture Cooltimeimg{ Image{ U"img/machi.png"}.scaled(0.15) };//待の文字画像
 
 	//ゲームルールを設定する
 	int setGameRule(CSV csv)
@@ -173,29 +173,41 @@ public:
 				warningTime -= deltatime;
 
 				Rect(0, 0, 800, 800).draw(Color(200, 0, 0, 100));
-				font(U"作戦領域へ戻れ").drawAt(400, 300);
+				font(U"中に戻って").drawAt(400, 300);
 				font(U"{:.1f}"_fmt(warningTime)).drawAt(400, 350);
 			}
 
 			//パラメータ表示
 			double PlayerLife = playermanager.PlayerLife();
 			double PlayerInherence = playermanager.PlayerInherence();
-			double PlayerModeCoolTime = playermanager.PlayerModeCoolTimer() / playermanager.PlayerModeCoolTime();
+			double PlayerModeCoolTime = 1.0 - playermanager.PlayerModeCoolTimer() / playermanager.PlayerModeCoolTime();
 			Rect(800, 0, 200, 800).draw(Palette::Black);
-			RectF(810.0, 780.0, 40, -4.0 * PlayerLife).draw(Palette::Orange);
-			RectF(860.0, 780.0, 40, -4.0 * PlayerInherence).draw(Palette::Antiquewhite);
-			RectF(910.0, 780.0, 40, -400.0 * PlayerModeCoolTime).draw(Palette::Antiquewhite);
+			//体力バー
+			RoundRect{ Arg::center(835.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Lightgreen).drawFrame(3, Palette::Green);
+			Lifeimg.drawAt(835.0, 330.0);
+			RoundRect{ Arg::center(835.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkgreen);
+			RoundRect(815.0, 770.0 - 4.0 * PlayerLife, 40.0, 4.0 * PlayerLife, 5.0).draw(Palette::Lime);
+			//エネルギーバー
+			RoundRect{ Arg::center(900.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Tomato).drawFrame(3, Palette::Crimson);
+			Inherenceimg.drawAt(900.0, 330);
+			RoundRect{ Arg::center(900.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Crimson);
+			RoundRect(880.0, 770.0 - 4.0 * PlayerInherence, 40.0, 4.0 * PlayerInherence, 5.0).draw(Palette::Tomato);
+			//モード切替インターバル
+			RoundRect{ Arg::center(965.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Orchid).drawFrame(3, Palette::Darkslateblue);
+			Cooltimeimg.drawAt(965.0, 330.0);
+			RoundRect{ Arg::center(965.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkslateblue);
+			RoundRect(945.0, 770.0 - 400.0 * PlayerModeCoolTime, 40.0, 400.0 * PlayerModeCoolTime, 5.0).draw(Palette::Orchid);
 			if (playermanager.PlayerMode())
 			{
 				//font(U"レフトサイド").draw(810, 300);
-				RoundRect{ Arg::center(900, 200), 180, 180, 5 }.draw(Palette::Skyblue).drawFrame(5, Palette::Blue);
-				Defenceimg.drawAt(900, 205);
+				RoundRect{ Arg::center(900, 150), 180, 180, 5 }.draw(Palette::Skyblue).drawFrame(5, Palette::Blue);
+				Defenceimg.drawAt(900, 155);
 			}
 			else
 			{
 				//font(U"ライトサイド").draw(810, 300);
-				RoundRect{ Arg::center(900, 200), 180, 180, 5 }.draw(Palette::Orangered).drawFrame(5, Palette::Red);
-				Attackimg.drawAt(900, 200);
+				RoundRect{ Arg::center(900, 150), 180, 180, 5 }.draw(Palette::Coral).drawFrame(5, Palette::Red);
+				Attackimg.drawAt(900, 150);
 			}
 
 			//時間経過

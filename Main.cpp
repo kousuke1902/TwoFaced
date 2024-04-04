@@ -11,7 +11,7 @@ void Main()
 	Window::Resize(1000, 800);
 
 	
-	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
+	Scene::SetBackground(Palette::Whitesmoke);
 	App manager;
 
 	manager.add<Title>(State::Title);

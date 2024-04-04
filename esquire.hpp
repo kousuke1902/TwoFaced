@@ -8,27 +8,36 @@
 //プレイヤー操作キャラEsquireのクラス
 class Esquire : public Player
 {
+private:
+
+	bool EchargeFlag;
 
 public:
 
-	Esquire(Vec2 pos) : Player(pos, 47.0, 100.0, 200.0, 0.2, 0.0, 100.0, 2.0)
+	Esquire(Vec2 pos) : Player(pos, 47.0, 100.0, 200.0, 0.1, 0.0, 100.0, 2.0)
 	{
 		image = Texture{ Image{ U"img/player0.png"}.scaled(0.2) };
 		image2 = Texture{ Image{ U"img/player1.png"}.scaled(0.2) };
+		EchargeFlag = false;
 	};
 
 	int AddInherence(double deltatime) override
 	{
-		Inherence += 1.0 * deltatime;
+		//緊急チャージ確認
+		if (Inherence <= 0.1)EchargeFlag = true;
+		else if (EchargeFlag == true && Inherence == 100.0)EchargeFlag = false;
+
+		if(EchargeFlag == true)Inherence += 5.0 * deltatime;
+		else Inherence += 2.0 * deltatime;
 		Inherence = Min(MaxInherence, Inherence);
-		Inherence = Max(Inherence, 0.0);
+
 		return 0;
 	}
 
 	//弾生成
 	int createBullet(BulletManager* bulletmanager, Vec2 targetpos) override
 	{
-		if (Inherence > 0.2)
+		if (Inherence > 0.2 && EchargeFlag == false)
 		{
 			Inherence -= 0.2;
 			//レフトサイドとライトサイドでの出力の違い
@@ -38,12 +47,13 @@ public:
 			}
 			else if (Mode == true)
 			{
-				bulletmanager->CreateDefence(HitBox.center() + Vec2(0.0, -10.0), 40.0, 5.0, Vec2(0.0, 0.0), 0.0, 0.008, 0.0, 0);
+				bulletmanager->CreateDefence(HitBox.center() + Vec2(0.0, -30.0), 40.0, 5.0, Vec2(0.0, 0.0), 0.0, 0.008, 0.0, 0);
 
 			}
 
 		}
 
+		Inherence = Max(Inherence, 0.0);
 
 		return 0;
 	}
