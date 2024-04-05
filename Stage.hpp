@@ -129,6 +129,39 @@ public:
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
 
+		//パラメータ表示
+		double PlayerLife = playermanager.PlayerLife();
+		double PlayerInherence = playermanager.PlayerInherence();
+		double PlayerModeCoolTime = 1.0 - playermanager.PlayerModeCoolTimer() / playermanager.PlayerModeCoolTime();
+		Rect(800, 0, 200, 800).draw(Palette::Black);
+		//体力バー
+		RoundRect{ Arg::center(835.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Lightgreen).drawFrame(3, Palette::Green);
+		Lifeimg.drawAt(835.0, 330.0);
+		RoundRect{ Arg::center(835.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkgreen);
+		RoundRect(815.0, 770.0 - 4.0 * PlayerLife, 40.0, 4.0 * PlayerLife, 5.0).draw(Palette::Lime);
+		//エネルギーバー
+		RoundRect{ Arg::center(900.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Tomato).drawFrame(3, Palette::Crimson);
+		Inherenceimg.drawAt(900.0, 330);
+		RoundRect{ Arg::center(900.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Crimson);
+		RoundRect(880.0, 770.0 - 4.0 * PlayerInherence, 40.0, 4.0 * PlayerInherence, 5.0).draw(Palette::Tomato);
+		//モード切替インターバル
+		RoundRect{ Arg::center(965.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Orchid).drawFrame(3, Palette::Darkslateblue);
+		Cooltimeimg.drawAt(965.0, 330.0);
+		RoundRect{ Arg::center(965.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkslateblue);
+		RoundRect(945.0, 770.0 - 400.0 * PlayerModeCoolTime, 40.0, 400.0 * PlayerModeCoolTime, 5.0).draw(Palette::Orchid);
+		if (playermanager.PlayerMode())
+		{
+			//font(U"レフトサイド").draw(810, 300);
+			RoundRect{ Arg::center(900, 150), 180, 180, 5 }.draw(Palette::Skyblue).drawFrame(5, Palette::Blue);
+			Defenceimg.drawAt(900, 155);
+		}
+		else
+		{
+			//font(U"ライトサイド").draw(810, 300);
+			RoundRect{ Arg::center(900, 150), 180, 180, 5 }.draw(Palette::Coral).drawFrame(5, Palette::Red);
+			Attackimg.drawAt(900, 150);
+		}
+
 		//ポーズがOFFの状態であることの確認
 		if (!PauseFlag)
 		{
@@ -177,38 +210,7 @@ public:
 				font(U"{:.1f}"_fmt(warningTime)).drawAt(400, 350);
 			}
 
-			//パラメータ表示
-			double PlayerLife = playermanager.PlayerLife();
-			double PlayerInherence = playermanager.PlayerInherence();
-			double PlayerModeCoolTime = 1.0 - playermanager.PlayerModeCoolTimer() / playermanager.PlayerModeCoolTime();
-			Rect(800, 0, 200, 800).draw(Palette::Black);
-			//体力バー
-			RoundRect{ Arg::center(835.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Lightgreen).drawFrame(3, Palette::Green);
-			Lifeimg.drawAt(835.0, 330.0);
-			RoundRect{ Arg::center(835.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkgreen);
-			RoundRect(815.0, 770.0 - 4.0 * PlayerLife, 40.0, 4.0 * PlayerLife, 5.0).draw(Palette::Lime);
-			//エネルギーバー
-			RoundRect{ Arg::center(900.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Tomato).drawFrame(3, Palette::Crimson);
-			Inherenceimg.drawAt(900.0, 330);
-			RoundRect{ Arg::center(900.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Crimson);
-			RoundRect(880.0, 770.0 - 4.0 * PlayerInherence, 40.0, 4.0 * PlayerInherence, 5.0).draw(Palette::Tomato);
-			//モード切替インターバル
-			RoundRect{ Arg::center(965.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Orchid).drawFrame(3, Palette::Darkslateblue);
-			Cooltimeimg.drawAt(965.0, 330.0);
-			RoundRect{ Arg::center(965.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkslateblue);
-			RoundRect(945.0, 770.0 - 400.0 * PlayerModeCoolTime, 40.0, 400.0 * PlayerModeCoolTime, 5.0).draw(Palette::Orchid);
-			if (playermanager.PlayerMode())
-			{
-				//font(U"レフトサイド").draw(810, 300);
-				RoundRect{ Arg::center(900, 150), 180, 180, 5 }.draw(Palette::Skyblue).drawFrame(5, Palette::Blue);
-				Defenceimg.drawAt(900, 155);
-			}
-			else
-			{
-				//font(U"ライトサイド").draw(810, 300);
-				RoundRect{ Arg::center(900, 150), 180, 180, 5 }.draw(Palette::Coral).drawFrame(5, Palette::Red);
-				Attackimg.drawAt(900, 150);
-			}
+
 
 			//時間経過
 			gamerule->addTimer(deltatime);
