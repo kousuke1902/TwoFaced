@@ -32,6 +32,8 @@ private:
 	Texture Lifeimg{ Image{ U"img/tai.png"}.scaled(0.15) };//体の文字画像
 	Texture Inherenceimg{ Image{ U"img/ryoku.png"}.scaled(0.15) };//力の文字画像
 	Texture Cooltimeimg{ Image{ U"img/machi.png"}.scaled(0.15) };//待の文字画像
+	Texture CursorR{ Image{ U"img/cursorR.png"}.scaled(0.15) };//カーソル右
+	Texture CursorL{ Image{ U"img/cursorR.png"}.scaled(0.15).mirrored() };//カーソル左
 
 	//ゲームルールを設定する
 	int setGameRule(CSV csv)
@@ -129,26 +131,6 @@ public:
 		//処理フレーム間の経過時間
 		const double deltatime = Scene::DeltaTime();
 
-		//パラメータ表示
-		double PlayerLife = playermanager.PlayerLife();
-		double PlayerInherence = playermanager.PlayerInherence();
-		double PlayerModeCoolTime = 1.0 - playermanager.PlayerModeCoolTimer() / playermanager.PlayerModeCoolTime();
-		Rect(800, 0, 200, 800).draw(Palette::Black);
-		//体力バー
-		RoundRect{ Arg::center(835.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Lightgreen).drawFrame(3, Palette::Green);
-		Lifeimg.drawAt(835.0, 330.0);
-		RoundRect{ Arg::center(835.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkgreen);
-		RoundRect(815.0, 770.0 - 4.0 * PlayerLife, 40.0, 4.0 * PlayerLife, 5.0).draw(Palette::Lime);
-		//エネルギーバー
-		RoundRect{ Arg::center(900.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Tomato).drawFrame(3, Palette::Crimson);
-		Inherenceimg.drawAt(900.0, 330);
-		RoundRect{ Arg::center(900.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Crimson);
-		RoundRect(880.0, 770.0 - 4.0 * PlayerInherence, 40.0, 4.0 * PlayerInherence, 5.0).draw(Palette::Tomato);
-		//モード切替インターバル
-		RoundRect{ Arg::center(965.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Orchid).drawFrame(3, Palette::Darkslateblue);
-		Cooltimeimg.drawAt(965.0, 330.0);
-		RoundRect{ Arg::center(965.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkslateblue);
-		RoundRect(945.0, 770.0 - 400.0 * PlayerModeCoolTime, 40.0, 400.0 * PlayerModeCoolTime, 5.0).draw(Palette::Orchid);
 		if (playermanager.PlayerMode())
 		{
 			//font(U"レフトサイド").draw(810, 300);
@@ -270,15 +252,37 @@ public:
 			else if (cursol > 2)cursol = 0;
 
 			//表示
-			font(U"Pause").drawAt(400, 100);
-			font(U"続ける").drawAt(400, 300);
-			font(U"最初から").drawAt(400, 400);
-			font(U"ステージ選択に戻る").drawAt(400, 500);
+			RoundRect{ Arg::center(400.0, 365.0), 600.0, 440.0, 5.0 }.draw(Palette::Gainsboro).drawFrame(5.0, Palette::Dimgray);
+			font(U"Pause").drawAt(400, 200, Palette::Black);
+			font(U"続ける").drawAt(400, 330, Palette::Black);
+			font(U"最初から").drawAt(400, 430, Palette::Black);
+			font(U"ステージ選択に戻る").drawAt(400, 530, Palette::Black);
 
-			font(U"->").drawAt(50, cursol * 100 + 300);
-
+			CursorL.drawAt(180, cursol * 100 + 330);
+			CursorR.drawAt(620, cursol * 100 + 330);
 
 		}
+
+		//パラメータ表示
+		double PlayerLife = playermanager.PlayerLife();
+		double PlayerInherence = playermanager.PlayerInherence();
+		double PlayerModeCoolTime = 1.0 - playermanager.PlayerModeCoolTimer() / playermanager.PlayerModeCoolTime();
+		Rect(800, 0, 200, 800).draw(Palette::Black);
+		//体力バー
+		RoundRect{ Arg::center(835.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Lightgreen).drawFrame(3, Palette::Green);
+		Lifeimg.drawAt(835.0, 330.0);
+		RoundRect{ Arg::center(835.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkgreen);
+		RoundRect(815.0, 770.0 - 4.0 * PlayerLife, 40.0, 4.0 * PlayerLife, 5.0).draw(Palette::Lime);
+		//エネルギーバー
+		RoundRect{ Arg::center(900.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Tomato).drawFrame(3, Palette::Crimson);
+		Inherenceimg.drawAt(900.0, 330);
+		RoundRect{ Arg::center(900.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Crimson);
+		RoundRect(880.0, 770.0 - 4.0 * PlayerInherence, 40.0, 4.0 * PlayerInherence, 5.0).draw(Palette::Tomato);
+		//モード切替インターバル
+		RoundRect{ Arg::center(965.0, 330.0), 55.0, 55.0, 5.0 }.draw(Palette::Orchid).drawFrame(3, Palette::Darkslateblue);
+		Cooltimeimg.drawAt(965.0, 330.0);
+		RoundRect{ Arg::center(965.0, 570.0), 55.0, 410.0, 5.0 }.draw(Palette::Darkslateblue);
+		RoundRect(945.0, 770.0 - 400.0 * PlayerModeCoolTime, 40.0, 400.0 * PlayerModeCoolTime, 5.0).draw(Palette::Orchid);
 	}
 
 	//描画処理
