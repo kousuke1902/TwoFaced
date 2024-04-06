@@ -7,7 +7,7 @@ class DefenceB : public Bullet
 
 public:
 
-	DefenceB(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype) : Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype)
+	DefenceB(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, Texture img) : Bullet(pos, w, h, vector, speed, lifespan, damage, img)
 	{
 
 

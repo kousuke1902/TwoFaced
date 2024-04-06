@@ -19,6 +19,7 @@ public:
 		image = Texture{ Image{ U"img/player0.png"}.scaled(0.2) };
 		image2 = Texture{ Image{ U"img/player1.png"}.scaled(0.2) };
 		EchargeFlag = false;
+		bulletimage = Texture{ Image{ U"img/bulletE.png"}.scaled(0.1) };
 	};
 
 	int AddInherence(double deltatime) override
@@ -27,8 +28,8 @@ public:
 		if (Inherence <= 0.1)EchargeFlag = true;
 		else if (EchargeFlag == true && Inherence == 100.0)EchargeFlag = false;
 
-		if(EchargeFlag == true)Inherence += 5.0 * deltatime;
-		else Inherence += 2.0 * deltatime;
+		if(EchargeFlag == true)Inherence += 8.0 * deltatime;
+		else Inherence += 4.0 * deltatime;
 		Inherence = Min(MaxInherence, Inherence);
 
 		return 0;
@@ -43,11 +44,11 @@ public:
 			//レフトサイドとライトサイドでの出力の違い
 			if (Mode == false)
 			{
-				bulletmanager->CreateStraightP(HitBox.center(), 5.0, 5.0, Vec2(Random(-0.1, 0.1), -1.0), 400.0, 6.0, 1.0, 0);
+				bulletmanager->CreateStraightP(HitBox.center() + Vec2(0.0, -25.0), 23.0, 15.0, Vec2(Random(-0.1, 0.1), -1.0), 400.0, 6.0, 1.0, bulletimage);
 			}
 			else if (Mode == true)
 			{
-				bulletmanager->CreateDefence(HitBox.center() + Vec2(0.0, -30.0), 40.0, 5.0, Vec2(0.0, 0.0), 0.0, 0.008, 0.0, 0);
+				bulletmanager->CreateDefence(HitBox.center() + Vec2(0.0, -30.0), 70.0, 5.0, Vec2(0.0, 0.0), 0.0, 0.008, 0.0, bulletimage);
 
 			}
 

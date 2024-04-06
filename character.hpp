@@ -15,6 +15,7 @@ protected:
 	double shotCoolTime;//弾発射のクールタイム
 	double shotCoolTimer;//弾発射のクールタイムタイマー
 	Texture image;//キャラクターテクスチャ
+	Texture bulletimage;//弾のテクスチャ
 
 
 public:
@@ -133,7 +134,7 @@ public:
 	virtual int createBullet(BulletManager* bulletmanager, Vec2 targetpos)
 	{
 
-		bulletmanager->CreateStraightP(HitBox.center(), 5, 5,Vec2(0.0, 1.0), 100.0, 50.0, 1.0, 0);
+		bulletmanager->CreateStraightP(HitBox.center(), 5, 5,Vec2(0.0, 1.0), 100.0, 50.0, 1.0, bulletimage);
 
 		return 0;
 	}

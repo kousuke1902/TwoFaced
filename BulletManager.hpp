@@ -50,30 +50,30 @@ public:
 	}
 
 	//プレイヤー直進弾の生成
-	int CreateStraightP(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateStraightP(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, Texture img)
 	{
-		playerbullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype);
+		playerbullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, img);
 		return 0;
 	}
 
 	//エネミー直進弾の生成
-	int CreateStraightE(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateStraightE(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, Texture img)
 	{
-		enemybullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype);
+		enemybullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, img);
 		return 0;
 	}
 
 	//全体攻撃直進弾の生成
-	int CreateStraightS(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateStraightS(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, Texture img)
 	{
-		strongbullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, imgtype);
+		strongbullets << new Bullet(pos, w, h, vector, speed, lifespan, damage, img);
 		return 0;
 	}
 
 	//防御弾生成
-	int CreateDefence(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	int CreateDefence(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, Texture img)
 	{
-		defencebullets << new DefenceB(pos, w, h, vector, speed, lifespan, damage, imgtype);
+		defencebullets << new DefenceB(pos, w, h, vector, speed, lifespan, damage, img);
 		return 0;
 	}
 
@@ -97,7 +97,7 @@ public:
 				//弾の移動
 				bullet->movePos(deltatime);
 				//描画
-				bullet->readHitBox().draw(Palette::Blue);
+				bullet->draw();
 
 				++it;
 			}
@@ -119,7 +119,7 @@ public:
 				//弾の移動
 				bullet->movePos(deltatime);
 				//描画
-				bullet->readHitBox().draw(Palette::Red);
+				bullet->draw();
 
 				++it;
 			}
@@ -163,7 +163,7 @@ public:
 				//弾の移動
 				bullet->movePos(deltatime);
 				//描画
-				bullet->readHitBox().draw(Palette::Darkviolet);
+				bullet->readHitBox().draw(Palette::Black);
 
 				//弾同士の衝突確認
 				//プレイヤー弾

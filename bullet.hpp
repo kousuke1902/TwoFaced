@@ -12,18 +12,18 @@ protected:
 	double Speed;//弾の速度
 	double LifeSpan;//弾の時間的寿命
 	double Damage;//与えるダメージ
-	int ImgType;//弾の画像の種類
+	Texture Img;//弾の画像の種類
 
 public:
 
-	Bullet(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, int imgtype)
+	Bullet(Vec2 pos, double w, double h, Vec2 vector, double speed, double lifespan, double damage, Texture img)
 	{
 		HitBox = RectF(Arg::center(pos), w, h);
 		Vector = vector.setLength(1.0);
 		Speed = speed;
 		LifeSpan = lifespan;
 		Damage = damage;
-		ImgType = imgtype;
+		Img = img;
 	}
 
 
@@ -63,12 +63,6 @@ public:
 		return Damage;
 	}
 
-	//弾の画像種類取得
-	int readImgType()
-	{
-		return ImgType;
-	}
-
 	//時間的寿命の削り取り
 	virtual int reduceLifeSpan()
 	{
@@ -91,6 +85,15 @@ public:
 	{
 		HitBox.moveBy(Vector * Speed * deltatime);
 
+		return 0;
+	}
+
+	//弾の描画
+	virtual int draw()
+	{
+		double theta = Atan2(Vector.y, Vector.x) + 90_deg;
+		Img.rotated(theta).drawAt(HitBox.center());
+		//HitBox.rotated(theta).draw(Palette::Red);
 		return 0;
 	}
 

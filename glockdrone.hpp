@@ -20,13 +20,14 @@ public:
 	GlockDrone(Vec2 pos, Array<MoveCommand*> setmovecommand) : Enemy(pos, 52.0, 20.0, 300.0, 1.0, setmovecommand)
 	{
 		image = Texture{ Image{ U"img/drone.png"}.scaled(0.2) };
+		bulletimage = Texture{ Image{ U"img/bulletE.png"}.scaled(0.1) };
 	}
 
 	//弾生成
 	int createBullet(BulletManager* bulletmanager, Vec2 enemypos)override
 	{
 
-		bulletmanager->CreateStraightE(HitBox.center(), 5, 5, enemypos - HitBox.center(), 100.0, 8.0, 1.0, 0);
+		bulletmanager->CreateStraightE(HitBox.center(), 22, 15, enemypos - HitBox.center(), 100.0, 8.0, 1.0, bulletimage);
 
 		return 0;
 	}
