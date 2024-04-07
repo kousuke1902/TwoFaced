@@ -27,13 +27,13 @@ private:
 	double downtime;//カーソル入力時間
 	double warningTime;//作戦領域離脱時間
 
-	Texture Attackimg{ Image{ U"img/ko.png"}.scaled(0.6) };//攻の文字画像
-	Texture Defenceimg{ Image{ U"img/shu.png"}.scaled(0.6) };//守の文字画像
-	Texture Lifeimg{ Image{ U"img/tai.png"}.scaled(0.15) };//体の文字画像
-	Texture Inherenceimg{ Image{ U"img/ryoku.png"}.scaled(0.15) };//力の文字画像
-	Texture Cooltimeimg{ Image{ U"img/machi.png"}.scaled(0.15) };//待の文字画像
-	Texture CursorR{ Image{ U"img/cursorR.png"}.scaled(0.15) };//カーソル右
-	Texture CursorL{ Image{ U"img/cursorR.png"}.scaled(0.15).mirrored() };//カーソル左
+	Texture Attackimg;//攻の文字画像
+	Texture Defenceimg;//守の文字画像
+	Texture Lifeimg;//体の文字画像
+	Texture Inherenceimg;//力の文字画像
+	Texture Cooltimeimg;//待の文字画像
+	Texture CursorR;//カーソル右
+	Texture CursorL;//カーソル左
 
 	//ゲームルールを設定する
 	int setGameRule(CSV csv)
@@ -120,6 +120,14 @@ public:
 		cursol = 0;
 		downtime = 0.0;
 		warningTime = 10.0;
+
+		Attackimg = Texture{ Image{ U"img/ko.png"}.scaled(0.6) };
+		Defenceimg = Texture{ Image{ U"img/shu.png"}.scaled(0.6) };
+		Lifeimg = Texture{ Image{ U"img/tai.png"}.scaled(0.15) };
+		Inherenceimg = Texture{ Image{ U"img/ryoku.png"}.scaled(0.15) };
+		Cooltimeimg = Texture{ Image{ U"img/machi.png"}.scaled(0.15) };
+		CursorR = Texture{ Image{ U"img/cursorR.png"}.scaled(0.15) };
+		CursorL = Texture{ Image{ U"img/cursorR.png"}.scaled(0.15).mirrored() };
 	}
 
 	//更新処理
@@ -288,12 +296,5 @@ public:
 
 	}
 
-	//描画処理
-	void draw() const override
-	{
-
-
-
-	}
 
 };

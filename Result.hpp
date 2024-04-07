@@ -9,22 +9,20 @@ class Result : public App::Scene
 
 private:
 	PlayerInput input;
-	Font font;
-	double Score;
-	String Evalute;
+	Font font;//描画文字
+	double Score;//スコア
+	Texture Evalute; 
 
 public:
 
 	Result(const InitData& init): IScene{ init }
 	{
 		font = Font{ FontMethod::MSDF , 48 };
-		Score = getData().ResultLife / 100.0 * 100;
-		if (Score >= 90)Evalute = U"Advanced";
-		else if (Score >= 80)Evalute = U"Basic";
-		else if (Score >= 70)Evalute = U"Check";
-		else if (Score >= 60)Evalute = U"Delayed";
-		else if (Score >= 50)Evalute = U"Error";
-		else Evalute = U"Fatal";
+		Score = getData().ResultLife;
+		if (Score >= 90)Evalute = Texture { Image{ U"img/yu.png"}.scaled(0.8) };
+		else if (Score >= 75)Evalute = Texture{ Image{ U"img/ryo.png"}.scaled(0.8) };
+		else if (Score >= 50)Evalute = Texture{ Image{ U"img/ka.png"}.scaled(0.8) };
+		else Evalute = Texture{ Image{ U"img/fuka.png"}.scaled(0.8) };
 	}
 
 	// 更新関数
@@ -46,9 +44,14 @@ public:
 	void draw() const override
 	{
 		ClearPrint();
-		font(U"実戦試験評価").drawAt(300, 100);
-		font(Evalute).drawAt(300, 200);
-		font(U"残耐久値 : {:.2f}%"_fmt(Score)).drawAt(300, 300);
+		RoundRect{ Arg::center(500.0, 390.0), 640.0, 460.0, 5.0 }.draw(Palette::White).drawFrame(5.0, Palette::Black);
+		font(U"評価").drawAt(500.0, 200.0, Palette::Black);
+		Evalute.drawAt(500.0, 350.0);
+		font(U"残り体力").drawAt(500.0, 530.0, Palette::Black);
+		font(U"{:.2f} % "_fmt(Score)).drawAt(500, 580, Palette::Black);
+
+		//font(U"Aボタン/Spaceキーでステージセレクトへ").drawAt(250, 750, Palette::Black);
+		//font(U"Bボタン/Vキーでリトライ").drawAt(700, 750, Palette::Black);
 	}
 
 };
