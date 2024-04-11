@@ -14,6 +14,8 @@ private:
 	double downtime;//入力時間
 	int cursol;//カーソル位置
 	Font font;//ステージ名表記
+	Texture CursorR;//カーソル右
+	Texture CursorL;//カーソル左
 
 public:
 
@@ -30,6 +32,10 @@ public:
 		downtime = 0.0;
 		cursol = 0;
 		font = Font{ 30 };
+
+		CursorR = Texture{ Image{ U"img/cursorR.png"}.scaled(0.15) };
+		CursorL = Texture{ Image{ U"img/cursorR.png"}.scaled(0.15).mirrored() };
+
 	}
 
 	void update() override
@@ -73,22 +79,27 @@ public:
 		else if (cursol > stagelist.size() - 1)cursol = 0;
 
 		//テキストマーカー
-		Rect{ -60, -30, 400, 50 }.draw(Palette::Royalblue);
-		Rect{ -20, 90, 400, 50 }.draw(Palette::Royalblue);
-		Rect{ 40, 200, 400, 50 }.draw(Palette::Royalblue);
-		Rect{ 100, 310, 400, 50 }.draw(Palette::Royalblue);
-		Rect{ 40, 420, 400, 50 }.draw(Palette::Royalblue);
-		Rect{ -20, 530, 400, 50 }.draw(Palette::Royalblue);
+		RoundRect{ Arg::center(250.0, 100.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
+		RoundRect{ Arg::center(300.0, 200.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
+		RoundRect{ Arg::center(350.0, 300.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
+		RoundRect{ Arg::center(500.0, 400.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
+		RoundRect{ Arg::center(350.0, 500.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
+		RoundRect{ Arg::center(300.0, 600.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
 
 		//ステージ名表示
-		if (cursol - 3 >= 0)font(stagelist[cursol - 3].readNum() + U" : " + stagelist[cursol - 3].readName()).draw(-60, -44);
-		if (cursol - 2 >= 0)font(stagelist[cursol - 2].readNum() + U" : " + stagelist[cursol - 2].readName()).draw(-10, 76);
-		if (cursol - 1 >= 0)font(stagelist[cursol - 1].readNum() + U" : " + stagelist[cursol - 1].readName()).draw(40, 186);
-		font(stagelist[cursol].readNum() + U" : " + stagelist[cursol].readName()).draw(100, 296);
-		if (cursol + 1 < stagelist.size())font(stagelist[cursol + 1].readNum() + U" : " + stagelist[cursol + 1].readName()).draw(40, 406);
-		if (cursol + 2 < stagelist.size())font(stagelist[cursol + 2].readNum() + U" : " + stagelist[cursol + 2].readName()).draw(-10, 516);
+		if (cursol - 3 >= 0)font(stagelist[cursol - 3].readNum() + U" : " + stagelist[cursol - 3].readName()).drawAt(250.0, 100.0, Palette::Black);
+		if (cursol - 2 >= 0)font(stagelist[cursol - 2].readNum() + U" : " + stagelist[cursol - 2].readName()).drawAt(300.0, 200.0, Palette::Black);
+		if (cursol - 1 >= 0)font(stagelist[cursol - 1].readNum() + U" : " + stagelist[cursol - 1].readName()).drawAt(350.0, 300.0, Palette::Black);
+		font(stagelist[cursol].readNum() + U" : " + stagelist[cursol].readName()).drawAt(500.0, 400.0, Palette::Black);
+		if (cursol + 1 < stagelist.size())font(stagelist[cursol + 1].readNum() + U" : " + stagelist[cursol + 1].readName()).drawAt(350.0, 500.0, Palette::Black);
+		if (cursol + 2 < stagelist.size())font(stagelist[cursol + 2].readNum() + U" : " + stagelist[cursol + 2].readName()).drawAt(300.0, 600.0, Palette::Black);
 
+		//カーソル
+		CursorL.drawAt(190.0, 400.0);
+		CursorR.drawAt(810.0, 400.0);
 
+		//コメント
+		font(stagelist[cursol].readComment()).drawAt(500.0, 700.0, Palette::Black);
 	}
 
 	void draw() const override
