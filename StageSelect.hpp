@@ -78,13 +78,24 @@ public:
 		if (cursol < 0)cursol = stagelist.size() - 1;
 		else if (cursol > stagelist.size() - 1)cursol = 0;
 
+		for (int width = 0; width < 25; ++width)
+		{
+			Triangle{ 20.0 + 40 * width, 0.0, 80.0, 180_deg }.draw(Palette::Orange);
+			Triangle{ 20.0 + 40 * width, 800.0, 80.0 }.draw(Palette::Orange);
+		}
+		
+
+		//ステージセレクト
+		RoundRect{ Arg::center(800.0, 50.0), 300.0, 50.0, 5.0 }.draw(Palette::Springgreen).drawFrame(5.0, Palette::Teal);
+		font(U"ステージセレクト").drawAt(800.0, 50.0, Palette::Black);
+
 		//テキストマーカー
-		RoundRect{ Arg::center(250.0, 100.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
-		RoundRect{ Arg::center(300.0, 200.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
-		RoundRect{ Arg::center(350.0, 300.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
-		RoundRect{ Arg::center(500.0, 400.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
-		RoundRect{ Arg::center(350.0, 500.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
-		RoundRect{ Arg::center(300.0, 600.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue);
+		RoundRect{ Arg::center(250.0, 100.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue).drawFrame(5.0, Palette::Mediumblue);
+		RoundRect{ Arg::center(300.0, 200.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue).drawFrame(5.0, Palette::Mediumblue);
+		RoundRect{ Arg::center(350.0, 300.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue).drawFrame(5.0, Palette::Mediumblue);
+		RoundRect{ Arg::center(500.0, 400.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue).drawFrame(5.0, Palette::Mediumblue);
+		RoundRect{ Arg::center(350.0, 500.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue).drawFrame(5.0, Palette::Mediumblue);
+		RoundRect{ Arg::center(300.0, 600.0), 550.0, 50.0, 5.0 }.draw(Palette::Royalblue).drawFrame(5.0, Palette::Mediumblue);
 
 		//ステージ名表示
 		if (cursol - 3 >= 0)font(stagelist[cursol - 3].readNum() + U" : " + stagelist[cursol - 3].readName()).drawAt(250.0, 100.0, Palette::Black);
@@ -99,7 +110,9 @@ public:
 		CursorR.drawAt(810.0, 400.0);
 
 		//コメント
-		font(stagelist[cursol].readComment()).drawAt(500.0, 700.0, Palette::Black);
+		//RoundRect{ Arg::center(650.0, 750.0), 550.0, 50.0, 5.0 }.draw(Palette::Azure).drawFrame(5.0, Palette::Lightsteelblue);
+		Shape2D::RectBalloon(RectF{ Arg::center(650.0, 700.0), 550.0, 50.0 }, Vec2{ 850.0, 780.0 }, 0.2).draw(Palette::Azure).drawFrame(5.0, Palette::Lightsteelblue);
+		font(stagelist[cursol].readComment()).drawAt(650.0, 700.0, Palette::Black);
 	}
 
 	void draw() const override
