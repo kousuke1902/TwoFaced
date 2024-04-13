@@ -80,8 +80,8 @@ public:
 
 		for (int width = 0; width < 25; ++width)
 		{
-			Triangle{ 20.0 + 40 * width, 0.0, 80.0, 180_deg }.draw(Palette::Orange);
-			Triangle{ 20.0 + 40 * width, 800.0, 80.0 }.draw(Palette::Orange);
+			Triangle{ 20.0 + 40 * width, 0.0, 80.0, 180_deg }.draw(Palette::Lavender);
+			Triangle{ 20.0 + 40 * width, 800.0, 80.0 }.draw(Palette::Lavender);
 		}
 		
 
