@@ -112,7 +112,7 @@ public:
 	Stage(const InitData& init) : IScene{ init }
 	{
 		stagefile = getData().Stagepath;
-		CSV csv{ stagefile };
+		CSV csv{ Resource(U"stage/" + stagefile) };
 		setGameRule(csv);
 		loadspawnEnemies(csv);
 		PauseFlag = false;
@@ -121,13 +121,13 @@ public:
 		downtime = 0.0;
 		warningTime = 10.0;
 
-		Attackimg = Texture{ Image{ U"img/ko.png"}.scaled(0.6) };
-		Defenceimg = Texture{ Image{ U"img/shu.png"}.scaled(0.6) };
-		Lifeimg = Texture{ Image{ U"img/tai.png"}.scaled(0.15) };
-		Inherenceimg = Texture{ Image{ U"img/ryoku.png"}.scaled(0.15) };
-		Cooltimeimg = Texture{ Image{ U"img/machi.png"}.scaled(0.15) };
-		CursorR = Texture{ Image{ U"img/cursorR.png"}.scaled(0.15) };
-		CursorL = Texture{ Image{ U"img/cursorR.png"}.scaled(0.15).mirrored() };
+		Attackimg = Texture{ Image{ Resource(U"img/ko.png") }.scaled(0.6) };
+		Defenceimg = Texture{ Image{ Resource(U"img/shu.png") }.scaled(0.6) };
+		Lifeimg = Texture{ Image{ Resource(U"img/tai.png") }.scaled(0.15) };
+		Inherenceimg = Texture{ Image{ Resource(U"img/ryoku.png") }.scaled(0.15) };
+		Cooltimeimg = Texture{ Image{ Resource(U"img/machi.png") }.scaled(0.15) };
+		CursorR = Texture{ Image{ Resource(U"img/cursorR.png") }.scaled(0.15) };
+		CursorL = Texture{ Image{ Resource(U"img/cursorR.png") }.scaled(0.15).mirrored() };
 	}
 
 	//更新処理

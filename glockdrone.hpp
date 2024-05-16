@@ -14,13 +14,13 @@ public:
 
 	GlockDrone(Vec2 pos) : Enemy(pos, 49.0, 20.0, 300.0, 1.0)
 	{
-		image = Texture{ U"img/drone.png" };
+		image = Texture{ Resource(U"img/drone.png") };
 	}
 
 	GlockDrone(Vec2 pos, Array<MoveCommand*> setmovecommand) : Enemy(pos, 52.0, 20.0, 300.0, 1.0, setmovecommand)
 	{
-		image = Texture{ Image{ U"img/drone.png"}.scaled(0.2) };
-		bulletimage = Texture{ Image{ U"img/bulletE.png"}.scaled(0.1) };
+		image = Texture{ Image{ Resource(U"img/drone.png") }.scaled(0.2) };
+		bulletimage = Texture{ Image{ Resource(U"img/bulletE.png") }.scaled(0.1) };
 	}
 
 	//弾生成

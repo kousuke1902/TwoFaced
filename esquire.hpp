@@ -16,10 +16,10 @@ public:
 
 	Esquire(Vec2 pos) : Player(pos, 47.0, 100.0, 200.0, 0.1, 0.0, 100.0, 2.0)
 	{
-		image = Texture{ Image{ U"img/player0.png"}.scaled(0.2) };
-		image2 = Texture{ Image{ U"img/player1.png"}.scaled(0.2) };
+		image = Texture{ Image{ Resource(U"img/player0.png") }.scaled(0.2) };
+		image2 = Texture{ Image{ Resource(U"img/player1.png") }.scaled(0.2) };
 		EchargeFlag = false;
-		bulletimage = Texture{ Image{ U"img/bulletE.png"}.scaled(0.1) };
+		bulletimage = Texture{ Image{ Resource(U"img/bulletE.png") }.scaled(0.1) };
 	};
 
 	int AddInherence(double deltatime) override

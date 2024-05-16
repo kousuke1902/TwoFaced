@@ -19,10 +19,10 @@ public:
 	{
 		font = Font{ FontMethod::MSDF , 48 };
 		Score = getData().ResultLife;
-		if (Score >= 90)Evalute = Texture { Image{ U"img/yu.png"}.scaled(0.8) };
-		else if (Score >= 75)Evalute = Texture{ Image{ U"img/ryo.png"}.scaled(0.8) };
-		else if (Score >= 50)Evalute = Texture{ Image{ U"img/ka.png"}.scaled(0.8) };
-		else Evalute = Texture{ Image{ U"img/fuka.png"}.scaled(0.8) };
+		if (Score >= 90)Evalute = Texture { Image{ Resource(U"img/yu.png") }.scaled(0.8) };
+		else if (Score >= 75)Evalute = Texture{ Image{ Resource(U"img/ryo.png") }.scaled(0.8) };
+		else if (Score >= 50)Evalute = Texture{ Image{ Resource(U"img/ka.png") }.scaled(0.8) };
+		else Evalute = Texture{ Image{ Resource(U"img/fuka.png") }.scaled(0.8) };
 	}
 
 	// 更新関数

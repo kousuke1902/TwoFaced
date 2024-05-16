@@ -9,7 +9,7 @@ void Main()
 {
 
 	Window::Resize(1000, 800);
-
+	Window::SetTitle(U"Two Faced");
 	
 	Scene::SetBackground(Palette::Whitesmoke);
 	App manager;

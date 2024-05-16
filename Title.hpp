@@ -17,11 +17,11 @@ public:
 	Title(const InitData& init) : IScene{ init }
 	{
 		font = Font{ FontMethod::MSDF , 48 };
-		title = Texture{ Image{ U"img/Title.png"}.scaled(0.7) };
+		title = Texture{ Image{ Resource(U"img/Title.png") }.scaled(0.7) };
 		int rand = Random(2);
-		if (rand == 0)o = Texture{ Image{ U"img/player0.png"}.scaled(0.5) };
-		else if (rand == 1)o = Texture{ Image{ U"img/player1.png"}.scaled(0.5) };
-		else if (rand == 2)o = Texture{ Image{ U"img/cursorR.png"}.scaled(0.5) };
+		if (rand == 0)o = Texture{ Image{ Resource(U"img/player0.png") }.scaled(0.5) };
+		else if (rand == 1)o = Texture{ Image{ Resource(U"img/player1.png") }.scaled(0.5) };
+		else if (rand == 2)o = Texture{ Image{ Resource(U"img/cursorR.png") }.scaled(0.5) };
 
 	}
 
