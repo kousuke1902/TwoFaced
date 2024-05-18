@@ -182,6 +182,12 @@ public:
 			{
 				warningTime -= deltatime;
 
+				if (warningTime <= 0)
+				{
+					getData().ResultLife = 0.0;
+					changeScene(State::Result);
+				}
+
 				Rect(0, 0, 800, 800).draw(Color(200, 0, 0, 100));
 				font(U"中に戻って").drawAt(400, 300);
 				font(U"{:.1f}"_fmt(warningTime)).drawAt(400, 350);
