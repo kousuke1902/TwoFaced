@@ -18,4 +18,4 @@ classは使ったことはありましたが継承を多く使いました．ま
 [配布場所Link](https://drive.google.com/file/d/16G6CKEB4riQr81aVm_a_geYLETxqzcH9/view?usp=drive_link "zipファイルをダウンロード後，解凍してください")
 
 # Qiita
-近日中にQiitaで解説と反省会の記事を作成します
+[自作シューティングゲーム「TwoFaced」の紹介，プログラム解説，反省会](https://qiita.com/kousuke1902/items/82f0efbe235d0bc384c1)
